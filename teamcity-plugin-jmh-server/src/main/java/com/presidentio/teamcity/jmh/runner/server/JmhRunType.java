@@ -1,5 +1,6 @@
-package com.presidentio.teamcity.jmh.runner;
+package com.presidentio.teamcity.jmh.runner.server;
 
+import com.presidentio.teamcity.jmh.runner.common.JmhRunnerConst;
 import jetbrains.buildServer.serverSide.PropertiesProcessor;
 import jetbrains.buildServer.serverSide.RunType;
 import jetbrains.buildServer.serverSide.RunTypeRegistry;

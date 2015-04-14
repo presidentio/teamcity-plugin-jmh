@@ -5,7 +5,7 @@
 <%@ taglib prefix="bs" tagdir="/WEB-INF/tags" %>
 
 <jsp:useBean id="propertiesBean" scope="request" type="jetbrains.buildServer.controllers.BasePropertiesBean"/>
-<jsp:useBean id="constants" class="com.presidentio.teamcity.jmh.runner.JmhRunnerConst"/>
+<jsp:useBean id="constants" class="com.presidentio.teamcity.jmh.runner.common.JmhRunnerConst"/>
 
 <l:settingsGroup title="Jmh options">
     <tr>
