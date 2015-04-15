@@ -2,5 +2,5 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans default-autowire="constructor">
     <bean id="jmhRunType" class="com.presidentio.teamcity.jmh.runner.server.JmhRunType"></bean>
-    <!--<bean class="com.presidentio.JmhBuildTab"></bean>-->
+    <bean class="com.presidentio.teamcity.jmh.view.JmhBuildTab"></bean>
 </beans>

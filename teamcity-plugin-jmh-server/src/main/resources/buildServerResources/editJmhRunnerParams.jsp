@@ -15,4 +15,11 @@
             <span class="smallNote">Jmh jar path</span>
         </td>
     </tr>
+    <tr>
+        <th><label for="${constants.PROP_BENCHMARKS}">Benchmarks: </label></th>
+        <td><props:textProperty name="${constants.PROP_BENCHMARKS}" className="longField"/>
+            <span class="error" id="error_${constants.PROP_BENCHMARKS}"></span>
+            <span class="smallNote">Jmh jar path</span>
+        </td>
+    </tr>
 </l:settingsGroup>

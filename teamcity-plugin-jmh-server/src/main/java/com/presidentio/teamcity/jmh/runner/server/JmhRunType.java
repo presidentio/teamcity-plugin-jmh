@@ -22,6 +22,7 @@ public class JmhRunType extends RunType {
         this.pluginDescriptor = pluginDescriptor;
         runTypeRegistry.registerRunType(this);
     }
+
     @NotNull
     @Override
     public String getType() {
@@ -62,7 +63,7 @@ public class JmhRunType extends RunType {
     @Override
     public Map<String, String> getDefaultRunnerProperties() {
         Map<String, String> defaultProperties = new HashMap<String, String>(1);
-        defaultProperties.put(JmhRunnerConst.PROP_JAR_PATH, "target/some.jar");
+        defaultProperties.put(JmhRunnerConst.PROP_JAR_PATH, "target/benchmarks.jar");
         return defaultProperties;
     }
 }

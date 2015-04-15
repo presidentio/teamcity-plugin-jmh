@@ -3,6 +3,7 @@ package com.presidentio.teamcity.jmh.runner.agent;
 import com.presidentio.teamcity.jmh.runner.common.JmhRunnerConst;
 import jetbrains.buildServer.agent.AgentBuildRunnerInfo;
 import jetbrains.buildServer.agent.BuildAgentConfiguration;
+import jetbrains.buildServer.agent.artifacts.ArtifactsWatcher;
 import jetbrains.buildServer.agent.runner.CommandLineBuildService;
 import jetbrains.buildServer.agent.runner.CommandLineBuildServiceFactory;
 import org.jetbrains.annotations.NotNull;
@@ -11,9 +12,16 @@ import org.jetbrains.annotations.NotNull;
  * Created by Vitaliy on 14.04.2015.
  */
 public class JmhCommandLineBuildServiceFactory implements CommandLineBuildServiceFactory {
+
+    private ArtifactsWatcher artifactsWatcher;
+
+    public JmhCommandLineBuildServiceFactory(ArtifactsWatcher artifactsWatcher) {
+        this.artifactsWatcher = artifactsWatcher;
+    }
+
     @NotNull
     public CommandLineBuildService createService() {
-        return null;
+        return new JmhBuildServiceAdapter(artifactsWatcher);
     }
 
     @NotNull
