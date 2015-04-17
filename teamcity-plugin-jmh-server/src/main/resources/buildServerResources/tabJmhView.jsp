@@ -12,7 +12,7 @@
         color: #333;
     }
 
-    .table-benchmark td, #table-3 th {
+    .table-benchmark td, .table-benchmark th {
         border-top-color: white;
         border-bottom: 1px solid #DFDFDF;
         color: #555;
