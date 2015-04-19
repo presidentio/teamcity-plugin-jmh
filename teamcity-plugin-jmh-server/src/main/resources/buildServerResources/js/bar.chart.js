@@ -1,17 +1,23 @@
 function barChartInit(elId, data) {
 
-    var margin = {top: 50, right: 20, bottom: 10, left: 465},
-        width = 1800 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
+    var margin = {top: 50, right: 20, bottom: 10, left: 465};
+    var height = 0, width = 0;
 
-    var y = d3.scale.ordinal()
-        .rangeRoundBands([0, height], .3);
+    var y = d3.scale.ordinal();
 
-    var x = d3.scale.linear()/*
-        .rangeRound([0, width])*/;
+    var x = d3.scale.linear();
+
+    function resize(){
+        width = parseInt(d3.select("#buildResultsInner").style("width")) - margin.left - margin.right;
+        height = Object.keys(data).length * 100 - margin.top - margin.bottom;
+        x.rangeRound([0, width]);
+        y.rangeRoundBands([0, height], .3);
+    }
+    
+    resize();
 
     var color = d3.scale.ordinal()
-        .range(["#c7001e", "#f6a580", "#cccccc", "#92c6db", "#086fad", "#009999", "#00CC99", "#00CC66", "#00CC00", "#00FF00"]);
+        .range(["#c7001e", "#f6a580", "#cccccc", "#92c6db", "#086fad", "#009999", "#00CC99", "#00CC66", "#00CC00", "#00FF00", "#000000"]);
 
     var xAxis = d3.svg.axis()
         .scale(x)
@@ -22,7 +28,7 @@ function barChartInit(elId, data) {
 
     var yAxis = d3.svg.axis()
         .scale(y)
-        .orient("left")
+        .orient("left");
 
     var svg = d3.select(elId).append("svg")
         .attr("width", width + margin.left + margin.right)
@@ -31,7 +37,7 @@ function barChartInit(elId, data) {
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    color.domain(["0.0", "50.0", "90.0", "95.0", "99.0", "99.9", "99.99", "99.999", "99.9999", "100.0"]);
+    color.domain(["0.0", "50.0", "90.0", "95.0", "99.0", "99.9", "99.99", "99.999", "99.9999", "100.0", "average"]);
 
     (function (data) {
         for (var benchmarkName in data) {
@@ -127,7 +133,8 @@ function barChartInit(elId, data) {
 
         var startp = svg.append("g").attr("class", "legendbox").attr("id", "mylegendbox");
         // this is not nice, we should calculate the bounding box and use that
-        var legend_tabs = [0, 65, 130, 195, 260, 325, 390, 455, 520, 585];
+        var legend_tabs = [0, 65, 130, 195, 260, 325, 390, 455, 520, 585, 650];
+        var legend_width = [18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 1];
         var legend = startp.selectAll(".legend")
             .data(color.domain().slice())
             .enter().append("g")
@@ -138,7 +145,9 @@ function barChartInit(elId, data) {
 
         legend.append("rect")
             .attr("x", 0)
-            .attr("width", 18)
+            .attr("width", function (d, i) {
+                return legend_width[i];
+            })
             .attr("height", 18)
             .style("fill", color);
 
@@ -155,16 +164,18 @@ function barChartInit(elId, data) {
         d3.selectAll(".axis path")
             .style("fill", "none")
             .style("stroke", "#000")
-            .style("shape-rendering", "crispEdges")
+            .style("shape-rendering", "crispEdges");
 
         d3.selectAll(".axis line")
             .style("fill", "none")
             .style("stroke", "#000")
-            .style("shape-rendering", "crispEdges")
+            .style("shape-rendering", "crispEdges");
 
         var movesize = width / 2 - startp.node().getBBox().width / 2;
         d3.selectAll(".legendbox").attr("transform", "translate(" + movesize + ",0)");
 
 
     })(data);
+    
+    d3.select(window).on('resize', resize);
 }
