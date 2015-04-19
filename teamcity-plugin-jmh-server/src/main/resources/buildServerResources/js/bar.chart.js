@@ -7,20 +7,7 @@ function barChartInit(elId, data) {
 
     var x = d3.scale.linear();
 
-    function resize(){
-        width = parseInt(d3.select("#buildResultsInner").style("width")) - margin.left - margin.right;
-        height = Object.keys(data).length * 100 - margin.top - margin.bottom;
-        x.rangeRound([0, width]);
-        y.rangeRoundBands([0, height], .3);
-    }
-    
-    resize();
-
-    var color = d3.scale.ordinal()
-        .range(["#c7001e", "#f6a580", "#cccccc", "#92c6db", "#086fad", "#009999", "#00CC99", "#00CC66", "#00CC00", "#00FF00", "#000000"]);
-
     var xAxis = d3.svg.axis()
-        .scale(x)
         .orient("top")
         .tickFormat(function (d) {
             return d + " ms"
@@ -29,6 +16,20 @@ function barChartInit(elId, data) {
     var yAxis = d3.svg.axis()
         .scale(y)
         .orient("left");
+
+    function resize(){
+        width = parseInt(d3.select("#buildResultsInner").style("width")) - margin.left - margin.right;
+        height = Object.keys(data).length * 100 - margin.top - margin.bottom;
+        x.rangeRound([0, width]);
+        y.rangeRoundBands([0, height], .3);
+        xAxis.scale(x);
+        yAxis.scale(y);
+    }
+
+    resize();
+
+    var color = d3.scale.ordinal()
+        .range(["#c7001e", "#f6a580", "#cccccc", "#92c6db", "#086fad", "#009999", "#00CC99", "#00CC66", "#00CC00", "#00FF00", "#000000"]);
 
     var svg = d3.select(elId).append("svg")
         .attr("width", width + margin.left + margin.right)
