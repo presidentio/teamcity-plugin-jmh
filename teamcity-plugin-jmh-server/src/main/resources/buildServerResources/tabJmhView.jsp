@@ -34,15 +34,31 @@
         vertical-align: top;
     }
 </style>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.4.13/d3.min.js"></script>
+<script src="${teamcityPluginResourcesPath}js/bar.chart.js"></script>
 <table class="table-benchmark">
     <tr>
         <th>Name</th>
         <th>Time</th>
     </tr>
-    <c:forEach items="${benchmarks}" var="benchmark">
+    <c:forEach items="${benchmarks}" var="benchmark" varStatus="status">
         <tr>
             <td>${benchmark.benchmark}</td>
             <td>${benchmark.primaryMetric.score}</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div id="bar-chart-${status.index}" style="margin-bottom: 50px;"></div>
+                <script>
+                    barChartInit("#bar-chart-${status.index}", {
+                        "${benchmark.benchmark}":{
+                            <c:forEach var="percentile" items="${benchmark.primaryMetric.scorePercentiles}" varStatus="status">
+                            "${percentile.key}":${percentile.value}<c:if test="${!status.last}">,</c:if>
+                            </c:forEach>
+                        }
+                    });
+                </script>
+            </td>
         </tr>
     </c:forEach>
 </table>
