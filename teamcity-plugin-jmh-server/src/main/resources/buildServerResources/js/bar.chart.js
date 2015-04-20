@@ -18,27 +18,27 @@ function barChartInit(elId, data) {
         .orient("left");
 
     var color = d3.scale.ordinal()
-        .range(["#c7001e", "#f6a580", "#cccccc", "#92c6db", "#086fad", "#009999", "#00CC99", "#00CC66", "#00CC00", "#00FF00", "#000000"]);
+        .range(["#c7001e", "#f6a580", "#cccccc", "#92c6db", "#086fad", "#009999", "#00CC99", "#00CC66", "#00CC00", "#00FF00"]);
 
     var svgReal = d3.select(elId).append("svg")
         .attr("id", "d3-plot");
     var svg = svgReal.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    color.domain(["0.0", "50.0", "90.0", "95.0", "99.0", "99.9", "99.99", "99.999", "99.9999", "100.0", "average"]);
+    color.domain(["0.0", "50.0", "90.0", "95.0", "99.0", "99.9", "99.99", "99.999", "99.9999", "100.0"]);
 
     for (var benchmarkName in data) {
         var d = data[benchmarkName];
-        var xPrev = d["0.0"];
+        var xPrev = d.percentiles["0.0"];
         d.boxes = color.domain().map(function (name) {
             var a = {
                 name: name,
                 x0: xPrev,
-                x1: d[name],
+                x1: d.percentiles[name],
                 N: parseFloat(name),
-                n: d[name]
+                n: d.percentiles[name]
             };
-            xPrev = d[name];
+            xPrev = d.percentiles[name];
             return a;
         });
     }
@@ -80,6 +80,13 @@ function barChartInit(elId, data) {
         })
         .enter().append("g").attr("class", "subbar");
 
+    vakken.append("rect")
+        .attr("class", "bar-avg")
+        .attr("width", 1)
+        .attr("height", y.rangeBand() + 6)
+        .style("fill", "#000")
+        .attr("transform", "translate(0,-3)");
+
     bars.append("rect")
         .attr("class", "bar-rect")
         .attr("height", y.rangeBand())
@@ -97,10 +104,10 @@ function barChartInit(elId, data) {
             return index % 2 == 0 ? "even" : "uneven";
         });
 
-    var startp = svg.append("g").attr("class", "legendbox").attr("id", "mylegendbox");
+    var startp = svg.append("g").attr("class", "legendbox");
     // this is not nice, we should calculate the bounding box and use that
-    var legend_tabs = [0, 65, 130, 195, 260, 325, 390, 455, 520, 585, 650];
-    var legend_width = [18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 1];
+    var legend_tabs = [0, 65, 130, 195, 260, 325, 390, 455, 520, 585];
+    var legend_width = [18, 18, 18, 18, 18, 18, 18, 18, 18, 18];
     var legend = startp.selectAll(".legend")
         .data(color.domain().slice())
         .enter().append("g")
@@ -108,9 +115,23 @@ function barChartInit(elId, data) {
         .attr("transform", function (d, i) {
             return "translate(" + legend_tabs[i] + ",-45)";
         });
+    var avgLegend = startp.append("g")
+        .attr("transform", "translate(" + 650 + ",-45)");
+    avgLegend
+        .append("rect")
+        .attr("width", 1)
+        .attr("height", 18)
+        .style("fill", "#000");
+    avgLegend
+        .append("text")
+        .attr("x", 5)
+        .attr("y", 9)
+        .attr("dy", ".35em")
+        .style("text-anchor", "begin")
+        .style("font", "10px sans-serif")
+        .text("avg");
 
     legend.append("rect")
-        .attr("x", 0)
         .attr("width", function (d, i) {
             return legend_width[i];
         })
@@ -138,7 +159,6 @@ function barChartInit(elId, data) {
         .style("shape-rendering", "crispEdges");
 
 
-
     function resize() {
         width = parseInt(d3.select(elId).node().getBoundingClientRect().width) - margin.left - margin.right;
         x.rangeRound([0, width]);
@@ -154,6 +174,16 @@ function barChartInit(elId, data) {
             .attr("width", function (d) {
                 return x(d.x1) - x(d.x0);
             });
+        vakken.select(".bar-avg")
+            .attr("x", function (d) {
+                return x(data[d].avg);
+            });
+        /*
+         bars.select(".bar-avg")
+         .attr("x", d.avg)
+         .attr("width", function (d) {
+         return x(d.x1) - x(d.x0);
+         });*/
         var movesize = width / 2 - startp.node().getBBox().width / 2;
         svgReal.selectAll(".legendbox").attr("transform", "translate(" + movesize + ",0)");
     }
