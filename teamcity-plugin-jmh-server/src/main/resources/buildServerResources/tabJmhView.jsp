@@ -51,12 +51,15 @@
                 <div id="bar-chart-${status.index}" style="margin-bottom: 50px;"></div>
                 <script>
                     barChartInit("#bar-chart-${status.index}", {
-                        "${benchmark.benchmark}":{
-                            <c:forEach var="percentile" items="${benchmark.primaryMetric.scorePercentiles}" varStatus="status">
-                            "${percentile.key}":${percentile.value}<c:if test="${!status.last}">,</c:if>
-                            </c:forEach>
+                        "${benchmark.benchmark}": {
+                            "percentiles":{
+                                <c:forEach var="percentile" items="${benchmark.primaryMetric.scorePercentiles}" varStatus="status">
+                                "${percentile.key}":${percentile.value}<c:if test="${!status.last}">, </c:if>
+                                </c:forEach>
+                            },
+                            "avg":${benchmark.primaryMetric.score}
                         }
-                    });
+                    }, "${benchmark.primaryMetric.scoreUnit}");
                 </script>
             </td>
         </tr>

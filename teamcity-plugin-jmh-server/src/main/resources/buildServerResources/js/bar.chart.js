@@ -1,4 +1,4 @@
-function barChartInit(elId, data) {
+function barChartInit(elId, data, unit) {
 
     var margin = {top: 50, right: 20, bottom: 10, left: 465};
     var height = 0, width = 0;
@@ -10,7 +10,7 @@ function barChartInit(elId, data) {
     var xAxis = d3.svg.axis()
         .orient("top")
         .tickFormat(function (d) {
-            return d + " ms"
+            return d + " " + unit;
         });
 
     var yAxis = d3.svg.axis()
@@ -80,19 +80,23 @@ function barChartInit(elId, data) {
         })
         .enter().append("g").attr("class", "subbar");
 
-    vakken.append("rect")
-        .attr("class", "bar-avg")
-        .attr("width", 1)
-        .attr("height", y.rangeBand() + 6)
-        .style("fill", "#000")
-        .attr("transform", "translate(0,-3)");
-
     bars.append("rect")
         .attr("class", "bar-rect")
         .attr("height", y.rangeBand())
         .style("fill", function (d) {
             return color(d.name);
         });
+
+    var barAvg = vakken.append("g")
+        .attr("class", "bar-avg");
+    barAvg.append("rect")
+        .attr("width", 1)
+        .attr("height", y.rangeBand() + 6)
+        .style("fill", "#000")
+        .attr("transform", "translate(0,-3)");
+    barAvg.append("text")
+        .text(function(d){return data[d].avg + " " + unit;})
+        .attr("transform", "translate(3," + (y.rangeBand() / 2 + 3) + ")");
 
     vakken.insert("rect", ":first-child")
         .attr("height", y.rangeBand())
@@ -175,15 +179,9 @@ function barChartInit(elId, data) {
                 return x(d.x1) - x(d.x0);
             });
         vakken.select(".bar-avg")
-            .attr("x", function (d) {
-                return x(data[d].avg);
+            .attr("transform", function (d) {
+                return "translate(" + x(data[d].avg) + ",0)"
             });
-        /*
-         bars.select(".bar-avg")
-         .attr("x", d.avg)
-         .attr("width", function (d) {
-         return x(d.x1) - x(d.x0);
-         });*/
         var movesize = width / 2 - startp.node().getBBox().width / 2;
         svgReal.selectAll(".legendbox").attr("transform", "translate(" + movesize + ",0)");
     }
