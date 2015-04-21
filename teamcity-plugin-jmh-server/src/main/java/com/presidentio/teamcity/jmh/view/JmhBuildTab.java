@@ -61,7 +61,7 @@ public class JmhBuildTab extends SimpleCustomTab {
         model.put("benchmarks", getBenchmarks(build));
     }
 
-    private GroupedBechmarks getBenchmarks(SBuild build) {
+    private GroupedBenchmarks getBenchmarks(SBuild build) {
         File benchmarksFile = new File(build.getArtifactsDirectory(), JmhRunnerConst.OUTPUT_FILE);
         try {
             LOGGER.info("benchmarksFile=" + IOUtils.toString(new FileInputStream(benchmarksFile)));
@@ -72,7 +72,7 @@ public class JmhBuildTab extends SimpleCustomTab {
             try {
                 List<Benchmark> benchmarks = objectMapper.readValue(benchmarksFile,
                         objectMapper.getTypeFactory().constructCollectionType(List.class, Benchmark.class));
-                return new GroupedBechmarks(benchmarks);
+                return new GroupedBenchmarks(benchmarks);
             } catch (JsonMappingException e) {
                 e.printStackTrace();
             } catch (JsonParseException e) {

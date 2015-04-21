@@ -26,7 +26,7 @@ public class GroupedBechmarksTest extends TestCase {
         benchmark = new Benchmark();
         benchmark.setBenchmark("a.c");
         benchmarks.add(benchmark);
-        GroupedBechmarks groupedBechmarks = new GroupedBechmarks(benchmarks);
+        GroupedBenchmarks groupedBechmarks = new GroupedBenchmarks(benchmarks);
         Assert.assertEquals(2, groupedBechmarks.size());
         Assert.assertTrue(groupedBechmarks.containsKey("a"));
         Assert.assertTrue(groupedBechmarks.containsKey("b"));

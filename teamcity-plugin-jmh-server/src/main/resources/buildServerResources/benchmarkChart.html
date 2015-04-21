@@ -10,8 +10,27 @@
 
 
 <body>
+<span class="handle handle_overview_successful handle_expanded" data-target="to-hide" onclick="onClick(this)">asdasd</span>
+<script>
+    function hasClass(element, cls) {
+        return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
+    }
+    function onClick(el) {
+        console.log(el);
+        if (hasClass(el, 'handle_expanded')) {
+            el.className = el.className.replace('handle_expanded', 'handle_collapsed');
+            document.getElementById(el.getAttribute('data-target')).style.display = "none";
+        } else {
+            el.className = el.className.replace('handle_collapsed', 'handle_expanded');
+            document.getElementById(el.getAttribute('data-target')).style.display = "block";
+        }
 
-<div id="figure" style="margin-bottom: 50px; width: 100%; height: 500px;"></div>
+    }
+</script>
+<div id="to-hide">
+    <div class="bt-separator"></div>
+    <div id="figure" style="margin-bottom: 50px; width: 100%; height: 500px;"></div>
+</div>
 
 
 <script>

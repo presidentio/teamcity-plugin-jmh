@@ -1,0 +1,41 @@
+.chart-separator {
+    height: 5px;
+    margin-left: 2em;
+    border-top: 1px dotted #DEDEDE;
+}
+
+.group-title {
+    cursor: pointer;
+    color: #151515;
+    font: 130% "Helvetica Neue", Arial, sans-serif;
+    border-top: 1px solid #ccc;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.group-title .group-button {
+    vertical-align: middle;
+}
+
+.group-name {
+    min-width: 40em;
+    display: inline-block;
+}
+
+.first-group {
+    border-top: none;
+}
+
+.bar-chart-container {
+    padding-left: 20px;
+}
+
+.benchmark-counter {
+    float: right;
+}
+
+.benchmark-interval {
+    margin-right: 2px;
+    color: #888;
+    font: 82%/1.5em "Helvetica Neue", Arial, sans-serif;
+}

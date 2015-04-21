@@ -68,7 +68,7 @@ function barChartInit(elId, data, unit) {
 
     svg.selectAll(".y.axis text")
         .style("font-size", function(d) {
-            return Math.min(16, (nameSize - 8) / this.getComputedTextLength() * 24) + "px";
+            return Math.min(14, (nameSize - 8) / this.getComputedTextLength() * 24) + "px";
         });
 
     var vakken = svg.selectAll(".question")
