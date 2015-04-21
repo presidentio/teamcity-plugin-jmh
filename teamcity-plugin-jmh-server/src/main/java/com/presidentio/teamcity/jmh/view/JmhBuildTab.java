@@ -28,7 +28,7 @@ import java.util.Map;
  * Created by Vitaliy on 09.04.2015.
  */
 public class JmhBuildTab extends SimpleCustomTab {
-    
+
     private static final Logger LOGGER = Loggers.SERVER;
 
     public static final String BUILD_ID = "buildId";
@@ -61,7 +61,7 @@ public class JmhBuildTab extends SimpleCustomTab {
         model.put("benchmarks", getBenchmarks(build));
     }
 
-    private List<Benchmark> getBenchmarks(SBuild build) {
+    private GroupedBechmarks getBenchmarks(SBuild build) {
         File benchmarksFile = new File(build.getArtifactsDirectory(), JmhRunnerConst.OUTPUT_FILE);
         try {
             LOGGER.info("benchmarksFile=" + IOUtils.toString(new FileInputStream(benchmarksFile)));
@@ -70,7 +70,9 @@ public class JmhBuildTab extends SimpleCustomTab {
         }
         if (benchmarksFile.exists()) {
             try {
-                return objectMapper.readValue(benchmarksFile, objectMapper.getTypeFactory().constructCollectionType(List.class, Benchmark.class));
+                List<Benchmark> benchmarks = objectMapper.readValue(benchmarksFile,
+                        objectMapper.getTypeFactory().constructCollectionType(List.class, Benchmark.class));
+                return new GroupedBechmarks(benchmarks);
             } catch (JsonMappingException e) {
                 e.printStackTrace();
             } catch (JsonParseException e) {

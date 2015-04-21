@@ -100,7 +100,8 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>C:\ProgramData\JetBrains\TeamCity\plugins</outputDirectory>
+                            <!--<outputDirectory>C:\ProgramData\JetBrains\TeamCity\plugins</outputDirectory>-->
+                            <outputDirectory>/opt/jetbrains/TeamCity/.BuildServer/plugins</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>../target</directory>

@@ -1,6 +1,7 @@
 function barChartInit(elId, data, unit) {
 
-    var margin = {top: 50, right: 20, bottom: 10, left: 465};
+    var nameSize = 150;
+    var margin = {top: 50, right: 20, bottom: 10, left: nameSize};
     var height = 0, width = 0;
 
     var y = d3.scale.ordinal();
@@ -56,8 +57,7 @@ function barChartInit(elId, data, unit) {
 
     svg.append("g")
         .attr("class", "x axis");
-
-    height = Object.keys(data).length * 100 - margin.top - margin.bottom;
+    height = Object.keys(data).length * (100 - margin.top - margin.bottom);
 
     y.rangeRoundBands([0, height], .3);
     yAxis.scale(y);
@@ -66,13 +66,19 @@ function barChartInit(elId, data, unit) {
         .attr("class", "y axis")
         .call(yAxis);
 
+    svg.selectAll(".y.axis text")
+        .style("font-size", function(d) {
+            return Math.min(16, (nameSize - 8) / this.getComputedTextLength() * 24) + "px";
+        });
+
     var vakken = svg.selectAll(".question")
         .data(d3.keys(data))
         .enter().append("g")
         .attr("class", "bar")
         .attr("transform", function (key) {
             return "translate(0," + y(key) + ")";
-        });
+        })
+        .attr("dy", ".35em");
 
     var bars = vakken.selectAll("rect")
         .data(function (d) {

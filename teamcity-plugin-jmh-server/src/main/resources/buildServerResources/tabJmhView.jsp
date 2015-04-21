@@ -33,33 +33,36 @@
         padding: 4px 7px 2px;
         vertical-align: top;
     }
+
 </style>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.4.13/d3.min.js"></script>
+<link rel="stylesheet" href="${teamcityPluginResourcesPath}css/bar.chart.css">
 <script src="${teamcityPluginResourcesPath}js/bar.chart.js"></script>
-<table class="table-benchmark">
+
+<table class="list-benchmark">
     <tr>
         <th>Name</th>
         <th>Time</th>
     </tr>
-    <c:forEach items="${benchmarks}" var="benchmark" varStatus="status">
+    <c:forEach items="${benchmarks}" var="entry" varStatus="groupStatus">
         <tr>
-            <td>${benchmark.benchmark}</td>
-            <td>${benchmark.primaryMetric.score}</td>
+            <td>${entry.key}</td>
         </tr>
         <tr>
             <td colspan="2">
-                <div id="bar-chart-${status.index}" style="margin-bottom: 50px;"></div>
+                <div id="bar-chart-${groupStatus.index}" style="margin-bottom: 50px;"></div>
                 <script>
-                    barChartInit("#bar-chart-${status.index}", {
-                        "${benchmark.benchmark}": {
-                            "percentiles":{
-                                <c:forEach var="percentile" items="${benchmark.primaryMetric.scorePercentiles}" varStatus="status">
-                                "${percentile.key}":${percentile.value}<c:if test="${!status.last}">, </c:if>
-                                </c:forEach>
-                            },
-                            "avg":${benchmark.primaryMetric.score}
-                        }
-                    }, "${benchmark.primaryMetric.scoreUnit}");
+                    barChartInit("#bar-chart-${groupStatus.index}", {
+                        <c:forEach items="${entry.value}" var="benchmarkEntry" varStatus="benchmarkStatus">
+                            "${benchmarkEntry.key}": {
+                                "percentiles":{
+                                    <c:forEach var="percentile" items="${benchmarkEntry.value.primaryMetric.scorePercentiles}" varStatus="status">
+                                        "${percentile.key}":${percentile.value}<c:if test="${!status.last}">, </c:if>
+                                    </c:forEach>
+                                }, "avg":${benchmarkEntry.value.primaryMetric.score}
+                            }<c:if test="${!benchmarkStatus.last}">, </c:if>
+                        </c:forEach>
+                    }, "us/op");
                 </script>
             </td>
         </tr>
