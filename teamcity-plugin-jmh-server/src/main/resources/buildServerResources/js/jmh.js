@@ -20,9 +20,17 @@ function toggleBenchmarkGroup(groupTitle) {
     }
 
 }
-jQuery(document).ready(function() {
+jQuery(document).ready(function () {
     bChart.drawLegend(".benchmark-chart-legend");
-    jQuery('.group-collapsible').click(function() {
+    jQuery(".group-collapsible").click(function () {
         toggleBenchmarkGroup(this);
+    });
+    jQuery(".group-collapsible").each(function () {
+        var successful = jQuery("#" + jQuery(this).attr("data-target") + " .bar-background .failing").length == 0;
+        if (successful) {
+            jQuery(this).find(".group-button").addClass("handle_overview_successful")
+        }else{
+            jQuery(this).find(".group-button").addClass("handle_overview_failing")
+        }
     });
 });

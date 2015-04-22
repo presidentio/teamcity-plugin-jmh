@@ -9,9 +9,10 @@
 <div class="benchmark-chart-legend"></div>
 
 <c:forEach items="${benchmarks}" var="entry" varStatus="groupStatus">
+    <c:set var="prevGroup" value="${prevBenchmarks.get(entry.key)}"/>
     <div class="group-title<c:if test="${groupStatus.first}"> first-group</c:if>">
         <div class="group-collapsible" data-target="bar-chart-container-${groupStatus.index}">
-            <span class="handle handle_overview_successful handle_expanded group-button"></span>
+            <span class="handle handle_expanded group-button"></span>
             <span class="group-name">${entry.key}</span>
         </div>
         <span class="benchmark-interval">${entry.value.minTime} ${entry.value.scoreUnit} - ${entry.value.maxTime} ${entry.value.scoreUnit}</span>
@@ -23,12 +24,19 @@
         <script>
             bChart.drawChart("#bar-chart-${groupStatus.index}", {
                 <c:forEach items="${entry.value}" var="benchmarkEntry" varStatus="benchmarkStatus">
+                <c:set var="prevBenchmark" value="${null}"/>
+                <c:if test="${prevGroup != null}">
+                <c:set var="prevBenchmark" value="${prevGroup.get(benchmarkEntry.key)}"/>
+                </c:if>
                 "${benchmarkEntry.key}": {
                     "percentiles": {
                         <c:forEach var="percentile" items="${benchmarkEntry.value.primaryMetric.scorePercentiles}" varStatus="status">
                         "${percentile.key}":${percentile.value}<c:if test="${!status.last}">, </c:if>
                         </c:forEach>
                     }, "avg":${benchmarkEntry.value.primaryMetric.score}
+                    <c:if test="${prevBenchmark != null}">
+                    , "prevAvg":${prevBenchmark.primaryMetric.score}
+                    </c:if>
                 }<c:if test="${!benchmarkStatus.last}">, </c:if>
                 </c:forEach>
             }, "${entry.value.scoreUnit}");

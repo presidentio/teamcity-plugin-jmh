@@ -7,6 +7,7 @@ import com.presidentio.teamcity.jmh.runner.server.JmhRunnerBundle;
 import jetbrains.buildServer.log.Loggers;
 import jetbrains.buildServer.serverSide.SBuild;
 import jetbrains.buildServer.serverSide.SBuildServer;
+import jetbrains.buildServer.serverSide.SFinishedBuild;
 import jetbrains.buildServer.web.openapi.PagePlaces;
 import jetbrains.buildServer.web.openapi.PlaceId;
 import jetbrains.buildServer.web.openapi.PluginDescriptor;
@@ -49,8 +50,6 @@ public class JmhBuildTab extends SimpleCustomTab {
     public boolean isAvailable(@NotNull HttpServletRequest request) {
         long buildId = Long.valueOf(request.getParameter(BUILD_ID));
         SBuild build = buildServer.findBuildInstanceById(buildId);
-        LOGGER.info("isAvailable=" + (build.isFinished() && getBenchmarks(build) != null));
-        LOGGER.info("getBenchmarks=" + getBenchmarks(build));
         return build.isFinished() && getBenchmarks(build) != null;
     }
 
@@ -58,6 +57,14 @@ public class JmhBuildTab extends SimpleCustomTab {
     public void fillModel(@NotNull Map<String, Object> model, @NotNull HttpServletRequest request) {
         long buildId = Long.valueOf(request.getParameter(BUILD_ID));
         SBuild build = buildServer.findBuildInstanceById(buildId);
+        List<SFinishedBuild> buildsBefore = buildServer.getHistory().getEntriesBefore(build, true);
+        for (SFinishedBuild sFinishedBuild : buildsBefore) {
+            GroupedBenchmarks groupedBenchmarks = getBenchmarks(sFinishedBuild);
+            if (groupedBenchmarks != null) {
+                model.put("prevBenchmarks", groupedBenchmarks);
+                break;
+            }
+        }
         model.put("benchmarks", getBenchmarks(build));
     }
 

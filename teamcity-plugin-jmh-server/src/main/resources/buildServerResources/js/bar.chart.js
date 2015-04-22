@@ -7,8 +7,11 @@ function BenchmarkChart() {
     this.drawChart = function (elId, data, unit) {
 
         var nameSize = 150;
+        var outerPadding = .3;
+        var barHeight = 40;
         var margin = {top: 50, right: 20, bottom: 10, left: nameSize};
-        var height = 0, width = 0;
+        var height = Object.keys(data).length * barHeight + barHeight * outerPadding,
+            width = 0;
 
         var y = d3.scale.ordinal();
 
@@ -23,10 +26,6 @@ function BenchmarkChart() {
         var yAxis = d3.svg.axis()
             .scale(y)
             .orient("left");
-
-        var svgReal = d3.select(elId).append("svg");
-        var svg = svgReal.append("g")
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
         color.domain(percentiles);
 
@@ -57,12 +56,39 @@ function BenchmarkChart() {
         x.domain([min_val, max_val]).nice();
         y.domain(Object.keys(data));
 
+        y.rangeRoundBands([0, height], outerPadding, outerPadding);
+        yAxis.scale(y);
+
+        var svgReal = d3.select(elId).append("svg");
+
+        svgReal.append("g")
+            .attr('transform', "translate(0, " + margin.top + ")")
+            .attr("class", "bar-background")
+            .selectAll(".bar-background")
+            .data(d3.keys(data))
+            .enter()
+            .append("rect")
+            .attr("class", function (d) {
+                var curData = data[d];
+                if (bChart.isFailed(curData)) {
+                    return "failing";
+                } else {
+                    return "successful";
+                }
+            })
+            .attr("dy", ".35em")
+            .attr("height", y.rangeBand() + barHeight * 0.3)
+            .attr("width", "100%")
+            .attr("transform", function (key) {
+                return "translate(0," + (y(key) - barHeight * 0.15) + ")";
+            })
+            .style("fill-opacity", "0.09");
+
+        var svg = svgReal.append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
         svg.append("g")
             .attr("class", "x axis");
-        height = Object.keys(data).length * (100 - margin.top - margin.bottom);
-
-        y.rangeRoundBands([0, height], .3);
-        yAxis.scale(y);
 
         svg.append("g")
             .attr("class", "y axis")
@@ -102,11 +128,36 @@ function BenchmarkChart() {
             .attr("height", y.rangeBand() + 6)
             .style("fill", "#000")
             .attr("transform", "translate(0,-3)");
-        barAvg.append("text")
+        var barAvgText = barAvg.append("text")
+            .style("font-size", "0.95em")
             .text(function (d) {
                 return data[d].avg + " " + unit;
+            });
+
+        var barPrevAvg = vakken.append("g")
+            .style("display", function (d) {
+                var curData = data[d];
+                if (curData.prevAvg != undefined) {
+                    return "block";
+                } else {
+                    return "none";
+                }
             })
-            .attr("transform", "translate(3," + (y.rangeBand() / 2 + 3) + ")");
+            .attr("class", "bar-prev-avg");
+        barPrevAvg.append("line")
+            .attr("stroke-dasharray", "2,2")
+            .attr("y1", 0)
+            .attr("y2", y.rangeBand() + 6)
+            .attr("stroke-width", 1)
+            .attr("stroke", "gray")
+            .attr("transform", "translate(0,-3)");
+        var barPrevAvgText = barPrevAvg.append("text")
+            .style("font-size", "0.8em")
+            .attr("fill", "gray")
+            .text(function (d) {
+                var curData = data[d];
+                return curData.prevAvg + " " + unit;
+            });
 
         vakken.insert("rect", ":first-child")
             .attr("height", y.rangeBand())
@@ -131,7 +182,7 @@ function BenchmarkChart() {
 
         function resize() {
             width = parseInt(d3.select(elId).node().getBoundingClientRect().width) - margin.left - margin.right;
-            x.rangeRound([0, width]);
+            x.rangeRound([0, width]).nice();
             xAxis.scale(x);
             svgReal.attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom);
@@ -144,10 +195,45 @@ function BenchmarkChart() {
                 .attr("width", function (d) {
                     return x(d.x1) - x(d.x0);
                 });
-            vakken.select(".bar-avg")
-                .attr("transform", function (d) {
-                    return "translate(" + x(data[d].avg) + ",0)"
-                });
+            barAvg.attr("transform", function (d) {
+                return "translate(" + x(data[d].avg) + ",0)"
+            });
+            barPrevAvg.attr("transform", function (d) {
+                var curData = data[d];
+                if (curData.prevAvg != undefined) {
+                    return "translate(" + Math.min(x(max_val) + 10, Math.max(5, x(data[d].prevAvg))) + ",0)"
+                } else {
+                    return "";
+                }
+            });
+            barAvgText.attr("transform", function (d) {
+                var textWidth = this.getComputedTextLength();
+                var curData = data[d];
+                var xTranslate = 3;
+                var yTranslate = y.rangeBand() / 2 + 10;
+                if (x(curData.avg) < textWidth) {
+                    xTranslate = 3;
+                } else {
+                    if (x(curData.avg) + textWidth > width || curData.prevAvg != undefined && curData.avg < curData.prevAvg) {
+                        xTranslate = -xTranslate - textWidth;
+                    }
+                }
+                return "translate(" + xTranslate + "," + yTranslate + ")";
+            });
+            barPrevAvgText.attr("transform", function (d) {
+                var textWidth = this.getComputedTextLength();
+                var curData = data[d];
+                var xTranslate = 3;
+                var yTranslate = y.rangeBand() / 2 - 3;
+                if (x(curData.prevAvg) < textWidth) {
+                    xTranslate = 3;
+                } else {
+                    if (x(curData.prevAvg) + textWidth > width || curData.prevAvg != undefined && curData.avg > curData.prevAvg) {
+                        xTranslate = -xTranslate - textWidth;
+                    }
+                }
+                return "translate(" + xTranslate + "," + yTranslate + ")";
+            })
         }
 
         resize();
@@ -158,7 +244,7 @@ function BenchmarkChart() {
     this.drawLegend = function (elId) {
         var svgReal = d3.select(elId).append("svg")
             .attr("height", 18)
-            .attr("width", 650);
+            .attr("width", 700);
         var svg = svgReal.append("g");
         var startp = svg.append("g").attr("class", "legendbox");
         var legend_tabs = [0, 65, 130, 195, 260, 325, 390, 455, 520];
@@ -185,6 +271,26 @@ function BenchmarkChart() {
             .style("font", "10px sans-serif")
             .text("avg");
 
+        var prevLegend = startp.append("g")
+            .attr("transform", "translate(" + 635 + ",0)");
+        prevLegend
+            .append("line")
+            .attr("stroke-dasharray", "2,2")
+            .attr("y1", 0)
+            .attr("y2", 18)
+            .attr("x1", 0)
+            .attr("x2", 0)
+            .attr("stroke-width", 1)
+            .attr("stroke", "black");
+        prevLegend
+            .append("text")
+            .attr("x", 5)
+            .attr("y", 9)
+            .attr("dy", ".35em")
+            .style("text-anchor", "begin")
+            .style("font", "10px sans-serif")
+            .text("prev. avg.");
+
         legend.append("rect")
             .attr("width", 18)
             .attr("height", 18)
@@ -199,7 +305,11 @@ function BenchmarkChart() {
             .text(function (d) {
                 return d;
             });
-    }
+    };
+
+    this.isFailed = function (d) {
+        return d.prevAvg != undefined && d.avg - d.prevAvg > (d.avg + d.prevAvg) / 2 / 100;
+    };
 }
 
 bChart = new BenchmarkChart();

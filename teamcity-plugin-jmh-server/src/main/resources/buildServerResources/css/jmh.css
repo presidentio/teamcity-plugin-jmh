@@ -39,16 +39,24 @@
 .benchmark-interval {
     margin-right: 2px;
     color: #888;
-    font: 82%/1.5em "Helvetica Neue", Arial, sans-serif;
+    font: 82%/1.7em "Helvetica Neue", Arial, sans-serif;
 }
 
-.benchmark-chart-legend{
+.benchmark-chart-legend {
     float: right;
     border: 1px dotted #cecece;
     padding: 5px 2px 2px 5px;
 }
 
-.group-collapsible{
+.group-collapsible {
     display: inline-block;
     cursor: pointer;
+}
+
+.bar-background .successful {
+    fill: #0F0
+}
+
+.bar-background .failing {
+    fill: #F00
 }
