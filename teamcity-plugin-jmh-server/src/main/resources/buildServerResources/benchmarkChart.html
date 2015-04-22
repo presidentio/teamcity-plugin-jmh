@@ -29,6 +29,7 @@
 </script>
 <div id="to-hide">
     <div class="bt-separator"></div>
+    <div id="figure-legend"></div>
     <div id="figure" style="margin-bottom: 50px; width: 100%; height: 500px;"></div>
 </div>
 
@@ -189,7 +190,8 @@
         }
     };
 
-    barChartInit("#figure", data, "us/op");
+    bChart.drawChart("#figure", data, "us/op");
+    bChart.drawLegend("#figure-legend");
     /*
 
      (function(data) {

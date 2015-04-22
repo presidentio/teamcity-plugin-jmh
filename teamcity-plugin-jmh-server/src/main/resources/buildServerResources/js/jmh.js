@@ -12,14 +12,17 @@ function toggleBenchmarkGroup(groupTitle) {
     if (hasClass(span, 'handle_expanded')) {
         span.className = span.className.replace('handle_expanded', 'handle_collapsed');
         document.getElementById(groupTitle.getAttribute('data-target')).style.display = "none";
+        jQuery(groupTitle).parent().find(".benchmark-counter").css("display", "block");
     } else {
         span.className = span.className.replace('handle_collapsed', 'handle_expanded');
         document.getElementById(groupTitle.getAttribute('data-target')).style.display = "block";
+        jQuery(groupTitle).parent().find(".benchmark-counter").css("display", "none");
     }
 
 }
 jQuery(document).ready(function() {
-    jQuery('.group-title').click(function() {
+    bChart.drawLegend(".benchmark-chart-legend");
+    jQuery('.group-collapsible').click(function() {
         toggleBenchmarkGroup(this);
     });
 });

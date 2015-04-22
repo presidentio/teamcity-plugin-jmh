@@ -5,12 +5,13 @@
 }
 
 .group-title {
-    cursor: pointer;
     color: #151515;
     font: 130% "Helvetica Neue", Arial, sans-serif;
     border-top: 1px solid #ccc;
     padding-bottom: 5px;
     padding-top: 5px;
+    display: inline-block;
+    width: 100%;
 }
 
 .group-title .group-button {
@@ -32,10 +33,22 @@
 
 .benchmark-counter {
     float: right;
+    display: none;
 }
 
 .benchmark-interval {
     margin-right: 2px;
     color: #888;
     font: 82%/1.5em "Helvetica Neue", Arial, sans-serif;
+}
+
+.benchmark-chart-legend{
+    float: right;
+    border: 1px dotted #cecece;
+    padding: 5px 2px 2px 5px;
+}
+
+.group-collapsible{
+    display: inline-block;
+    cursor: pointer;
 }

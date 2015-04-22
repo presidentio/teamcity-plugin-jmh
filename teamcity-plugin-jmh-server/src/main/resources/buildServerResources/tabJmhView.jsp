@@ -6,10 +6,14 @@
 <script src="${teamcityPluginResourcesPath}js/bar.chart.js"></script>
 <script src="${teamcityPluginResourcesPath}js/jmh.js"></script>
 
+<div class="benchmark-chart-legend"></div>
+
 <c:forEach items="${benchmarks}" var="entry" varStatus="groupStatus">
-    <div class="group-title<c:if test="${groupStatus.first}"> first-group</c:if>" data-target="bar-chart-container-${groupStatus.index}">
-        <span class="handle handle_overview_successful handle_expanded group-button"></span>
-        <span class="group-name">${entry.key}</span>
+    <div class="group-title<c:if test="${groupStatus.first}"> first-group</c:if>">
+        <div class="group-collapsible" data-target="bar-chart-container-${groupStatus.index}">
+            <span class="handle handle_overview_successful handle_expanded group-button"></span>
+            <span class="group-name">${entry.key}</span>
+        </div>
         <span class="benchmark-interval">${entry.value.minTime} ${entry.value.scoreUnit} - ${entry.value.maxTime} ${entry.value.scoreUnit}</span>
         <span class="tabCounter benchmark-counter">${entry.value.size()}</span>
     </div>
@@ -17,7 +21,7 @@
         <div class="chart-separator"></div>
         <div id="bar-chart-${groupStatus.index}" style="margin-bottom: 50px;"></div>
         <script>
-            barChartInit("#bar-chart-${groupStatus.index}", {
+            bChart.drawChart("#bar-chart-${groupStatus.index}", {
                 <c:forEach items="${entry.value}" var="benchmarkEntry" varStatus="benchmarkStatus">
                 "${benchmarkEntry.key}": {
                     "percentiles": {
