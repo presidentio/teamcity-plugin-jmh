@@ -9,7 +9,7 @@ function BenchmarkChart() {
         var nameSize = 150;
         var outerPadding = .3;
         var barHeight = 40;
-        var margin = {top: 50, right: 20, bottom: 10, left: nameSize};
+        var margin = {top: 50, right: 30, bottom: 10, left: nameSize};
         var height = Object.keys(data).length * barHeight + barHeight * outerPadding,
             width = 0;
 
@@ -20,7 +20,7 @@ function BenchmarkChart() {
         var xAxis = d3.svg.axis()
             .orient("top")
             .tickFormat(function (d) {
-                return d + " " + unit;
+                return (d.toFixed(10) * 1.0) + " " + unit;
             });
 
         var yAxis = d3.svg.axis()
@@ -201,7 +201,7 @@ function BenchmarkChart() {
             barPrevAvg.attr("transform", function (d) {
                 var curData = data[d];
                 if (curData.prevAvg != undefined) {
-                    return "translate(" + Math.min(x(max_val) + 10, Math.max(5, x(data[d].prevAvg))) + ",0)"
+                    return "translate(" + Math.min(width + 2, Math.max(2, x(data[d].prevAvg))) + ",0)"
                 } else {
                     return "";
                 }
@@ -307,8 +307,27 @@ function BenchmarkChart() {
             });
     };
 
+    var modes = {
+        "thrpt": {
+            "order": "desc"
+        },
+        "avgt": {
+            "order": "asc"
+        },
+        "sample": {
+            "order": "asc"
+        },
+        "ss": {
+            "order": "asc"
+        }
+    };
+
     this.isFailed = function (d) {
-        return d.prevAvg != undefined && d.avg - d.prevAvg > (d.avg + d.prevAvg) / 2 / 100;
+        if (d.prevAvg == undefined) {
+            return false;
+        }
+        var more = d.avg - d.prevAvg > (d.avg + d.prevAvg) / 2 / 100;
+        return more && modes[d.mode].order == "asc";
     };
 }
 

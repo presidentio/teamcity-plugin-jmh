@@ -33,7 +33,8 @@
                         <c:forEach var="percentile" items="${benchmarkEntry.value.primaryMetric.scorePercentiles}" varStatus="status">
                         "${percentile.key}":${percentile.value}<c:if test="${!status.last}">, </c:if>
                         </c:forEach>
-                    }, "avg":${benchmarkEntry.value.primaryMetric.score}
+                    }, "avg":${benchmarkEntry.value.primaryMetric.score},
+                    "mode":"${benchmarkEntry.value.mode}"
                     <c:if test="${prevBenchmark != null}">
                     , "prevAvg":${prevBenchmark.primaryMetric.score}
                     </c:if>
