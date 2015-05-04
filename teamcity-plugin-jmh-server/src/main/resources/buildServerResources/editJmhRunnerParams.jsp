@@ -8,6 +8,7 @@
 <jsp:useBean id="propertiesBean" scope="request" type="jetbrains.buildServer.controllers.BasePropertiesBean"/>
 <jsp:useBean id="constants" class="com.presidentio.teamcity.jmh.runner.common.JmhRunnerConst"/>
 <jsp:useBean id="mode" class="com.presidentio.teamcity.jmh.runner.common.ModeConst"/>
+<jsp:useBean id="timeUnit" class="com.presidentio.teamcity.jmh.runner.common.TimeUnitConst"/>
 
 <l:settingsGroup title="Jmh options">
     <tr>
@@ -37,6 +38,21 @@
             </props:selectProperty>
             <span class="error" id="error_${constants.PROP_MODE}"></span>
             <span class="smallNote">Benchmark mode.</span>
+        </td>
+    </tr>
+    <tr>
+        <th><label for="${constants.PROP_TIME_UNIT}">Time unit: </label></th>
+        <td>
+            <props:selectProperty name="${constants.PROP_TIME_UNIT}" multiple="false">
+                <props:option value="${timeUnit.UNSPECIFIED}" selected="true">Unspecified</props:option>
+                <props:option value="${timeUnit.MINUTES}">Minutes(m)</props:option>
+                <props:option value="${timeUnit.SECONDS}">Seconds(s)</props:option>
+                <props:option value="${timeUnit.MILLISECONDS}">Milliseconds(ms)</props:option>
+                <props:option value="${timeUnit.MICROSECONDS}">Microseconds(us)</props:option>
+                <props:option value="${timeUnit.NANOSECONDS}">Nanoseconds(ns)</props:option>
+            </props:selectProperty>
+            <span class="error" id="error_${constants.PROP_TIME_UNIT}"></span>
+            <span class="smallNote">Output time unit.</span>
         </td>
     </tr>
 </l:settingsGroup>

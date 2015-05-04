@@ -4,7 +4,7 @@ package com.presidentio.teamcity.jmh.entity;
  * Created by Vitaliy on 16.04.2015.
  */
 public class Benchmark {
-    
+
     private String benchmark;
     private String mode;
     private Integer threads;
@@ -15,6 +15,22 @@ public class Benchmark {
     private String measurementTime;
     private PrimaryMetric primaryMetric;
     private SecondaryMetrics secondaryMetrics;
+
+    public Benchmark(Benchmark benchmark) {
+        this.benchmark = benchmark.getBenchmark();
+        this.mode = benchmark.getMode();
+        this.threads = benchmark.getThreads();
+        this.forks = benchmark.getForks();
+        this.warmupIterations = benchmark.getWarmupIterations();
+        this.warmupTime = benchmark.getWarmupTime();
+        this.measurementIterations = benchmark.getMeasurementIterations();
+        this.measurementTime = benchmark.getMeasurementTime();
+        this.primaryMetric = new PrimaryMetric(benchmark.getPrimaryMetric());
+        this.secondaryMetrics = new SecondaryMetrics(benchmark.getSecondaryMetrics());
+    }
+
+    public Benchmark() {
+    }
 
     public String getBenchmark() {
         return benchmark;

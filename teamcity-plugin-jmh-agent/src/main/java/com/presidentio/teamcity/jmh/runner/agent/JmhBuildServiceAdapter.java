@@ -2,6 +2,7 @@ package com.presidentio.teamcity.jmh.runner.agent;
 
 import com.presidentio.teamcity.jmh.runner.common.JmhRunnerConst;
 import com.presidentio.teamcity.jmh.runner.common.ModeConst;
+import com.presidentio.teamcity.jmh.runner.common.TimeUnitConst;
 import jetbrains.buildServer.RunBuildException;
 import jetbrains.buildServer.agent.artifacts.ArtifactsWatcher;
 import jetbrains.buildServer.agent.runner.BuildServiceAdapter;
@@ -22,6 +23,7 @@ public class JmhBuildServiceAdapter extends BuildServiceAdapter {
     public static final String ARG_FORMAT = "-rf";
     public static final String ARG_OUTPUT_FILE = "-rff";
     public static final String ARG_MODE = "-bm";
+    public static final String ARG_TIME_UNIT = "-tu";
 
     private ArtifactsWatcher artifactsWatcher;
 
@@ -54,6 +56,13 @@ public class JmhBuildServiceAdapter extends BuildServiceAdapter {
         if (!mode.equals(ModeConst.UNSPECIFIED)) {
             arguments.add(ARG_MODE);
             arguments.add(mode);
+        }
+
+
+        String timeUnit = runnerParameters.get(JmhRunnerConst.PROP_TIME_UNIT);
+        if (!timeUnit.equals(TimeUnitConst.UNSPECIFIED)) {
+            arguments.add(ARG_TIME_UNIT);
+            arguments.add(timeUnit);
         }
 
         return new SimpleProgramCommandLine(getRunnerContext(), "java", arguments);
