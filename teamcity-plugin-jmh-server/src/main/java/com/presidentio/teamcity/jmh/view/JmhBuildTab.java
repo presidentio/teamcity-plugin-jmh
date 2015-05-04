@@ -58,14 +58,40 @@ public class JmhBuildTab extends SimpleCustomTab {
         long buildId = Long.valueOf(request.getParameter(BUILD_ID));
         SBuild build = buildServer.findBuildInstanceById(buildId);
         List<SFinishedBuild> buildsBefore = buildServer.getHistory().getEntriesBefore(build, true);
+        GroupedBenchmarks curGroupedBenchmark = getBenchmarks(build);
+        GroupedBenchmarks prevGroupedBenchmark = new GroupedBenchmarks();
         for (SFinishedBuild sFinishedBuild : buildsBefore) {
             GroupedBenchmarks groupedBenchmarks = getBenchmarks(sFinishedBuild);
             if (groupedBenchmarks != null) {
-                model.put("prevBenchmarks", groupedBenchmarks);
+                for (String benchmarkGroupKey : curGroupedBenchmark.keySet()) {
+                    Group curGroup = curGroupedBenchmark.get(benchmarkGroupKey);
+                    Group prevGroup = prevGroupedBenchmark.get(benchmarkGroupKey);
+                    Group group = groupedBenchmarks.get(benchmarkGroupKey);
+                    if (group != null) {
+                        if (prevGroup == null) {
+                            prevGroup = new Group();
+                            prevGroupedBenchmark.put(benchmarkGroupKey, prevGroup);
+                        }
+                        for (String benchmarkKey : curGroup.keySet()) {
+                            if (!prevGroup.containsKey(benchmarkKey)) {
+                                Benchmark curBenchmark = curGroup.get(benchmarkKey);
+                                Benchmark benchmark = group.get(benchmarkKey);
+                                if (benchmark != null) {
+                                    if (curBenchmark.getMode().equals(benchmark.getMode())
+                                            && curBenchmark.getPrimaryMetric().getScoreUnit()
+                                            .equals(benchmark.getPrimaryMetric().getScoreUnit())) {
+                                        prevGroup.put(benchmarkKey, benchmark);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
                 break;
             }
         }
-        model.put("benchmarks", getBenchmarks(build));
+        model.put("benchmarks", curGroupedBenchmark);
+        model.put("prevBenchmarks", prevGroupedBenchmark);
     }
 
     private GroupedBenchmarks getBenchmarks(SBuild build) {
