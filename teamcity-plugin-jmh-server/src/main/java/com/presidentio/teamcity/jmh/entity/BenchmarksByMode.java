@@ -1,12 +1,11 @@
 package com.presidentio.teamcity.jmh.entity;
 
-import java.util.HashMap;
 import java.util.List;
 
 /**
  * Created by presidentio on 06.05.15.
  */
-public class BenchmarksByMode extends HashMap<String, BenchmarksByClass> {
+public class BenchmarksByMode extends BaseBenchmarkGroup<BenchmarksByClass> {
 
     public void addAll(List<Benchmark> benchmarks) {
         for (Benchmark benchmark : benchmarks) {
@@ -14,7 +13,8 @@ public class BenchmarksByMode extends HashMap<String, BenchmarksByClass> {
         }
     }
 
-    public void add(Benchmark benchmark) {
+    @Override
+    protected void put(Benchmark benchmark) {
         BenchmarksByClass byClass = get(benchmark.getMode());
         if (byClass == null) {
             byClass = new BenchmarksByClass();

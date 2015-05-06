@@ -3,7 +3,7 @@ package com.presidentio.teamcity.jmh.entity;
 /**
  * Created by Vitaliy on 16.04.2015.
  */
-public class Benchmark {
+public class Benchmark implements BenchmarkGroup {
 
     private String benchmark;
     private String mode;
@@ -126,5 +126,36 @@ public class Benchmark {
                 ", primaryMetric=" + primaryMetric +
                 ", secondaryMetrics=" + secondaryMetrics +
                 '}';
+    }
+
+    @Override
+    public double minTime() {
+        Double minValue = Double.MAX_VALUE;
+        for (Double[] doubles : getPrimaryMetric().rawData) {
+            for (Double value : doubles) {
+                if (minValue > value) {
+                    minValue = value;
+                }
+            }
+        }
+        return minValue;
+    }
+
+    @Override
+    public double maxTime() {
+        Double maxValue = 0D;
+        for (Double[] doubles : getPrimaryMetric().rawData) {
+            for (Double value : doubles) {
+                if (maxValue < value) {
+                    maxValue = value;
+                }
+            }
+        }
+        return maxValue;
+    }
+
+    @Override
+    public String scoreUnit() {
+        return getPrimaryMetric().getScoreUnit();
     }
 }

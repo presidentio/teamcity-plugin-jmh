@@ -1,13 +1,12 @@
 package com.presidentio.teamcity.jmh.entity;
 
-import java.util.HashMap;
-
 /**
  * Created by presidentio on 06.05.15.
  */
-public class BenchmarksByMethod extends HashMap<String, Benchmark>{
+public class BenchmarksByMethod extends BaseBenchmarkGroup<Benchmark>{
 
-    public void add(Benchmark benchmark) {
+    @Override
+    public void put(Benchmark benchmark) {
         String methodName = extractMethod(benchmark.getBenchmark());
         put(methodName, benchmark);
     }
