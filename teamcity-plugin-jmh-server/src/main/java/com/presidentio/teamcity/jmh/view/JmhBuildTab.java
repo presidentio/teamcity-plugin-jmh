@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -58,39 +59,46 @@ public class JmhBuildTab extends SimpleCustomTab {
         long buildId = Long.valueOf(request.getParameter(BUILD_ID));
         SBuild build = buildServer.findBuildInstanceById(buildId);
         List<SFinishedBuild> buildsBefore = buildServer.getHistory().getEntriesBefore(build, true);
-        GroupedBenchmarks curGroupedBenchmark = getBenchmarks(build);
-        GroupedBenchmarks prevGroupedBenchmark = new GroupedBenchmarks();
-        for (SFinishedBuild sFinishedBuild : buildsBefore) {
-            GroupedBenchmarks groupedBenchmarks = getBenchmarks(sFinishedBuild);
-            if (groupedBenchmarks != null) {
-                for (String benchmarkGroupKey : curGroupedBenchmark.keySet()) {
-                    Group curGroup = curGroupedBenchmark.get(benchmarkGroupKey);
-                    Group prevGroup = prevGroupedBenchmark.get(benchmarkGroupKey);
-                    Group group = groupedBenchmarks.get(benchmarkGroupKey);
-                    if (group != null) {
-                        if (prevGroup == null) {
-                            prevGroup = new Group();
-                            prevGroupedBenchmark.put(benchmarkGroupKey, prevGroup);
-                        }
-                        for (String benchmarkKey : curGroup.keySet()) {
-                            if (!prevGroup.containsKey(benchmarkKey)) {
-                                Benchmark curBenchmark = curGroup.get(benchmarkKey);
-                                Benchmark benchmark = group.get(benchmarkKey);
-                                if (benchmark != null) {
-                                    if (curBenchmark.getMode().equals(benchmark.getMode())) {
-                                        prevGroup.put(benchmarkKey, 
-                                                changeScoreUnit(benchmark, curBenchmark.getPrimaryMetric().getScoreUnit()));
+        Map<String, GroupedBenchmarks> curGroupedBenchmarkByMode = getBenchmarks(build);
+        Map<String, GroupedBenchmarks> prevGroupedBenchmarkByMode = new HashMap<>();
+        for (String mode : curGroupedBenchmarkByMode.keySet()) {
+            GroupedBenchmarks curGroupedBenchmark = curGroupedBenchmarkByMode.get(mode);
+            GroupedBenchmarks prevGroupedBenchmark = new GroupedBenchmarks();
+            prevGroupedBenchmarkByMode.put(mode, prevGroupedBenchmark);
+            for (SFinishedBuild sFinishedBuild : buildsBefore) {
+                Map<String, GroupedBenchmarks> groupedBenchmarksByMode = getBenchmarks(sFinishedBuild);
+                if (groupedBenchmarksByMode != null) {
+                    GroupedBenchmarks groupedBenchmarks = groupedBenchmarksByMode.get(mode);
+                    if (groupedBenchmarks != null) {
+                        for (String benchmarkGroupKey : curGroupedBenchmark.keySet()) {
+                            Group curGroup = curGroupedBenchmark.get(benchmarkGroupKey);
+                            Group prevGroup = prevGroupedBenchmark.get(benchmarkGroupKey);
+                            Group group = groupedBenchmarks.get(benchmarkGroupKey);
+                            if (group != null) {
+                                if (prevGroup == null) {
+                                    prevGroup = new Group();
+                                    prevGroupedBenchmark.put(benchmarkGroupKey, prevGroup);
+                                }
+                                for (String benchmarkKey : curGroup.keySet()) {
+                                    if (!prevGroup.containsKey(benchmarkKey)) {
+                                        Benchmark curBenchmark = curGroup.get(benchmarkKey);
+                                        Benchmark benchmark = group.get(benchmarkKey);
+                                        if (benchmark != null) {
+                                            if (curBenchmark.getMode().equals(benchmark.getMode())) {
+                                                prevGroup.put(benchmarkKey,
+                                                        changeScoreUnit(benchmark, curBenchmark.getPrimaryMetric().getScoreUnit()));
+                                            }
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-                break;
             }
         }
-        model.put("benchmarks", curGroupedBenchmark);
-        model.put("prevBenchmarks", prevGroupedBenchmark);
+        model.put("benchmarks", curGroupedBenchmarkByMode);
+        model.put("prevBenchmarks", prevGroupedBenchmarkByMode);
     }
 
     private Benchmark changeScoreUnit(Benchmark benchmark, String scoreUnit) {
@@ -113,7 +121,7 @@ public class JmhBuildTab extends SimpleCustomTab {
         return result;
     }
 
-    private GroupedBenchmarks getBenchmarks(SBuild build) {
+    private Map<String, GroupedBenchmarks> getBenchmarks(SBuild build) {
         File benchmarksFile = new File(build.getArtifactsDirectory(), JmhRunnerConst.OUTPUT_FILE);
         try {
             LOGGER.info("benchmarksFile=" + IOUtils.toString(new FileInputStream(benchmarksFile)));
@@ -124,7 +132,16 @@ public class JmhBuildTab extends SimpleCustomTab {
             try {
                 List<Benchmark> benchmarks = objectMapper.readValue(benchmarksFile,
                         objectMapper.getTypeFactory().constructCollectionType(List.class, Benchmark.class));
-                return new GroupedBenchmarks(benchmarks);
+                Map<String, GroupedBenchmarks> result = new HashMap<>();
+                for (Benchmark benchmark : benchmarks) {
+                    GroupedBenchmarks groupedBenchmarks = result.get(benchmark.getMode());
+                    if (groupedBenchmarks == null) {
+                        groupedBenchmarks = new GroupedBenchmarks();
+                        result.put(benchmark.getMode(), groupedBenchmarks);
+                    }
+                    groupedBenchmarks.add(benchmark);
+                }
+                return result;
             } catch (IOException e) {
                 e.printStackTrace();
             }

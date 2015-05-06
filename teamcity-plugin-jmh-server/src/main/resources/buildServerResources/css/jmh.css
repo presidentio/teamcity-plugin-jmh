@@ -60,3 +60,13 @@
 .bar-background .failing {
     fill: #F00
 }
+
+.mode-container {
+    margin-left: 20px;
+}
+
+.mode-name {
+    min-width: 40em;
+    display: inline-block;
+    font-weight: bold;
+}

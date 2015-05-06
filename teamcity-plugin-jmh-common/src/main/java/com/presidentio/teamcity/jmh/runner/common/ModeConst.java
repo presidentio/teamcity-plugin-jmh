@@ -1,5 +1,8 @@
 package com.presidentio.teamcity.jmh.runner.common;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by presidentio on 23.04.15.
  */
@@ -11,6 +14,17 @@ public class ModeConst {
     public static final String SINGLE_SHOT_TIME = "ss";
     public static final String ALL = "all";
     public static final String UNSPECIFIED = "unspecified";
+
+    public static final Map<String, String> NAMES = new HashMap<>();
+
+    static {
+        NAMES.put(THROUGHPUT, "Throughput");
+        NAMES.put(AVERAGE_TIME, "Average time");
+        NAMES.put(SAMPLE_TIME, "Sample time");
+        NAMES.put(SINGLE_SHOT_TIME, "Single shot time");
+        NAMES.put(ALL, "All");
+        NAMES.put(UNSPECIFIED, "Unspecified");
+    }
 
     public String getTHROUGHPUT() {
         return THROUGHPUT;
@@ -34,5 +48,9 @@ public class ModeConst {
 
     public String getUNSPECIFIED() {
         return UNSPECIFIED;
+    }
+
+    public String name(String mode) {
+        return NAMES.get(mode);
     }
 }
