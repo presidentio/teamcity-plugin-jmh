@@ -1,6 +1,4 @@
-package com.presidentio.teamcity.jmh.view;
-
-import com.presidentio.teamcity.jmh.entity.Benchmark;
+package com.presidentio.teamcity.jmh.entity;
 
 import java.util.HashMap;
 

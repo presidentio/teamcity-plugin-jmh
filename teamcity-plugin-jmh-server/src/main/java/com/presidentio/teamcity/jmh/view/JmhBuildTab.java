@@ -1,8 +1,7 @@
 package com.presidentio.teamcity.jmh.view;
 
 import com.intellij.openapi.diagnostic.Logger;
-import com.presidentio.teamcity.jmh.entity.Benchmark;
-import com.presidentio.teamcity.jmh.entity.PrimaryMetric;
+import com.presidentio.teamcity.jmh.entity.*;
 import com.presidentio.teamcity.jmh.runner.common.JmhRunnerConst;
 import com.presidentio.teamcity.jmh.runner.common.UnitConverter;
 import com.presidentio.teamcity.jmh.runner.server.JmhRunnerBundle;
@@ -14,15 +13,12 @@ import jetbrains.buildServer.web.openapi.PagePlaces;
 import jetbrains.buildServer.web.openapi.PlaceId;
 import jetbrains.buildServer.web.openapi.PluginDescriptor;
 import jetbrains.buildServer.web.openapi.SimpleCustomTab;
-import org.apache.commons.io.IOUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.jetbrains.annotations.NotNull;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -51,7 +47,7 @@ public class JmhBuildTab extends SimpleCustomTab {
     public boolean isAvailable(@NotNull HttpServletRequest request) {
         long buildId = Long.valueOf(request.getParameter(BUILD_ID));
         SBuild build = buildServer.findBuildInstanceById(buildId);
-        return build.isFinished() && getBenchmarks(build) != null;
+        return build.isFinished() && hasBenchmarks(build);
     }
 
     @Override
@@ -59,49 +55,19 @@ public class JmhBuildTab extends SimpleCustomTab {
         long buildId = Long.valueOf(request.getParameter(BUILD_ID));
         SBuild build = buildServer.findBuildInstanceById(buildId);
         List<SFinishedBuild> buildsBefore = buildServer.getHistory().getEntriesBefore(build, true);
-        Map<String, GroupedBenchmarks> curGroupedBenchmarkByMode = getBenchmarks(build);
-        Map<String, GroupedBenchmarks> prevGroupedBenchmarkByMode = new HashMap<>();
-        for (String mode : curGroupedBenchmarkByMode.keySet()) {
-            GroupedBenchmarks curGroupedBenchmark = curGroupedBenchmarkByMode.get(mode);
-            GroupedBenchmarks prevGroupedBenchmark = new GroupedBenchmarks();
-            prevGroupedBenchmarkByMode.put(mode, prevGroupedBenchmark);
-            for (SFinishedBuild sFinishedBuild : buildsBefore) {
-                Map<String, GroupedBenchmarks> groupedBenchmarksByMode = getBenchmarks(sFinishedBuild);
-                if (groupedBenchmarksByMode != null) {
-                    GroupedBenchmarks groupedBenchmarks = groupedBenchmarksByMode.get(mode);
-                    if (groupedBenchmarks != null) {
-                        for (String benchmarkGroupKey : curGroupedBenchmark.keySet()) {
-                            Group curGroup = curGroupedBenchmark.get(benchmarkGroupKey);
-                            Group prevGroup = prevGroupedBenchmark.get(benchmarkGroupKey);
-                            Group group = groupedBenchmarks.get(benchmarkGroupKey);
-                            if (group != null) {
-                                if (prevGroup == null) {
-                                    prevGroup = new Group();
-                                    prevGroupedBenchmark.put(benchmarkGroupKey, prevGroup);
-                                }
-                                for (String benchmarkKey : curGroup.keySet()) {
-                                    if (!prevGroup.containsKey(benchmarkKey)) {
-                                        Benchmark curBenchmark = curGroup.get(benchmarkKey);
-                                        Benchmark benchmark = group.get(benchmarkKey);
-                                        if (benchmark != null) {
-                                            if (curBenchmark.getMode().equals(benchmark.getMode())) {
-                                                prevGroup.put(benchmarkKey,
-                                                        changeScoreUnit(benchmark, curBenchmark.getPrimaryMetric().getScoreUnit()));
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+        try {
+            BenchmarksByMode benchmarkContainer = parseBenchmarks(build);
+            BenchmarksByMode prevBenchmarkContainer = getPreviousBenchmarks(buildsBefore,
+                    benchmarkContainer);
+            model.put("benchmarks", benchmarkContainer);
+            model.put("prevBenchmarks", prevBenchmarkContainer);
+        } catch (IOException e) {
+            model.put("error", "Failed to load benchmarks for this build");
+            LOGGER.error(e);
         }
-        model.put("benchmarks", curGroupedBenchmarkByMode);
-        model.put("prevBenchmarks", prevGroupedBenchmarkByMode);
     }
 
-    private Benchmark changeScoreUnit(Benchmark benchmark, String scoreUnit) {
+    private Benchmark convertScoreUnit(Benchmark benchmark, String scoreUnit) {
         Benchmark result = new Benchmark(benchmark);
         PrimaryMetric primaryMetric = result.getPrimaryMetric();
         String unitFrom = primaryMetric.getScoreUnit();
@@ -121,31 +87,53 @@ public class JmhBuildTab extends SimpleCustomTab {
         return result;
     }
 
-    private Map<String, GroupedBenchmarks> getBenchmarks(SBuild build) {
+    private boolean hasBenchmarks(SBuild build) {
         File benchmarksFile = new File(build.getArtifactsDirectory(), JmhRunnerConst.OUTPUT_FILE);
-        try {
-            LOGGER.info("benchmarksFile=" + IOUtils.toString(new FileInputStream(benchmarksFile)));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if (benchmarksFile.exists()) {
+        return benchmarksFile.exists();
+    }
+
+    private BenchmarksByMode parseBenchmarks(SBuild build) throws IOException {
+        File benchmarksFile = new File(build.getArtifactsDirectory(), JmhRunnerConst.OUTPUT_FILE);
+        List<Benchmark> benchmarks = objectMapper.readValue(benchmarksFile,
+                objectMapper.getTypeFactory().constructCollectionType(List.class, Benchmark.class));
+        BenchmarksByMode benchmarkContainer = new BenchmarksByMode();
+        benchmarkContainer.addAll(benchmarks);
+        return benchmarkContainer;
+    }
+
+    private BenchmarksByMode getPreviousBenchmarks(List<SFinishedBuild> buildsBefore,
+                                                   BenchmarksByMode curByMode) {
+        BenchmarksByMode prevByMode = new BenchmarksByMode();
+        for (SFinishedBuild sFinishedBuild : buildsBefore) {
             try {
-                List<Benchmark> benchmarks = objectMapper.readValue(benchmarksFile,
-                        objectMapper.getTypeFactory().constructCollectionType(List.class, Benchmark.class));
-                Map<String, GroupedBenchmarks> result = new HashMap<>();
-                for (Benchmark benchmark : benchmarks) {
-                    GroupedBenchmarks groupedBenchmarks = result.get(benchmark.getMode());
-                    if (groupedBenchmarks == null) {
-                        groupedBenchmarks = new GroupedBenchmarks();
-                        result.put(benchmark.getMode(), groupedBenchmarks);
+                if (hasBenchmarks(sFinishedBuild)) {
+                    BenchmarksByMode byMode = parseBenchmarks(sFinishedBuild);
+                    for (String mode : curByMode.keySet()) {
+                        BenchmarksByClass curByClass = curByMode.get(mode);
+                        if (byMode.containsKey(mode)) {
+                            BenchmarksByClass byClass = byMode.get(mode);
+                            for (String className : curByClass.keySet()) {
+                                BenchmarksByMethod curByMethod = curByClass.get(className);
+                                if (byClass.containsKey(className)) {
+                                    BenchmarksByMethod byMethod = byClass.get(className);
+                                    for (String methodName : curByMethod.keySet()) {
+                                        if (byMethod.containsKey(methodName) && !prevByMode.contains(mode, className, methodName)) {
+                                            Benchmark curBenchmark = curByMethod.get(methodName);
+                                            Benchmark benchmark = byMethod.get(methodName);
+                                            benchmark = convertScoreUnit(benchmark, curBenchmark.getPrimaryMetric().getScoreUnit());
+                                            prevByMode.add(benchmark);
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
-                    groupedBenchmarks.add(benchmark);
                 }
-                return result;
             } catch (IOException e) {
-                e.printStackTrace();
+                LOGGER.error(e);
             }
         }
-        return null;
+        return prevByMode;
     }
+
 }

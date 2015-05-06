@@ -1,6 +1,7 @@
 package com.presidentio.teamcity.jmh.view;
 
 import com.presidentio.teamcity.jmh.entity.Benchmark;
+import com.presidentio.teamcity.jmh.entity.GroupedBenchmarks;
 import junit.framework.TestCase;
 import org.junit.Assert;
 
