@@ -1,6 +1,8 @@
 package com.presidentio.teamcity.jmh.runner.common;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -14,6 +16,9 @@ public class ModeConst {
     public static final String SINGLE_SHOT_TIME = "ss";
     public static final String ALL = "all";
     public static final String UNSPECIFIED = "unspecified";
+
+    public static final List<String> MODES = Arrays.asList(ALL, AVERAGE_TIME, SAMPLE_TIME, SINGLE_SHOT_TIME,
+            THROUGHPUT, UNSPECIFIED);
 
     public static final Map<String, String> NAMES = new HashMap<>();
 

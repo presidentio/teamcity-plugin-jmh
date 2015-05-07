@@ -1,7 +1,9 @@
 package com.presidentio.teamcity.jmh.runner.server;
 
-import com.presidentio.teamcity.jmh.runner.common.JmhRunnerConst;
+import com.presidentio.teamcity.jmh.runner.common.Dictionary;
+import com.presidentio.teamcity.jmh.runner.common.PluginConst;
 import com.presidentio.teamcity.jmh.runner.common.ModeConst;
+import com.presidentio.teamcity.jmh.runner.common.SettingsConst;
 import jetbrains.buildServer.serverSide.PropertiesProcessor;
 import jetbrains.buildServer.serverSide.RunType;
 import jetbrains.buildServer.serverSide.RunTypeRegistry;
@@ -28,9 +30,9 @@ public class JmhRunType extends RunType {
     @Override
     public String describeParameters(@NotNull Map<String, String> parameters) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Path to jmh jar: ").append(parameters.get(JmhRunnerConst.PROP_JAR_PATH));
-        if (!parameters.get(JmhRunnerConst.PROP_MODE).equals(ModeConst.UNSPECIFIED)) {
-            stringBuilder.append("\nJmh mode: ").append(parameters.get(JmhRunnerConst.PROP_JAR_PATH));
+        stringBuilder.append(Dictionary.PATH_TO_JMH_JAR + ": ").append(parameters.get(SettingsConst.PROP_JAR_PATH));
+        if (!parameters.get(SettingsConst.PROP_MODE).equals(ModeConst.UNSPECIFIED)) {
+            stringBuilder.append("\n" + Dictionary.MODE + ": ").append(parameters.get(SettingsConst.PROP_MODE));
         }
         return stringBuilder.toString();
     }
@@ -38,19 +40,19 @@ public class JmhRunType extends RunType {
     @NotNull
     @Override
     public String getType() {
-        return JmhRunnerConst.RUNNER_TYPE;
+        return PluginConst.RUNNER_TYPE;
     }
 
     @NotNull
     @Override
     public String getDisplayName() {
-        return JmhRunnerBundle.DISPLAY_NAME;
+        return Dictionary.DISPLAY_NAME;
     }
 
     @NotNull
     @Override
     public String getDescription() {
-        return JmhRunnerBundle.DESCRIPTION;
+        return Dictionary.DESCRIPTION;
     }
 
     @Nullable
@@ -75,7 +77,7 @@ public class JmhRunType extends RunType {
     @Override
     public Map<String, String> getDefaultRunnerProperties() {
         Map<String, String> defaultProperties = new HashMap<String, String>(1);
-        defaultProperties.put(JmhRunnerConst.PROP_JAR_PATH, "target/benchmarks.jar");
+        defaultProperties.put(SettingsConst.PROP_JAR_PATH, PluginConst.DEFAULT_JAR_PATH);
         return defaultProperties;
     }
 }

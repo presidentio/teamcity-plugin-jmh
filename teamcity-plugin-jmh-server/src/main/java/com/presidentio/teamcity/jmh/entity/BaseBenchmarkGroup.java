@@ -10,26 +10,6 @@ import java.util.HashMap;
 public abstract class BaseBenchmarkGroup<B extends BenchmarkGroup> extends HashMap<String, B> 
         implements BenchmarkGroup {
 
-    private String scoreUnit;
-
-    public BaseBenchmarkGroup() {
-    }
-
-    public BaseBenchmarkGroup(String scoreUnit) {
-        this.scoreUnit = scoreUnit;
-    }
-    
-    public void add(Benchmark benchmark) {
-        if (scoreUnit == null) {
-            scoreUnit = benchmark.getPrimaryMetric().getScoreUnit();
-        } else {
-            benchmark = changeScoreUnit(benchmark, scoreUnit);
-        }
-        put(benchmark);
-    }
-
-    protected abstract void put(Benchmark benchmark);
-
     @Override
     public double minTime() {
         double minValue = Double.POSITIVE_INFINITY;
@@ -54,12 +34,7 @@ public abstract class BaseBenchmarkGroup<B extends BenchmarkGroup> extends HashM
         return maxValue;
     }
 
-    @Override
-    public String scoreUnit() {
-        return scoreUnit;
-    }
-
-    private Benchmark changeScoreUnit(Benchmark benchmark, String scoreUnit) {
+    protected Benchmark changeScoreUnit(Benchmark benchmark, String scoreUnit) {
         Benchmark result = new Benchmark(benchmark);
         PrimaryMetric primaryMetric = result.getPrimaryMetric();
         String unitFrom = primaryMetric.getScoreUnit();

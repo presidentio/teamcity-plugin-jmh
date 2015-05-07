@@ -2,9 +2,9 @@ package com.presidentio.teamcity.jmh.view;
 
 import com.intellij.openapi.diagnostic.Logger;
 import com.presidentio.teamcity.jmh.entity.*;
-import com.presidentio.teamcity.jmh.runner.common.JmhRunnerConst;
+import com.presidentio.teamcity.jmh.runner.common.Dictionary;
+import com.presidentio.teamcity.jmh.runner.common.PluginConst;
 import com.presidentio.teamcity.jmh.runner.common.UnitConverter;
-import com.presidentio.teamcity.jmh.runner.server.JmhRunnerBundle;
 import jetbrains.buildServer.log.Loggers;
 import jetbrains.buildServer.serverSide.SBuild;
 import jetbrains.buildServer.serverSide.SBuildServer;
@@ -25,7 +25,7 @@ import java.util.Map;
 /**
  * Created by Vitaliy on 09.04.2015.
  */
-public class JmhBuildTab extends SimpleCustomTab {
+public class JmhTab extends SimpleCustomTab {
 
     private static final Logger LOGGER = Loggers.SERVER;
 
@@ -34,11 +34,11 @@ public class JmhBuildTab extends SimpleCustomTab {
     private SBuildServer buildServer;
     private ObjectMapper objectMapper = new ObjectMapper();
 
-    public JmhBuildTab(@NotNull SBuildServer buildServer,
-                       @NotNull PagePlaces pagePlaces,
-                       @NotNull PluginDescriptor descriptor) {
-        super(pagePlaces, PlaceId.BUILD_RESULTS_TAB, JmhRunnerBundle.TAB_ID,
-                descriptor.getPluginResourcesPath("tabJmhView.jsp"), JmhRunnerBundle.TAB_TITLE);
+    public JmhTab(@NotNull SBuildServer buildServer,
+                  @NotNull PagePlaces pagePlaces,
+                  @NotNull PluginDescriptor descriptor) {
+        super(pagePlaces, PlaceId.BUILD_RESULTS_TAB, PluginConst.TAB_ID,
+                descriptor.getPluginResourcesPath("tabJmh.jsp"), Dictionary.TAB_TITLE);
         register();
         this.buildServer = buildServer;
     }
@@ -47,7 +47,7 @@ public class JmhBuildTab extends SimpleCustomTab {
     public boolean isAvailable(@NotNull HttpServletRequest request) {
         long buildId = Long.valueOf(request.getParameter(BUILD_ID));
         SBuild build = buildServer.findBuildInstanceById(buildId);
-        return build.isFinished() && hasBenchmarks(build);
+        return hasBenchmarks(build);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class JmhBuildTab extends SimpleCustomTab {
             model.put("benchmarks", benchmarkContainer);
             model.put("prevBenchmarks", prevBenchmarkContainer);
         } catch (IOException e) {
-            model.put("error", "Failed to load benchmarks for this build");
+            model.put("error", Dictionary.ERROR_FAILED_TO_PARSE_BENCHMARK);
             LOGGER.error(e);
         }
     }
@@ -88,12 +88,12 @@ public class JmhBuildTab extends SimpleCustomTab {
     }
 
     private boolean hasBenchmarks(SBuild build) {
-        File benchmarksFile = new File(build.getArtifactsDirectory(), JmhRunnerConst.OUTPUT_FILE);
+        File benchmarksFile = new File(build.getArtifactsDirectory(), PluginConst.OUTPUT_FILE);
         return benchmarksFile.exists();
     }
 
     private BenchmarksByMode parseBenchmarks(SBuild build) throws IOException {
-        File benchmarksFile = new File(build.getArtifactsDirectory(), JmhRunnerConst.OUTPUT_FILE);
+        File benchmarksFile = new File(build.getArtifactsDirectory(), PluginConst.OUTPUT_FILE);
         List<Benchmark> benchmarks = objectMapper.readValue(benchmarksFile,
                 objectMapper.getTypeFactory().constructCollectionType(List.class, Benchmark.class));
         BenchmarksByMode benchmarkContainer = new BenchmarksByMode();

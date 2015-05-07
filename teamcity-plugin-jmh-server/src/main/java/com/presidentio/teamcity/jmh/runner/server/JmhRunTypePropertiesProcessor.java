@@ -1,8 +1,7 @@
 package com.presidentio.teamcity.jmh.runner.server;
 
-import com.presidentio.teamcity.jmh.runner.common.JmhRunnerConst;
-import com.presidentio.teamcity.jmh.runner.common.ModeConst;
-import com.presidentio.teamcity.jmh.runner.common.TimeUnitConst;
+import com.presidentio.teamcity.jmh.runner.common.*;
+import com.presidentio.teamcity.jmh.runner.common.Dictionary;
 import jetbrains.buildServer.serverSide.InvalidProperty;
 import jetbrains.buildServer.serverSide.PropertiesProcessor;
 import jetbrains.buildServer.util.PropertiesUtil;
@@ -14,28 +13,22 @@ import java.util.*;
  */
 public class JmhRunTypePropertiesProcessor implements PropertiesProcessor {
 
-    private static final List<String> MODES = Arrays.asList(ModeConst.ALL, ModeConst.AVERAGE_TIME,
-            ModeConst.SAMPLE_TIME, ModeConst.SINGLE_SHOT_TIME, ModeConst.THROUGHPUT, ModeConst.UNSPECIFIED);
-
-    private static final List<String> TIME_UNITS = Arrays.asList(TimeUnitConst.UNSPECIFIED, TimeUnitConst.MINUTES,
-            TimeUnitConst.SECONDS, TimeUnitConst.MILLISECONDS, TimeUnitConst.MICROSECONDS, TimeUnitConst.NANOSECONDS);
-
     public Collection<InvalidProperty> process(Map<String, String> map) {
         List<InvalidProperty> result = new ArrayList<InvalidProperty>();
 
-        String jarPath = map.get(JmhRunnerConst.PROP_JAR_PATH);
+        String jarPath = map.get(SettingsConst.PROP_JAR_PATH);
         if (PropertiesUtil.isEmptyOrNull(jarPath)) {
-            result.add(new InvalidProperty(JmhRunnerConst.PROP_JAR_PATH, "Jar path must be specified"));
+            result.add(new InvalidProperty(SettingsConst.PROP_JAR_PATH, Dictionary.ERROR_JAR_PATH_EMPTY));
         }
 
-        String mode = map.get(JmhRunnerConst.PROP_MODE);
-        if (!MODES.contains(mode)) {
-            result.add(new InvalidProperty(JmhRunnerConst.PROP_MODE, "Mode must be one of: " + MODES));
+        String mode = map.get(SettingsConst.PROP_MODE);
+        if (!ModeConst.MODES.contains(mode)) {
+            result.add(new InvalidProperty(SettingsConst.PROP_MODE, Dictionary.ERROR_MODE_ILLEGAL));
         }
 
-        String timeUnit = map.get(JmhRunnerConst.PROP_TIME_UNIT);
-        if (!TIME_UNITS.contains(timeUnit)) {
-            result.add(new InvalidProperty(JmhRunnerConst.PROP_TIME_UNIT, "Time unit must be one of: " + TIME_UNITS));
+        String timeUnit = map.get(SettingsConst.PROP_TIME_UNIT);
+        if (!TimeUnitConst.TIME_UNITS.contains(timeUnit)) {
+            result.add(new InvalidProperty(SettingsConst.PROP_TIME_UNIT, Dictionary.ERROR_TIME_UNIT_ILLEGAL));
         }
 
         return result;

@@ -1,6 +1,6 @@
 package com.presidentio.teamcity.jmh.runner.agent;
 
-import com.presidentio.teamcity.jmh.runner.common.JmhRunnerConst;
+import com.presidentio.teamcity.jmh.runner.common.PluginConst;
 import jetbrains.buildServer.agent.AgentBuildRunnerInfo;
 import jetbrains.buildServer.agent.BuildAgentConfiguration;
 import jetbrains.buildServer.agent.artifacts.ArtifactsWatcher;
@@ -29,7 +29,7 @@ public class JmhCommandLineBuildServiceFactory implements CommandLineBuildServic
         return new AgentBuildRunnerInfo() {
             @NotNull
             public String getType() {
-                return JmhRunnerConst.RUNNER_TYPE;
+                return PluginConst.RUNNER_TYPE;
             }
 
             public boolean canRun(@NotNull final BuildAgentConfiguration buildAgentConfiguration) {

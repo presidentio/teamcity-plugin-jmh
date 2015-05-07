@@ -1,7 +1,8 @@
 package com.presidentio.teamcity.jmh.runner.agent;
 
-import com.presidentio.teamcity.jmh.runner.common.JmhRunnerConst;
+import com.presidentio.teamcity.jmh.runner.common.PluginConst;
 import com.presidentio.teamcity.jmh.runner.common.ModeConst;
+import com.presidentio.teamcity.jmh.runner.common.SettingsConst;
 import com.presidentio.teamcity.jmh.runner.common.TimeUnitConst;
 import jetbrains.buildServer.RunBuildException;
 import jetbrains.buildServer.agent.artifacts.ArtifactsWatcher;
@@ -37,29 +38,29 @@ public class JmhBuildServiceAdapter extends BuildServiceAdapter {
         Map<String, String> runnerParameters = getRunnerParameters();
         List<String> arguments = new ArrayList<String>();
 
-        String jarPath = runnerParameters.get(JmhRunnerConst.PROP_JAR_PATH);
+        String jarPath = runnerParameters.get(SettingsConst.PROP_JAR_PATH);
         arguments.add(ARG_JAR);
         arguments.add(jarPath);
 
         arguments.add(ARG_FORMAT);
-        arguments.add(JmhRunnerConst.OUTPUT_FORMAT);
+        arguments.add(PluginConst.OUTPUT_FORMAT);
 
         arguments.add(ARG_OUTPUT_FILE);
-        arguments.add(JmhRunnerConst.OUTPUT_FILE);
+        arguments.add(PluginConst.OUTPUT_FILE);
 
-        String benchmarks = runnerParameters.get(JmhRunnerConst.PROP_BENCHMARKS);
+        String benchmarks = runnerParameters.get(SettingsConst.PROP_BENCHMARKS);
         if (benchmarks != null && !benchmarks.isEmpty()) {
             arguments.add(benchmarks);
         }
 
-        String mode = runnerParameters.get(JmhRunnerConst.PROP_MODE);
+        String mode = runnerParameters.get(SettingsConst.PROP_MODE);
         if (!mode.equals(ModeConst.UNSPECIFIED)) {
             arguments.add(ARG_MODE);
             arguments.add(mode);
         }
 
 
-        String timeUnit = runnerParameters.get(JmhRunnerConst.PROP_TIME_UNIT);
+        String timeUnit = runnerParameters.get(SettingsConst.PROP_TIME_UNIT);
         if (!timeUnit.equals(TimeUnitConst.UNSPECIFIED)) {
             arguments.add(ARG_TIME_UNIT);
             arguments.add(timeUnit);
@@ -69,7 +70,7 @@ public class JmhBuildServiceAdapter extends BuildServiceAdapter {
     }
 
     @Override
-    public void afterProcessFinished() throws RunBuildException {
-        artifactsWatcher.addNewArtifactsPath(JmhRunnerConst.OUTPUT_FILE);
+    public void afterProcessSuccessfullyFinished() throws RunBuildException {
+        artifactsWatcher.addNewArtifactsPath(PluginConst.OUTPUT_FILE);
     }
 }

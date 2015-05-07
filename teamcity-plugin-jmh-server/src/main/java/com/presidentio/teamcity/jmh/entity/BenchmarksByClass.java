@@ -5,22 +5,30 @@ package com.presidentio.teamcity.jmh.entity;
  */
 public class BenchmarksByClass extends BaseBenchmarkGroup<BenchmarksByMethod> {
 
+    private String scoreUnit;
+
     public BenchmarksByClass() {
     }
 
     public BenchmarksByClass(String scoreUnit) {
-        super(scoreUnit);
+        this.scoreUnit = scoreUnit;
     }
 
-    @Override
-    protected void put(Benchmark benchmark) {
+    public void add(Benchmark benchmark) {
+        if (scoreUnit == null) {
+            scoreUnit = benchmark.getPrimaryMetric().getScoreUnit();
+        }
         String className = extractClass(benchmark.getBenchmark());
         BenchmarksByMethod byMethod = get(className);
         if (byMethod == null) {
-            byMethod = new BenchmarksByMethod();
+            byMethod = new BenchmarksByMethod(scoreUnit);
             put(className, byMethod);
         }
         byMethod.add(benchmark);
+    }
+
+    public String getScoreUnit() {
+        return scoreUnit;
     }
 
     private String extractClass(String classWithMethod) {

@@ -13,8 +13,7 @@ public class BenchmarksByMode extends BaseBenchmarkGroup<BenchmarksByClass> {
         }
     }
 
-    @Override
-    protected void put(Benchmark benchmark) {
+    public void add(Benchmark benchmark) {
         BenchmarksByClass byClass = get(benchmark.getMode());
         if (byClass == null) {
             byClass = new BenchmarksByClass();

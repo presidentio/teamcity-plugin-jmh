@@ -7,6 +7,5 @@ public interface BenchmarkGroup {
     
     double minTime();
     double maxTime();
-    String scoreUnit();
 
 }

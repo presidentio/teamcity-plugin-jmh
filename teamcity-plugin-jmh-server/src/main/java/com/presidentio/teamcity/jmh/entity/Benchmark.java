@@ -113,22 +113,6 @@ public class Benchmark implements BenchmarkGroup {
     }
 
     @Override
-    public String toString() {
-        return "Benchmark{" +
-                "benchmark='" + benchmark + '\'' +
-                ", mode='" + mode + '\'' +
-                ", threads=" + threads +
-                ", forks=" + forks +
-                ", warmupIterations=" + warmupIterations +
-                ", warmupTime='" + warmupTime + '\'' +
-                ", measurementIterations=" + measurementIterations +
-                ", measurementTime='" + measurementTime + '\'' +
-                ", primaryMetric=" + primaryMetric +
-                ", secondaryMetrics=" + secondaryMetrics +
-                '}';
-    }
-
-    @Override
     public double minTime() {
         Double minValue = Double.MAX_VALUE;
         for (Double[] doubles : getPrimaryMetric().rawData) {
@@ -152,10 +136,5 @@ public class Benchmark implements BenchmarkGroup {
             }
         }
         return maxValue;
-    }
-
-    @Override
-    public String scoreUnit() {
-        return getPrimaryMetric().getScoreUnit();
     }
 }
