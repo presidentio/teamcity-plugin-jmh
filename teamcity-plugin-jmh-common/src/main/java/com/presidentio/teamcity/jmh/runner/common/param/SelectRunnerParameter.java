@@ -1,6 +1,7 @@
 package com.presidentio.teamcity.jmh.runner.common.param;
 
 import com.presidentio.teamcity.jmh.runner.common.Dictionary;
+import com.presidentio.teamcity.jmh.runner.common.ParamTypeConst;
 
 import java.util.Map;
 
@@ -11,9 +12,15 @@ public class SelectRunnerParameter extends BaseRunnerParam {
 
     private Map<String, String> allowedValues;
 
+    public SelectRunnerParameter(Map<String, String> allowedValues, int type, String name, String commandLineName,
+                                 boolean required, String shortDescription, String description) {
+        super(type, name, commandLineName, required, shortDescription, description);
+        this.allowedValues = allowedValues;
+    }
+
     public SelectRunnerParameter(Map<String, String> allowedValues, String name, String commandLineName,
                                  boolean required, String shortDescription, String description) {
-        super(name, commandLineName, required, shortDescription, description);
+        super(ParamTypeConst.STRING_SELECT, name, commandLineName, required, shortDescription, description);
         this.allowedValues = allowedValues;
     }
 

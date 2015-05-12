@@ -11,5 +11,6 @@ public interface RunnerParam {
     String getShortDescription();
     String getDescription();
     String validate(String value);
+    int getType();
 
 }

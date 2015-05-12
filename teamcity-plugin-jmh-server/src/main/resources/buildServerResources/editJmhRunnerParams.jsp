@@ -6,36 +6,37 @@
 <jsp:useBean id="paramProvider" class="com.presidentio.teamcity.jmh.runner.common.param.RunnerParamProvider"/>
 <jsp:useBean id="mode" class="com.presidentio.teamcity.jmh.runner.common.ModeConst"/>
 <jsp:useBean id="timeUnit" class="com.presidentio.teamcity.jmh.runner.common.TimeUnitConst"/>
+<jsp:useBean id="paramType" class="com.presidentio.teamcity.jmh.runner.common.ParamTypeConst"/>
 
 <l:settingsGroup title="Jmh options">
-    <c:forEach var="paramEntry" items="${paramProvider.all()}">
+    <c:forEach var="runnerParam" items="${paramProvider.all()}">
         <tr>
-            <th><label for="${paramEntry.key}">${paramEntry.value.shortDescription}: </label></th>
+            <th><label for="${runnerParam.name}">${runnerParam.shortDescription}: </label></th>
             <td>
                 <c:choose>
-                    <c:when test="${paramEntry.value.class.name.equals('BaseRunnerParam')}">
-                        <props:textProperty name="${paramEntry.key}" className="longField"/>
+                    <c:when test="${runnerParam.type == paramType.STRING}">
+                        <props:textProperty name="${runnerParam.name}" className="longField"/>
                     </c:when>
-                    <c:when test="${paramEntry.value.class.name.equals('BoolRunnerParam')}">
-                        <props:selectProperty name="${paramEntry.key}" multiple="false">
-                            <c:forEach var="option" items="${paramEntry.value.allowedValues}">
+                    <c:when test="${runnerParam.type == paramType.BOOL}">
+                        <props:selectProperty name="${runnerParam.name}" multiple="false">
+                            <c:forEach var="option" items="${runnerParam.allowedValues}">
                                 <props:option value="${option.key}">${option.value}</props:option>
                             </c:forEach>
                         </props:selectProperty>
                     </c:when>
-                    <c:when test="${paramEntry.value.class.name.equals('IntRunnerParam')}">
-                        <props:textProperty name="${paramEntry.key}" className="longField"/>
+                    <c:when test="${runnerParam.type == paramType.INT}">
+                        <props:textProperty name="${runnerParam.name}" className="longField"/>
                     </c:when>
-                    <c:when test="${paramEntry.value.class.name.equals('SelectRunnerParam')}">
-                        <props:selectProperty name="${paramEntry.key}" multiple="false">
-                            <c:forEach var="option" items="${paramEntry.value.allowedValues}">
+                    <c:when test="${runnerParam.type == paramType.STRING_SELECT}">
+                        <props:selectProperty name="${runnerParam.name}" multiple="false">
+                            <c:forEach var="option" items="${runnerParam.allowedValues}">
                                 <props:option value="${option.key}">${option.value}</props:option>
                             </c:forEach>
                         </props:selectProperty>
                     </c:when>
                 </c:choose>
-                <span class="error" id="error_${paramEntry.key}"></span>
-                <span class="smallNote">paramEntry.value.description</span>
+                <span class="error" id="error_${runnerParam.name}"></span>
+                <span class="smallNote">${runnerParam.description}</span>
             </td>
         </tr>
     </c:forEach>

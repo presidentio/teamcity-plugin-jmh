@@ -1,6 +1,7 @@
 package com.presidentio.teamcity.jmh.runner.common.param;
 
 import com.presidentio.teamcity.jmh.runner.common.Dictionary;
+import com.presidentio.teamcity.jmh.runner.common.ParamTypeConst;
 
 /**
  * Created by presidentio on 12.05.15.
@@ -17,13 +18,21 @@ public class BaseRunnerParam implements RunnerParam {
 
     private String shortDescription;
 
-    public BaseRunnerParam(String name, String commandLineName, boolean required,
+    private int type;
+
+    public BaseRunnerParam(int type, String name, String commandLineName, boolean required,
                            String shortDescription, String description) {
+        this.type = type;
         this.name = name;
         this.commandLineName = commandLineName;
         this.required = required;
         this.description = description;
         this.shortDescription = shortDescription;
+    }
+
+    public BaseRunnerParam(String name, String commandLineName, boolean required,
+                           String shortDescription, String description) {
+        this(ParamTypeConst.STRING, name, commandLineName, required, shortDescription, description);
     }
 
     @Override
@@ -60,6 +69,11 @@ public class BaseRunnerParam implements RunnerParam {
         return null;
     }
 
+    @Override
+    public int getType() {
+        return type;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -78,5 +92,9 @@ public class BaseRunnerParam implements RunnerParam {
 
     public void setShortDescription(String shortDescription) {
         this.shortDescription = shortDescription;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

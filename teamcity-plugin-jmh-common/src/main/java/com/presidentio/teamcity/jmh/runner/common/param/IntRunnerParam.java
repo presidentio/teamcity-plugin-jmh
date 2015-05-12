@@ -1,6 +1,7 @@
 package com.presidentio.teamcity.jmh.runner.common.param;
 
 import com.presidentio.teamcity.jmh.runner.common.Dictionary;
+import com.presidentio.teamcity.jmh.runner.common.ParamTypeConst;
 
 /**
  * Created by presidentio on 12.05.15.
@@ -13,20 +14,20 @@ public class IntRunnerParam extends BaseRunnerParam {
 
     public IntRunnerParam(String name, String commandLineName, boolean required,
                           String shortDescription, String description, Integer from) {
-        super(name, commandLineName, required, shortDescription, description);
+        super(ParamTypeConst.INT, name, commandLineName, required, shortDescription, description);
         this.from = from;
     }
 
     public IntRunnerParam(String name, String commandLineName, boolean required,
                           String shortDescription, String description, Integer from, Integer to) {
-        super(name, commandLineName, required,shortDescription, description);
+        super(ParamTypeConst.INT, name, commandLineName, required,shortDescription, description);
         this.from = from;
         this.to = to;
     }
 
     public IntRunnerParam(String name, String commandLineName, boolean required,
                           String shortDescription, String description) {
-        super(name, commandLineName, required, shortDescription, description);
+        super(ParamTypeConst.INT, name, commandLineName, required, shortDescription, description);
     }
 
     @Override
