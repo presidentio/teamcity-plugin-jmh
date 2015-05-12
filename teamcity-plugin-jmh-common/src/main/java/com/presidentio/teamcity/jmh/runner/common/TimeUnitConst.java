@@ -1,7 +1,9 @@
 package com.presidentio.teamcity.jmh.runner.common;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Vitaliy on 04.05.2015.
@@ -17,6 +19,17 @@ public class TimeUnitConst {
 
     public static final List<String> TIME_UNITS = Arrays.asList(UNSPECIFIED, MINUTES, SECONDS, MILLISECONDS,
             MICROSECONDS, NANOSECONDS);
+
+    public static final Map<String, String> TIME_UNITS_WITH_DESCRIPTION = new HashMap<>();
+
+    static {
+        TIME_UNITS_WITH_DESCRIPTION.put(UNSPECIFIED, "Unspecified");
+        TIME_UNITS_WITH_DESCRIPTION.put(MINUTES, "Minutes");
+        TIME_UNITS_WITH_DESCRIPTION.put(SECONDS, "Seconds");
+        TIME_UNITS_WITH_DESCRIPTION.put(MILLISECONDS, "Milliseconds");
+        TIME_UNITS_WITH_DESCRIPTION.put(MICROSECONDS, "Microseconds");
+        TIME_UNITS_WITH_DESCRIPTION.put(NANOSECONDS, "Nanoseconds");
+    }
 
     public String getUNSPECIFIED() {
         return UNSPECIFIED;

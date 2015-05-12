@@ -1,12 +1,45 @@
 <%@ taglib prefix="props" tagdir="/WEB-INF/tags/props" %>
 <%@ taglib prefix="l" tagdir="/WEB-INF/tags/layout" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:useBean id="settings" class="com.presidentio.teamcity.jmh.runner.common.SettingsConst"/>
+<jsp:useBean id="paramProvider" class="com.presidentio.teamcity.jmh.runner.common.param.RunnerParamProvider"/>
 <jsp:useBean id="mode" class="com.presidentio.teamcity.jmh.runner.common.ModeConst"/>
 <jsp:useBean id="timeUnit" class="com.presidentio.teamcity.jmh.runner.common.TimeUnitConst"/>
 
 <l:settingsGroup title="Jmh options">
-    <tr>
+    <c:forEach var="paramEntry" items="${paramProvider.all()}">
+        <tr>
+            <th><label for="${paramEntry.key}">${paramEntry.value.shortDescription}: </label></th>
+            <td>
+                <c:choose>
+                    <c:when test="${paramEntry.value.class.name.equals('BaseRunnerParam')}">
+                        <props:textProperty name="${paramEntry.key}" className="longField"/>
+                    </c:when>
+                    <c:when test="${paramEntry.value.class.name.equals('BoolRunnerParam')}">
+                        <props:selectProperty name="${paramEntry.key}" multiple="false">
+                            <c:forEach var="option" items="${paramEntry.value.allowedValues}">
+                                <props:option value="${option.key}">${option.value}</props:option>
+                            </c:forEach>
+                        </props:selectProperty>
+                    </c:when>
+                    <c:when test="${paramEntry.value.class.name.equals('IntRunnerParam')}">
+                        <props:textProperty name="${paramEntry.key}" className="longField"/>
+                    </c:when>
+                    <c:when test="${paramEntry.value.class.name.equals('SelectRunnerParam')}">
+                        <props:selectProperty name="${paramEntry.key}" multiple="false">
+                            <c:forEach var="option" items="${paramEntry.value.allowedValues}">
+                                <props:option value="${option.key}">${option.value}</props:option>
+                            </c:forEach>
+                        </props:selectProperty>
+                    </c:when>
+                </c:choose>
+                <span class="error" id="error_${paramEntry.key}"></span>
+                <span class="smallNote">paramEntry.value.description</span>
+            </td>
+        </tr>
+    </c:forEach>
+    <%--<tr>
         <th><label for="${settings.PROP_JAR_PATH}">Jmh Jar Path: </label></th>
         <td><props:textProperty name="${settings.PROP_JAR_PATH}" className="longField"/>
             <span class="error" id="error_${settings.PROP_JAR_PATH}"></span>
@@ -50,4 +83,12 @@
             <span class="smallNote">Output time unit.</span>
         </td>
     </tr>
+    <tr class="advancedSetting">
+        <c:set value="${settings.PROP_BATCH_SIZE}" var="param"/>
+        <th><label for="${param}">${paramProvider.get(param)}: </label></th>
+        <td><props:textProperty name="${param}" className="longField"/>
+            <span class="error" id="error_${param}"></span>
+            <span class="smallNote">Benchmarks to run (regexp+).</span>
+        </td>
+    </tr>--%>
 </l:settingsGroup>

@@ -20,15 +20,15 @@ public class ModeConst {
     public static final List<String> MODES = Arrays.asList(ALL, AVERAGE_TIME, SAMPLE_TIME, SINGLE_SHOT_TIME,
             THROUGHPUT, UNSPECIFIED);
 
-    public static final Map<String, String> NAMES = new HashMap<>();
+    public static final Map<String, String> MODES_WITH_DESCRIPTION = new HashMap<>();
 
     static {
-        NAMES.put(THROUGHPUT, "Throughput");
-        NAMES.put(AVERAGE_TIME, "Average time");
-        NAMES.put(SAMPLE_TIME, "Sample time");
-        NAMES.put(SINGLE_SHOT_TIME, "Single shot time");
-        NAMES.put(ALL, "All");
-        NAMES.put(UNSPECIFIED, "Unspecified");
+        MODES_WITH_DESCRIPTION.put(ALL, "All");
+        MODES_WITH_DESCRIPTION.put(AVERAGE_TIME, "Average time");
+        MODES_WITH_DESCRIPTION.put(SAMPLE_TIME, "Sample time");
+        MODES_WITH_DESCRIPTION.put(SINGLE_SHOT_TIME, "Single shot time");
+        MODES_WITH_DESCRIPTION.put(THROUGHPUT, "Throughput");
+        MODES_WITH_DESCRIPTION.put(UNSPECIFIED, "Unspecified");
     }
 
     public String getTHROUGHPUT() {
@@ -56,6 +56,6 @@ public class ModeConst {
     }
 
     public String name(String mode) {
-        return NAMES.get(mode);
+        return MODES_WITH_DESCRIPTION.get(mode);
     }
 }
