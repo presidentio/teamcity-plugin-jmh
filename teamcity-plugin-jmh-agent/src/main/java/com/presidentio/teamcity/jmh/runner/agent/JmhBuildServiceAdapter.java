@@ -1,9 +1,9 @@
 package com.presidentio.teamcity.jmh.runner.agent;
 
 import com.presidentio.teamcity.jmh.runner.common.PluginConst;
-import com.presidentio.teamcity.jmh.runner.common.ModeConst;
 import com.presidentio.teamcity.jmh.runner.common.SettingsConst;
-import com.presidentio.teamcity.jmh.runner.common.TimeUnitConst;
+import com.presidentio.teamcity.jmh.runner.common.param.RunnerParam;
+import com.presidentio.teamcity.jmh.runner.common.param.RunnerParamProvider;
 import jetbrains.buildServer.RunBuildException;
 import jetbrains.buildServer.agent.artifacts.ArtifactsWatcher;
 import jetbrains.buildServer.agent.runner.BuildServiceAdapter;
@@ -23,8 +23,8 @@ public class JmhBuildServiceAdapter extends BuildServiceAdapter {
     public static final String ARG_JAR = "-jar";
     public static final String ARG_FORMAT = "-rf";
     public static final String ARG_OUTPUT_FILE = "-rff";
-    public static final String ARG_MODE = "-bm";
-    public static final String ARG_TIME_UNIT = "-tu";
+//    public static final String ARG_MODE = "-bm";
+//    public static final String ARG_TIME_UNIT = "-tu";
 
     private ArtifactsWatcher artifactsWatcher;
 
@@ -37,7 +37,7 @@ public class JmhBuildServiceAdapter extends BuildServiceAdapter {
     public ProgramCommandLine makeProgramCommandLine() throws RunBuildException {
         Map<String, String> runnerParameters = getRunnerParameters();
         List<String> arguments = new ArrayList<String>();
-
+        System.out.println("arguments = " + arguments);
         String jarPath = runnerParameters.get(SettingsConst.PROP_JAR_PATH);
         arguments.add(ARG_JAR);
         arguments.add(jarPath);
@@ -48,23 +48,31 @@ public class JmhBuildServiceAdapter extends BuildServiceAdapter {
         arguments.add(ARG_OUTPUT_FILE);
         arguments.add(PluginConst.OUTPUT_FILE);
 
+        RunnerParamProvider runnerParamProvider = new RunnerParamProvider();
+        for (RunnerParam runnerParam : runnerParamProvider.all()) {
+            if(runnerParameters.containsKey(runnerParam.getName())){
+                arguments.add(runnerParam.getCommandLineName());
+                arguments.add(runnerParameters.get(runnerParam.getName()));
+            }
+        }
+/*
         String benchmarks = runnerParameters.get(SettingsConst.PROP_BENCHMARKS);
         if (benchmarks != null && !benchmarks.isEmpty()) {
             arguments.add(benchmarks);
         }
 
         String mode = runnerParameters.get(SettingsConst.PROP_MODE);
-        if (!mode.equals(ModeConst.UNSPECIFIED)) {
+        if (!mode.equals(ModeConst.DEFAULT)) {
             arguments.add(ARG_MODE);
             arguments.add(mode);
         }
 
 
         String timeUnit = runnerParameters.get(SettingsConst.PROP_TIME_UNIT);
-        if (!timeUnit.equals(TimeUnitConst.UNSPECIFIED)) {
+        if (!timeUnit.equals(TimeUnitConst.DEFAULT)) {
             arguments.add(ARG_TIME_UNIT);
             arguments.add(timeUnit);
-        }
+        }*/
 
         return new SimpleProgramCommandLine(getRunnerContext(), "java", arguments);
     }

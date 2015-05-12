@@ -8,7 +8,6 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import static com.presidentio.teamcity.jmh.runner.common.ModeConst.MODES_WITH_DESCRIPTION;
-import static com.presidentio.teamcity.jmh.runner.common.ModeConst.SINGLE_SHOT_TIME;
 import static com.presidentio.teamcity.jmh.runner.common.SettingsConst.*;
 
 /**
@@ -19,11 +18,9 @@ public class RunnerParamProvider {
     private static final HashMap<String, RunnerParam> ALL = new HashMap<>();
 
     static {
-        ALL.put(PROP_JAR_PATH, new BaseRunnerParam(PROP_JAR_PATH, "", false, "Jmh jar", "Path to jmh jar"));
         ALL.put(PROP_BENCHMARKS, new BaseRunnerParam(PROP_BENCHMARKS, "", false, "Benchmarks", "Benchmarks to run (regexp+)."));
-        ALL.put(SINGLE_SHOT_TIME, new SelectRunnerParameter(MODES_WITH_DESCRIPTION, PROP_MODE, "-bm", false, "Benchmark mode",
-                "Benchmark mode. Available modes are: [Throughput/thrpt, AverageTime/avgt, SampleTime/sample, " +
-                        "SingleShotTime/ss, All/all]"));
+        ALL.put(PROP_MODE, new SelectRunnerParameter(MODES_WITH_DESCRIPTION, PROP_MODE, "-bm", false, "Benchmark mode",
+                "Benchmark mode."));
         ALL.put(PROP_BATCH_SIZE, new IntRunnerParam(PROP_BATCH_SIZE, "-bs", false, "Batch size",
                 "Number of benchmark method calls per operation. (some benchmark modes can ignore this setting)", 0));
         ALL.put(PROP_EXCLUDE, new BaseRunnerParam(PROP_EXCLUDE, "-e", false, "Exclude",
@@ -52,22 +49,22 @@ public class RunnerParamProvider {
                 "parameter values should be separated with equals sign. Parameter values should be separated with commas."));
         ALL.put(PROP_PROFILERS, new BaseRunnerParam(PROP_PROFILERS, "-prof", false, "Profilers",
                 "Use profilers to collect additional data."));
-        ALL.put(PROP_TIME_PER_MEASUREMENT, new IntRunnerParam(PROP_TIME_PER_MEASUREMENT, "-r", false,
-                "Measurement time", "Time to spend at each measurement iteration.", 0));
+        ALL.put(PROP_TIME_PER_MEASUREMENT, new BaseRunnerParam(PROP_TIME_PER_MEASUREMENT, "-r", false,
+                "Measurement time", "Time to spend at each measurement iteration. Arguments accept time suffixes, like \"100ms\"."));
         ALL.put(PROP_SYNCHRONIZE, new BoolRunnerParam(PROP_SYNCHRONIZE, "-si", false, "Synchronized",
                 "Synchronize iterations?"));
         ALL.put(PROP_THREADS, new IntRunnerParam(PROP_THREADS, "-t", false, "Threads",
                 "Number of worker threads to run with.", 0));
         ALL.put(PROP_THREAD_DISTRIBUTION, new BaseRunnerParam(PROP_THREAD_DISTRIBUTION, "-tg", false,
                 "Thread group distribution", "Override thread group distribution for asymmetric benchmarks."));
-        ALL.put(PROP_TIMEOUT, new IntRunnerParam(PROP_TIMEOUT, "-to", false, "Timeout",
-                "Timeout for benchmark iteration.", 0));
+        ALL.put(PROP_TIMEOUT, new BaseRunnerParam(PROP_TIMEOUT, "-to", false, "Timeout",
+                "Timeout for benchmark iteration. Arguments accept time suffixes, like \"100ms\"."));
         ALL.put(PROP_TIME_UNIT, new SelectRunnerParameter(TimeUnitConst.TIME_UNITS_WITH_DESCRIPTION, PROP_TIME_UNIT,
                 "-tu", false, "Time unit", "Output time unit. Available time units are: [m, s, ms, us, ns]."));
         ALL.put(PROP_VERBOSITY, new SelectRunnerParameter(VerboseModeConst.ALL_WITH_DESCRIPTION, PROP_VERBOSITY, "-v",
                 false, "Verbosity", "Verbosity mode. Available modes are: [SILENT, NORMAL, EXTRA]"));
-        ALL.put(PROP_TIME_PER_WARMUP, new IntRunnerParam(PROP_TIME_PER_WARMUP, "-w", false, "Warmup time",
-                "Time to spend at each warmup iteration.", 0));
+        ALL.put(PROP_TIME_PER_WARMUP, new BaseRunnerParam(PROP_TIME_PER_WARMUP, "-w", false, "Warmup time",
+                "Time to spend at each warmup iteration. Arguments accept time suffixes, like \"100ms\"."));
         ALL.put(PROP_WARMUP_BATCH_SIZE, new IntRunnerParam(PROP_WARMUP_BATCH_SIZE, "-wbs", false,
                 "Warmup batch size", "Warmup batch size: number of benchmark method calls per operation. " +
                 "(some benchmark modes can ignore this setting)", 0));

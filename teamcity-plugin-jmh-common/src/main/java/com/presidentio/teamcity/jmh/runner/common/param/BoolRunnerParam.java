@@ -1,6 +1,6 @@
 package com.presidentio.teamcity.jmh.runner.common.param;
 
-import com.presidentio.teamcity.jmh.runner.common.ParamTypeConst;
+import com.presidentio.teamcity.jmh.runner.common.RunnerParamTypeConst;
 
 import java.util.HashMap;
 
@@ -18,6 +18,6 @@ public class BoolRunnerParam extends SelectRunnerParameter {
 
     public BoolRunnerParam(String name, String commandLineName, boolean required, String shortDescription,
                            String description) {
-        super(ALLOWED_VALUES, ParamTypeConst.BOOL, name, commandLineName, required, shortDescription, description);
+        super(ALLOWED_VALUES, RunnerParamTypeConst.BOOL, name, commandLineName, required, shortDescription, description);
     }
 }

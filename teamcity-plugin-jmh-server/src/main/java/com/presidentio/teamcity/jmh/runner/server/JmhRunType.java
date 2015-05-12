@@ -31,7 +31,7 @@ public class JmhRunType extends RunType {
     public String describeParameters(@NotNull Map<String, String> parameters) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(Dictionary.PATH_TO_JMH_JAR + ": ").append(parameters.get(SettingsConst.PROP_JAR_PATH));
-        if (!parameters.get(SettingsConst.PROP_MODE).equals(ModeConst.UNSPECIFIED)) {
+        if (!parameters.get(SettingsConst.PROP_MODE).equals(ModeConst.DEFAULT)) {
             stringBuilder.append("\n" + Dictionary.MODE + ": ").append(parameters.get(SettingsConst.PROP_MODE));
         }
         return stringBuilder.toString();

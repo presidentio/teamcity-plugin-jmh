@@ -1,7 +1,7 @@
 package com.presidentio.teamcity.jmh.runner.common.param;
 
 import com.presidentio.teamcity.jmh.runner.common.Dictionary;
-import com.presidentio.teamcity.jmh.runner.common.ParamTypeConst;
+import com.presidentio.teamcity.jmh.runner.common.RunnerParamTypeConst;
 
 /**
  * Created by presidentio on 12.05.15.
@@ -32,7 +32,7 @@ public class BaseRunnerParam implements RunnerParam {
 
     public BaseRunnerParam(String name, String commandLineName, boolean required,
                            String shortDescription, String description) {
-        this(ParamTypeConst.STRING, name, commandLineName, required, shortDescription, description);
+        this(RunnerParamTypeConst.STRING, name, commandLineName, required, shortDescription, description);
     }
 
     @Override
@@ -62,11 +62,11 @@ public class BaseRunnerParam implements RunnerParam {
     }
 
     @Override
-    public String validate(String value) {
+    public String process(String value) throws ValidationException {
         if (required && (value == null || value.isEmpty())) {
-            return Dictionary.ERROR_PARAMETER_IS_REQUIRED;
+            throw new ValidationException(Dictionary.ERROR_PARAMETER_IS_REQUIRED);
         }
-        return null;
+        return value;
     }
 
     @Override

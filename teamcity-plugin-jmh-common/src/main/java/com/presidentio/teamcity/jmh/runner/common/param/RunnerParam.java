@@ -6,11 +6,17 @@ package com.presidentio.teamcity.jmh.runner.common.param;
 public interface RunnerParam {
 
     boolean isRequired();
+
     String getName();
+
     String getCommandLineName();
+
     String getShortDescription();
+
     String getDescription();
-    String validate(String value);
+
+    String process(String value) throws ValidationException;
+
     int getType();
 
 }

@@ -4,25 +4,27 @@
 
 <jsp:useBean id="settings" class="com.presidentio.teamcity.jmh.runner.common.SettingsConst"/>
 <jsp:useBean id="paramProvider" class="com.presidentio.teamcity.jmh.runner.common.param.RunnerParamProvider"/>
-<jsp:useBean id="mode" class="com.presidentio.teamcity.jmh.runner.common.ModeConst"/>
-<jsp:useBean id="timeUnit" class="com.presidentio.teamcity.jmh.runner.common.TimeUnitConst"/>
-<jsp:useBean id="paramType" class="com.presidentio.teamcity.jmh.runner.common.ParamTypeConst"/>
+<jsp:useBean id="paramType" class="com.presidentio.teamcity.jmh.runner.common.RunnerParamTypeConst"/>
 
 <l:settingsGroup title="Jmh options">
+    <tr>
+        <th><label for="${settings.PROP_JAR_PATH}">Jmh Jar Path: <l:star/></label></th>
+        <td><props:textProperty name="${settings.PROP_JAR_PATH}" className="longField"/>
+            <span class="error" id="error_${settings.PROP_JAR_PATH}"></span>
+            <span class="smallNote">Jmh jar path.</span>
+        </td>
+    </tr>
     <c:forEach var="runnerParam" items="${paramProvider.all()}">
-        <tr>
-            <th><label for="${runnerParam.name}">${runnerParam.shortDescription}: </label></th>
+        <tr <c:if test="${!runnerParam.required}">class="advancedSetting"</c:if>>
+            <th><label for="${runnerParam.name}"><c:out value="${runnerParam.shortDescription}"/>:
+                <c:if test="${runnerParam.required}"><l:star/></c:if></label></th>
             <td>
                 <c:choose>
                     <c:when test="${runnerParam.type == paramType.STRING}">
                         <props:textProperty name="${runnerParam.name}" className="longField"/>
                     </c:when>
                     <c:when test="${runnerParam.type == paramType.BOOL}">
-                        <props:selectProperty name="${runnerParam.name}" multiple="false">
-                            <c:forEach var="option" items="${runnerParam.allowedValues}">
-                                <props:option value="${option.key}">${option.value}</props:option>
-                            </c:forEach>
-                        </props:selectProperty>
+                        <props:checkboxProperty name="${runnerParam.name}"/>
                     </c:when>
                     <c:when test="${runnerParam.type == paramType.INT}">
                         <props:textProperty name="${runnerParam.name}" className="longField"/>
@@ -30,13 +32,13 @@
                     <c:when test="${runnerParam.type == paramType.STRING_SELECT}">
                         <props:selectProperty name="${runnerParam.name}" multiple="false">
                             <c:forEach var="option" items="${runnerParam.allowedValues}">
-                                <props:option value="${option.key}">${option.value}</props:option>
+                                <props:option value="${option.key}"><c:out value="${option.value}"/></props:option>
                             </c:forEach>
                         </props:selectProperty>
                     </c:when>
                 </c:choose>
                 <span class="error" id="error_${runnerParam.name}"></span>
-                <span class="smallNote">${runnerParam.description}</span>
+                <span class="smallNote"><c:out value="${runnerParam.description}"/></span>
             </td>
         </tr>
     </c:forEach>
@@ -58,7 +60,7 @@
         <th><label for="${settings.PROP_MODE}">Mode: </label></th>
         <td>
             <props:selectProperty name="${settings.PROP_MODE}" multiple="false">
-                <props:option value="${mode.UNSPECIFIED}" selected="true">Unspecified</props:option>
+                <props:option value="${mode.DEFAULT}" selected="true">Unspecified</props:option>
                 <props:option value="${mode.THROUGHPUT}">Throughput</props:option>
                 <props:option value="${mode.AVERAGE_TIME}">AverageTime</props:option>
                 <props:option value="${mode.SAMPLE_TIME}">SampleTime</props:option>
@@ -73,7 +75,7 @@
         <th><label for="${settings.PROP_TIME_UNIT}">Time unit: </label></th>
         <td>
             <props:selectProperty name="${settings.PROP_TIME_UNIT}" multiple="false">
-                <props:option value="${timeUnit.UNSPECIFIED}" selected="true">Unspecified</props:option>
+                <props:option value="${timeUnit.DEFAULT}" selected="true">Unspecified</props:option>
                 <props:option value="${timeUnit.MINUTES}">Minutes (m)</props:option>
                 <props:option value="${timeUnit.SECONDS}">Seconds (s)</props:option>
                 <props:option value="${timeUnit.MILLISECONDS}">Milliseconds (ms)</props:option>
