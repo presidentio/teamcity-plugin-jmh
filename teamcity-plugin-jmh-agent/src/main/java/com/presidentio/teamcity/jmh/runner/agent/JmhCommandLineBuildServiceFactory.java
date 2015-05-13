@@ -1,6 +1,6 @@
 package com.presidentio.teamcity.jmh.runner.agent;
 
-import com.presidentio.teamcity.jmh.runner.common.PluginConst;
+import com.presidentio.teamcity.jmh.runner.common.cons.PluginConst;
 import jetbrains.buildServer.agent.AgentBuildRunnerInfo;
 import jetbrains.buildServer.agent.BuildAgentConfiguration;
 import jetbrains.buildServer.agent.artifacts.ArtifactsWatcher;

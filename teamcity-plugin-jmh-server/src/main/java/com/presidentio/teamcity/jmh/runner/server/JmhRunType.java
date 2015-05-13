@@ -1,9 +1,9 @@
 package com.presidentio.teamcity.jmh.runner.server;
 
-import com.presidentio.teamcity.jmh.runner.common.Dictionary;
-import com.presidentio.teamcity.jmh.runner.common.PluginConst;
-import com.presidentio.teamcity.jmh.runner.common.ModeConst;
-import com.presidentio.teamcity.jmh.runner.common.SettingsConst;
+import com.presidentio.teamcity.jmh.runner.common.cons.Dictionary;
+import com.presidentio.teamcity.jmh.runner.common.cons.PluginConst;
+import com.presidentio.teamcity.jmh.runner.common.cons.ModeConst;
+import com.presidentio.teamcity.jmh.runner.common.cons.SettingsConst;
 import jetbrains.buildServer.serverSide.PropertiesProcessor;
 import jetbrains.buildServer.serverSide.RunType;
 import jetbrains.buildServer.serverSide.RunTypeRegistry;

@@ -1,7 +1,7 @@
 package com.presidentio.teamcity.jmh.runner.server;
 
-import com.presidentio.teamcity.jmh.runner.common.Dictionary;
-import com.presidentio.teamcity.jmh.runner.common.SettingsConst;
+import com.presidentio.teamcity.jmh.runner.common.cons.Dictionary;
+import com.presidentio.teamcity.jmh.runner.common.cons.SettingsConst;
 import com.presidentio.teamcity.jmh.runner.common.param.RunnerParam;
 import com.presidentio.teamcity.jmh.runner.common.param.RunnerParamProvider;
 import com.presidentio.teamcity.jmh.runner.common.param.ValidationException;

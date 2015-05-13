@@ -1,4 +1,4 @@
-package com.presidentio.teamcity.jmh.runner.common;
+package com.presidentio.teamcity.jmh.runner.common.cons;
 
 /**
  * Created by Vitaliy on 04.05.2015.

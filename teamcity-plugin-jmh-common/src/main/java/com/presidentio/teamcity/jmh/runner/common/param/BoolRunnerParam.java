@@ -1,6 +1,6 @@
 package com.presidentio.teamcity.jmh.runner.common.param;
 
-import com.presidentio.teamcity.jmh.runner.common.RunnerParamTypeConst;
+import com.presidentio.teamcity.jmh.runner.common.cons.RunnerParamTypeConst;
 
 import java.util.HashMap;
 

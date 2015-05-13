@@ -1,7 +1,7 @@
 package com.presidentio.teamcity.jmh.runner.common.param;
 
-import com.presidentio.teamcity.jmh.runner.common.Dictionary;
-import com.presidentio.teamcity.jmh.runner.common.RunnerParamTypeConst;
+import com.presidentio.teamcity.jmh.runner.common.cons.Dictionary;
+import com.presidentio.teamcity.jmh.runner.common.cons.RunnerParamTypeConst;
 
 /**
  * Created by presidentio on 12.05.15.

@@ -1,7 +1,7 @@
 package com.presidentio.teamcity.jmh.runner.agent;
 
-import com.presidentio.teamcity.jmh.runner.common.PluginConst;
-import com.presidentio.teamcity.jmh.runner.common.SettingsConst;
+import com.presidentio.teamcity.jmh.runner.common.cons.PluginConst;
+import com.presidentio.teamcity.jmh.runner.common.cons.SettingsConst;
 import com.presidentio.teamcity.jmh.runner.common.param.RunnerParam;
 import com.presidentio.teamcity.jmh.runner.common.param.RunnerParamProvider;
 import jetbrains.buildServer.RunBuildException;
@@ -55,24 +55,6 @@ public class JmhBuildServiceAdapter extends BuildServiceAdapter {
                 arguments.add(runnerParameters.get(runnerParam.getName()));
             }
         }
-/*
-        String benchmarks = runnerParameters.get(SettingsConst.PROP_BENCHMARKS);
-        if (benchmarks != null && !benchmarks.isEmpty()) {
-            arguments.add(benchmarks);
-        }
-
-        String mode = runnerParameters.get(SettingsConst.PROP_MODE);
-        if (!mode.equals(ModeConst.DEFAULT)) {
-            arguments.add(ARG_MODE);
-            arguments.add(mode);
-        }
-
-
-        String timeUnit = runnerParameters.get(SettingsConst.PROP_TIME_UNIT);
-        if (!timeUnit.equals(TimeUnitConst.DEFAULT)) {
-            arguments.add(ARG_TIME_UNIT);
-            arguments.add(timeUnit);
-        }*/
 
         return new SimpleProgramCommandLine(getRunnerContext(), "java", arguments);
     }

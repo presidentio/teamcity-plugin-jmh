@@ -1,4 +1,4 @@
-package com.presidentio.teamcity.jmh.runner.common;
+package com.presidentio.teamcity.jmh.runner.common.cons;
 
 import java.util.concurrent.TimeUnit;
 

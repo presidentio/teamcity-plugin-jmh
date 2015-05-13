@@ -2,9 +2,9 @@ package com.presidentio.teamcity.jmh.view;
 
 import com.intellij.openapi.diagnostic.Logger;
 import com.presidentio.teamcity.jmh.entity.*;
-import com.presidentio.teamcity.jmh.runner.common.Dictionary;
-import com.presidentio.teamcity.jmh.runner.common.PluginConst;
-import com.presidentio.teamcity.jmh.runner.common.UnitConverter;
+import com.presidentio.teamcity.jmh.runner.common.cons.Dictionary;
+import com.presidentio.teamcity.jmh.runner.common.cons.PluginConst;
+import com.presidentio.teamcity.jmh.runner.common.cons.UnitConverter;
 import jetbrains.buildServer.log.Loggers;
 import jetbrains.buildServer.serverSide.SBuild;
 import jetbrains.buildServer.serverSide.SBuildServer;

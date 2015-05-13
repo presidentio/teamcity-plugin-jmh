@@ -7,7 +7,7 @@
 <script src="${teamcityPluginResourcesPath}js/bar.chart.js"></script>
 <script src="${teamcityPluginResourcesPath}js/jmh.js"></script>
 
-<jsp:useBean id="mode" class="com.presidentio.teamcity.jmh.runner.common.ModeConst"/>
+<jsp:useBean id="mode" class="com.presidentio.teamcity.jmh.runner.common.cons.ModeConst"/>
 
 <c:choose>
     <c:when test="${error != null}">

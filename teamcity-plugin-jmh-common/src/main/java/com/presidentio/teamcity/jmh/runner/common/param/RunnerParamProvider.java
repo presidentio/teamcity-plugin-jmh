@@ -1,14 +1,14 @@
 package com.presidentio.teamcity.jmh.runner.common.param;
 
-import com.presidentio.teamcity.jmh.runner.common.TimeUnitConst;
-import com.presidentio.teamcity.jmh.runner.common.VerboseModeConst;
-import com.presidentio.teamcity.jmh.runner.common.WarmupModeConst;
+import com.presidentio.teamcity.jmh.runner.common.cons.TimeUnitConst;
+import com.presidentio.teamcity.jmh.runner.common.cons.VerboseModeConst;
+import com.presidentio.teamcity.jmh.runner.common.cons.WarmupModeConst;
 
 import java.util.Collection;
 import java.util.HashMap;
 
-import static com.presidentio.teamcity.jmh.runner.common.ModeConst.MODES_WITH_DESCRIPTION;
-import static com.presidentio.teamcity.jmh.runner.common.SettingsConst.*;
+import static com.presidentio.teamcity.jmh.runner.common.cons.ModeConst.MODES_WITH_DESCRIPTION;
+import static com.presidentio.teamcity.jmh.runner.common.cons.SettingsConst.*;
 
 /**
  * Created by presidentio on 12.05.15.
