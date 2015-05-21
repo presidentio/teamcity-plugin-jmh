@@ -1,3 +1,17 @@
+/**
+ * Copyright 2015 presidentio
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.presidentio.teamcity.jmh.runner.server;
 
 import com.presidentio.teamcity.jmh.runner.common.cons.Dictionary;
@@ -42,17 +56,6 @@ public class JmhRunTypePropertiesProcessor implements PropertiesProcessor {
                 result.add(new InvalidProperty(runnerParam.getName(), e.getMessage()));
             }
         }
-/*
-
-        String mode = map.get(SettingsConst.PROP_MODE);
-        if (!ModeConst.MODES.contains(mode)) {
-            result.add(new InvalidProperty(SettingsConst.PROP_MODE, Dictionary.ERROR_MODE_ILLEGAL));
-        }
-
-        String timeUnit = map.get(SettingsConst.PROP_TIME_UNIT);
-        if (!TimeUnitConst.TIME_UNITS.contains(timeUnit)) {
-            result.add(new InvalidProperty(SettingsConst.PROP_TIME_UNIT, Dictionary.ERROR_TIME_UNIT_ILLEGAL));
-        }*/
 
         return result;
     }
