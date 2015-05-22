@@ -18,6 +18,21 @@ function BenchmarkChart() {
     var percentiles = ["50.0", "90.0", "95.0", "99.0", "99.9", "99.99", "99.999", "99.9999", "100.0"];
     var color = d3.scale.ordinal().range(colors);
 
+    var modes = {
+        "thrpt": {
+            "order": "desc"
+        },
+        "avgt": {
+            "order": "asc"
+        },
+        "sample": {
+            "order": "asc"
+        },
+        "ss": {
+            "order": "asc"
+        }
+    };
+
     this.drawChart = function (elId, data, unit) {
 
         var nameSize = 150;
@@ -319,21 +334,6 @@ function BenchmarkChart() {
             .text(function (d) {
                 return d;
             });
-    };
-
-    var modes = {
-        "thrpt": {
-            "order": "desc"
-        },
-        "avgt": {
-            "order": "asc"
-        },
-        "sample": {
-            "order": "asc"
-        },
-        "ss": {
-            "order": "asc"
-        }
     };
 
     this.isFailed = function (d) {
