@@ -1,5 +1,7 @@
 # teamcity-plugin-jmh
 
+[![][travis img]][travis]
+
 ## Overview
 ===========
 
