@@ -10,12 +10,10 @@
     <artifactId>build</artifactId>
     <packaging>pom</packaging>
     <properties>
-        <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
-        <teamcity.teamcity-plugin-jmh.plugin.version>snapshot-${maven.build.timestamp}
-        </teamcity.teamcity-plugin-jmh.plugin.version>
-        <teamcity.teamcity-plugin-jmh.plugin.vendorName>Plugin vendor name
-        </teamcity.teamcity-plugin-jmh.plugin.vendorName>
-        <teamcity.teamcity-plugin-jmh.plugin.vendorUrl>Plugin vendor URL</teamcity.teamcity-plugin-jmh.plugin.vendorUrl>
+        <maven.build.timestamp.format>yyyy-MM-dd-HH-mm-ss</maven.build.timestamp.format>
+        <teamcity.teamcity-plugin-jmh.plugin.version>snapshot-${maven.build.timestamp}</teamcity.teamcity-plugin-jmh.plugin.version>
+        <teamcity.teamcity-plugin-jmh.plugin.vendorName>Presidentio</teamcity.teamcity-plugin-jmh.plugin.vendorName>
+        <teamcity.teamcity-plugin-jmh.plugin.vendorUrl>https://github.com/presidentio/teamcity-plugin-jmh</teamcity.teamcity-plugin-jmh.plugin.vendorUrl>
     </properties>
     <dependencies>
         <dependency>
@@ -84,32 +82,6 @@
                             <descriptors>
                                 <descriptor>plugin-assembly.xml</descriptor>
                             </descriptors>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>2.4.3</version>
-                <executions>
-                    <execution>
-                        <id>copy-resources</id>
-                        <!-- here the phase you need -->
-                        <phase>install</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <!--<outputDirectory>C:\ProgramData\JetBrains\TeamCity\plugins</outputDirectory>-->
-                            <outputDirectory>/opt/jetbrains/TeamCity/.BuildServer/plugins</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>../target</directory>
-                                    <includes>
-                                        <include>teamcity-plugin-jmh.zip</include>
-                                    </includes>
-                                </resource>
-                            </resources>
                         </configuration>
                     </execution>
                 </executions>

@@ -36,5 +36,4 @@ Licensing
 
 [![][license img]][license]
 
-This software is licensed under the terms in the file named "LICENSE" in this
-directory.
+This software is licensed under the terms in the file named "LICENSE" in this directory.
