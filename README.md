@@ -1,6 +1,6 @@
 # teamcity-plugin-jmh
 
-[![][travis img]][travis]
+[![Build Status](https://travis-ci.org/presidentio/teamcity-plugin-jmh.svg?branch=master)](https://travis-ci.org/presidentio/teamcity-plugin-jmh)
 
 ## Overview
 ===========
