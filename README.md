@@ -39,3 +39,7 @@ Licensing
 [![][license img]][license]
 
 This software is licensed under the terms in the file named "LICENSE" in this directory.
+
+
+[license]:LICENSE
+[license img]:https://img.shields.io/badge/license-Apache%202.0-brightgreen.svg
