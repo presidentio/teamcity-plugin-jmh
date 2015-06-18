@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Teamcity-plugin-jmh by presidentio</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Teamcity-plugin-jmh</h1>
+        <h2>Plugin run JMH benchmarks on the agent side and collect results for further displaying them on build tab named &quot;Benchmark&quot;.</h2>
+        <a href="https://github.com/presidentio/teamcity-plugin-jmh" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a id="teamcity-plugin-jmh" class="anchor" href="#teamcity-plugin-jmh" aria-hidden="true"><span class="octicon octicon-link"></span></a>teamcity-plugin-jmh</h1>
+
+<p><a href="https://travis-ci.org/presidentio/teamcity-plugin-jmh"><img src="https://travis-ci.org/presidentio/teamcity-plugin-jmh.svg?branch=master" alt="Build Status"></a></p>
+
+<h2>
+<a id="overview" class="anchor" href="#overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview</h2>
+
+<p>This plugin help you to work with <a href="http://openjdk.java.net/projects/code-tools/jmh/">jmh</a> framework. 
+JMH is a Java harness for building, running, and analysing nano/micro/milli/macro benchmarks written in Java and other languages targeting the JVM.
+Plugin run benchmarks on the agent side and collect results for further displaying them on build tab named "Benchmark".</p>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<h3>
+<a id="install" class="anchor" href="#install" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install</h3>
+
+<pre><code>git clone https://github.com/presidentio/teamcity-plugin-jmh
+cd teamcity-plugin-jmh
+mvn package -DskipTests
+cp target/teamcity-plugin-jmh.zip &lt;TeamCity Data Directory&gt;/plugins/
+service teamcity restart 
+</code></pre>
+
+<p>More info: <a href="https://confluence.jetbrains.com/display/TCD9/Installing+Additional+Plugins">Installing Additional Plugins for Teamcity</a></p>
+
+<h3>
+<a id="setup" class="anchor" href="#setup" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup</h3>
+
+<p>Go to you project <em>Build Configuration Settings</em> and create a new build step with runner type: <em>Jmh</em>.
+To run it, you must specify at least one required parameter -  <em>jar path</em>. It specify path to the jar compiled for the benchmarks running.
+Also you can configure benchmarks run with additional parameter supported by JMH, all of them available on build step settings page.</p>
+
+<h3>
+<a id="viewing-results" class="anchor" href="#viewing-results" aria-hidden="true"><span class="octicon octicon-link"></span></a>Viewing Results</h3>
+
+<p>After the project build finished successfully, you can open <em>Benchmarks</em> tab on project build page. 
+You will see results grouped by benchmark mode and class name. Each bar shows result percentiles. 
+Black vertical line shows average value and gray dashed vertical line, closest previous build average result for this benchmark. 
+The bar can lighted with one of the colors: red and green. Red color means benchmark result became slower and green - faster.</p>
+
+<h1>
+<a id="licensing" class="anchor" href="#licensing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Licensing</h1>
+
+<p><a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache%202.0-brightgreen.svg" alt=""></a></p>
+
+<p>This software is licensed under the terms in the file named "LICENSE" in this directory.</p>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/presidentio/teamcity-plugin-jmh/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/presidentio/teamcity-plugin-jmh/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/presidentio/teamcity-plugin-jmh"></a> is maintained by <a href="https://github.com/presidentio">presidentio</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-64112096-3");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
