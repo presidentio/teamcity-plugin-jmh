@@ -3,9 +3,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -44,8 +44,11 @@ public class JmhRunType extends RunType {
     @Override
     public String describeParameters(@NotNull Map<String, String> parameters) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(Dictionary.PATH_TO_JMH_JAR + ": ").append(parameters.get(SettingsConst.PROP_JAR_PATH));
-        if (!parameters.get(SettingsConst.PROP_MODE).equals(ModeConst.DEFAULT)) {
+        if (parameters.containsKey(SettingsConst.PROP_JAR_PATH)) {
+            stringBuilder.append(Dictionary.PATH_TO_JMH_JAR + ": ").append(parameters.get(SettingsConst.PROP_JAR_PATH));
+        }
+        if (parameters.containsKey(SettingsConst.PROP_MODE)
+                && !parameters.get(SettingsConst.PROP_MODE).equals(ModeConst.DEFAULT)) {
             stringBuilder.append("\n" + Dictionary.MODE + ": ").append(parameters.get(SettingsConst.PROP_MODE));
         }
         return stringBuilder.toString();
@@ -92,6 +95,7 @@ public class JmhRunType extends RunType {
     public Map<String, String> getDefaultRunnerProperties() {
         Map<String, String> defaultProperties = new HashMap<String, String>(1);
         defaultProperties.put(SettingsConst.PROP_JAR_PATH, PluginConst.DEFAULT_JAR_PATH);
+        defaultProperties.put(SettingsConst.PROP_MODE, ModeConst.DEFAULT);
         return defaultProperties;
     }
 }
