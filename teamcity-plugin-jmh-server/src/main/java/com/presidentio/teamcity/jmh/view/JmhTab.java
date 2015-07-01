@@ -20,17 +20,16 @@ import com.presidentio.teamcity.jmh.runner.common.cons.Dictionary;
 import com.presidentio.teamcity.jmh.runner.common.cons.PluginConst;
 import com.presidentio.teamcity.jmh.runner.common.cons.UnitConverter;
 import jetbrains.buildServer.log.Loggers;
+import jetbrains.buildServer.serverSide.BuildsManager;
 import jetbrains.buildServer.serverSide.SBuild;
 import jetbrains.buildServer.serverSide.SBuildServer;
 import jetbrains.buildServer.serverSide.SFinishedBuild;
-import jetbrains.buildServer.web.openapi.PagePlaces;
-import jetbrains.buildServer.web.openapi.PlaceId;
+import jetbrains.buildServer.web.openapi.BuildTab;
 import jetbrains.buildServer.web.openapi.PluginDescriptor;
-import jetbrains.buildServer.web.openapi.SimpleCustomTab;
+import jetbrains.buildServer.web.openapi.WebControllerManager;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.jetbrains.annotations.NotNull;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -39,47 +38,29 @@ import java.util.Map;
 /**
  * Created by Vitaliy on 09.04.2015.
  */
-public class JmhTab extends SimpleCustomTab {
+public class JmhTab extends BuildTab {
 
     private static final Logger LOGGER = Loggers.SERVER;
-
-    public static final String BUILD_ID = "buildId";
 
     private SBuildServer buildServer;
     private ObjectMapper objectMapper = new ObjectMapper();
 
     public JmhTab(@NotNull SBuildServer buildServer,
-                  @NotNull PagePlaces pagePlaces,
+                  @NotNull WebControllerManager webControllerManager,
+                  @NotNull BuildsManager buildsManager,
                   @NotNull PluginDescriptor descriptor) {
-        super(pagePlaces, PlaceId.BUILD_RESULTS_TAB, PluginConst.TAB_ID,
-                descriptor.getPluginResourcesPath("tabJmh.jsp"), Dictionary.TAB_TITLE);
-        register();
+        super(PluginConst.TAB_ID, Dictionary.TAB_TITLE, webControllerManager,
+                buildsManager, descriptor.getPluginResourcesPath("tabJmh.jsp"));
         this.buildServer = buildServer;
     }
 
     @Override
-    public boolean isAvailable(@NotNull HttpServletRequest request) {
-        long buildId;
-        try {
-            buildId = Long.valueOf(request.getParameter(BUILD_ID));
-        } catch (NumberFormatException e) {
-            LOGGER.warn("Illegal build id, must be a number: " + request.getParameter(BUILD_ID));
-            return false;
-        }
-        SBuild build = buildServer.findBuildInstanceById(buildId);
+    protected boolean isAvailableFor(@NotNull SBuild build) {
         return hasBenchmarks(build);
     }
 
     @Override
-    public void fillModel(@NotNull Map<String, Object> model, @NotNull HttpServletRequest request) {
-        long buildId;
-        try {
-            buildId = Long.valueOf(request.getParameter(BUILD_ID));
-        } catch (NumberFormatException e) {
-            LOGGER.warn("Illegal build id, must be a number: " + request.getParameter(BUILD_ID));
-            return;
-        }
-        SBuild build = buildServer.findBuildInstanceById(buildId);
+    protected void fillModel(@NotNull Map<String, Object> model, @NotNull SBuild build) {
         List<SFinishedBuild> buildsBefore = buildServer.getHistory().getEntriesBefore(build, true);
         try {
             BenchmarksByMode benchmarkContainer = parseBenchmarks(build);
@@ -91,6 +72,7 @@ public class JmhTab extends SimpleCustomTab {
             model.put("error", Dictionary.ERROR_FAILED_TO_PARSE_BENCHMARK);
             LOGGER.error(e);
         }
+
     }
 
     private Benchmark convertScoreUnit(Benchmark benchmark, String scoreUnit) {
