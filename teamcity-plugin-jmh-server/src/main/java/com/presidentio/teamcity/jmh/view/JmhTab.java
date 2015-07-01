@@ -3,9 +3,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -59,14 +59,26 @@ public class JmhTab extends SimpleCustomTab {
 
     @Override
     public boolean isAvailable(@NotNull HttpServletRequest request) {
-        long buildId = Long.valueOf(request.getParameter(BUILD_ID));
+        long buildId;
+        try {
+            buildId = Long.valueOf(request.getParameter(BUILD_ID));
+        } catch (NumberFormatException e) {
+            LOGGER.warn("Illegal build id, must be a number: " + request.getParameter(BUILD_ID));
+            return false;
+        }
         SBuild build = buildServer.findBuildInstanceById(buildId);
         return hasBenchmarks(build);
     }
 
     @Override
     public void fillModel(@NotNull Map<String, Object> model, @NotNull HttpServletRequest request) {
-        long buildId = Long.valueOf(request.getParameter(BUILD_ID));
+        long buildId;
+        try {
+            buildId = Long.valueOf(request.getParameter(BUILD_ID));
+        } catch (NumberFormatException e) {
+            LOGGER.warn("Illegal build id, must be a number: " + request.getParameter(BUILD_ID));
+            return;
+        }
         SBuild build = buildServer.findBuildInstanceById(buildId);
         List<SFinishedBuild> buildsBefore = buildServer.getHistory().getEntriesBefore(build, true);
         try {
