@@ -24,6 +24,7 @@ import jetbrains.buildServer.serverSide.BuildsManager;
 import jetbrains.buildServer.serverSide.SBuild;
 import jetbrains.buildServer.serverSide.SBuildServer;
 import jetbrains.buildServer.serverSide.SFinishedBuild;
+import jetbrains.buildServer.serverSide.artifacts.BuildArtifactsViewMode;
 import jetbrains.buildServer.web.openapi.BuildTab;
 import jetbrains.buildServer.web.openapi.PluginDescriptor;
 import jetbrains.buildServer.web.openapi.WebControllerManager;
@@ -96,8 +97,7 @@ public class JmhTab extends BuildTab {
     }
 
     private boolean hasBenchmarks(SBuild build) {
-        File benchmarksFile = new File(build.getArtifactsDirectory(), PluginConst.OUTPUT_FILE);
-        return benchmarksFile.exists();
+        return build.getArtifacts(BuildArtifactsViewMode.VIEW_ALL).findArtifact(PluginConst.OUTPUT_FILE).isAccessible();
     }
 
     private BenchmarksByMode parseBenchmarks(SBuild build) throws IOException {
