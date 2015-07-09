@@ -5,7 +5,7 @@
     <parent>
         <artifactId>teamcity-plugin-jmh</artifactId>
         <groupId>com.presidentio</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.1</version>
     </parent>
     <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
