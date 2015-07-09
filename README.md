@@ -31,7 +31,7 @@ You will see results grouped by benchmark mode and class name. Each bar shows re
 Black vertical line shows average value and gray dashed vertical line, closest previous build average result for this benchmark. 
 The bar can lighted with one of the colors: red and green. Red color means benchmark result became slower and green - faster.
 
-![](http://www.presidnetio.com/img/portfolio/teamcity-jmh-plugin.png)
+![](http://www.presidentio.com/img/portfolio/teamcity-jmh-plugin.png)
 
 Licensing
 =========
