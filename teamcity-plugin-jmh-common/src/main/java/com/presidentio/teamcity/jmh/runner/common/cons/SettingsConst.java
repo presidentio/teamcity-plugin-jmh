@@ -19,6 +19,8 @@ package com.presidentio.teamcity.jmh.runner.common.cons;
  */
 public class SettingsConst {
 
+    public static final String PROP_RUN_FROM = "run_from";
+    public static final String PROP_MAVEN_MODULE_LOCATION = "maven_module_location";
     public static final String PROP_JAR_PATH = "jar_path";
     public static final String PROP_BENCHMARKS = "benchmarks";
     public static final String PROP_MODE = "mode";
@@ -48,6 +50,14 @@ public class SettingsConst {
     public static final String PROP_WARMUP_ITERATIONS = "warmup_iterations";
     public static final String PROP_WARMUP_MODE = "warmup_mode";
     public static final String PROP_WARMUP_BENCHMARKS = "warmup_benchmarks";
+
+    public String getPROP_RUN_FROM() {
+        return PROP_RUN_FROM;
+    }
+
+    public String getPROP_MAVEN_MODULE_LOCATION() {
+        return PROP_MAVEN_MODULE_LOCATION;
+    }
 
     public String getPROP_JAR_PATH() {
         return PROP_JAR_PATH;

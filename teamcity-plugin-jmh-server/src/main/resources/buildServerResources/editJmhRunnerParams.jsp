@@ -18,11 +18,31 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:useBean id="settings" class="com.presidentio.teamcity.jmh.runner.common.cons.SettingsConst"/>
+<jsp:useBean id="runFrom" class="com.presidentio.teamcity.jmh.runner.common.cons.RunFromConst"/>
 <jsp:useBean id="paramProvider" class="com.presidentio.teamcity.jmh.runner.common.param.RunnerParamProvider"/>
 <jsp:useBean id="paramType" class="com.presidentio.teamcity.jmh.runner.common.cons.RunnerParamTypeConst"/>
 
 <l:settingsGroup title="Jmh options">
     <tr>
+        <th><label for="${settings.PROP_RUN_FROM}">Run from: <l:star/></label></th>
+        <td>
+            <props:selectProperty name="${settings.PROP_RUN_FROM}" id="${settings.PROP_RUN_FROM}" multiple="false">
+                <c:forEach var="option" items="${runFrom.RUN_FROMS_WITH_DESCRIPTION}">
+                    <props:option value="${option.key}"><c:out value="${option.value}"/></props:option>
+                </c:forEach>
+            </props:selectProperty>
+            <span class="error" id="error_${settings.PROP_RUN_FROM}"></span>
+            <span class="smallNote">Benchmarks location.</span>
+        </td>
+    </tr>
+    <tr id="${settings.PROP_MAVEN_MODULE_LOCATION}">
+        <th><label for="${settings.PROP_MAVEN_MODULE_LOCATION}">Maven module: <l:star/></label></th>
+        <td><props:textProperty name="${settings.PROP_MAVEN_MODULE_LOCATION}" className="longField"/>
+            <span class="error" id="error_${settings.PROP_MAVEN_MODULE_LOCATION}"></span>
+            <span class="smallNote">Maven module path.</span>
+        </td>
+    </tr>
+    <tr id="${settings.PROP_JAR_PATH}">
         <th><label for="${settings.PROP_JAR_PATH}">Jmh Jar Path: <l:star/></label></th>
         <td><props:textProperty name="${settings.PROP_JAR_PATH}" className="longField"/>
             <span class="error" id="error_${settings.PROP_JAR_PATH}"></span>
@@ -58,3 +78,21 @@
         </tr>
     </c:forEach>
 </l:settingsGroup>
+
+<script type="text/javascript">
+    BS.JmhRun = {
+        updateRunFrom: function () {
+            var val = $('${settings.PROP_RUN_FROM}').value;
+            if (val == '${runFrom.MAVEN}') {
+                BS.Util.hide($('${settings.PROP_JAR_PATH}'));
+                BS.Util.show($('${settings.PROP_MAVEN_MODULE_LOCATION}'));
+            }
+            if (val == '${runFrom.JAR}') {
+                BS.Util.show($('${settings.PROP_JAR_PATH}'));
+                BS.Util.hide($('${settings.PROP_MAVEN_MODULE_LOCATION}'));
+            }
+            BS.MultilineProperties.updateVisible();
+        }
+    };
+    BS.JmhRun.updateRunFrom();
+</script>

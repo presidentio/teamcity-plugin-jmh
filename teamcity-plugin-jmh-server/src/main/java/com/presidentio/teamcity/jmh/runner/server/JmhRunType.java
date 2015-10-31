@@ -14,10 +14,7 @@
  */
 package com.presidentio.teamcity.jmh.runner.server;
 
-import com.presidentio.teamcity.jmh.runner.common.cons.Dictionary;
-import com.presidentio.teamcity.jmh.runner.common.cons.PluginConst;
-import com.presidentio.teamcity.jmh.runner.common.cons.ModeConst;
-import com.presidentio.teamcity.jmh.runner.common.cons.SettingsConst;
+import com.presidentio.teamcity.jmh.runner.common.cons.*;
 import jetbrains.buildServer.serverSide.PropertiesProcessor;
 import jetbrains.buildServer.serverSide.RunType;
 import jetbrains.buildServer.serverSide.RunTypeRegistry;
@@ -44,8 +41,14 @@ public class JmhRunType extends RunType {
     @Override
     public String describeParameters(@NotNull Map<String, String> parameters) {
         StringBuilder stringBuilder = new StringBuilder();
-        if (parameters.containsKey(SettingsConst.PROP_JAR_PATH)) {
-            stringBuilder.append(Dictionary.PATH_TO_JMH_JAR + ": ").append(parameters.get(SettingsConst.PROP_JAR_PATH));
+        if (parameters.containsKey(SettingsConst.PROP_RUN_FROM)) {
+            String runFrom = parameters.get(SettingsConst.PROP_RUN_FROM);
+            if (runFrom.equals(RunFromConst.JAR)) {
+                stringBuilder.append(Dictionary.PATH_TO_JMH_JAR + ": ").append(parameters.get(SettingsConst.PROP_JAR_PATH));
+            }
+            if (runFrom.equals(RunFromConst.MAVEN)) {
+                stringBuilder.append(Dictionary.PROP_MAVEN_MODULE_LOCATION + ": ").append(parameters.get(SettingsConst.PROP_MAVEN_MODULE_LOCATION));
+            }
         }
         if (parameters.containsKey(SettingsConst.PROP_MODE)
                 && !parameters.get(SettingsConst.PROP_MODE).equals(ModeConst.DEFAULT)) {
@@ -94,6 +97,7 @@ public class JmhRunType extends RunType {
     @Override
     public Map<String, String> getDefaultRunnerProperties() {
         Map<String, String> defaultProperties = new HashMap<String, String>(1);
+        defaultProperties.put(SettingsConst.PROP_RUN_FROM, PluginConst.DEFAULT_JAR_PATH);
         defaultProperties.put(SettingsConst.PROP_JAR_PATH, PluginConst.DEFAULT_JAR_PATH);
         defaultProperties.put(SettingsConst.PROP_MODE, ModeConst.DEFAULT);
         return defaultProperties;

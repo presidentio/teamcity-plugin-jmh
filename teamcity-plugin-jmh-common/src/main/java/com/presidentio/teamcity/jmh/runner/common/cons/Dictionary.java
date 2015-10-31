@@ -20,6 +20,7 @@ package com.presidentio.teamcity.jmh.runner.common.cons;
 public class Dictionary {
 
     public static final String PATH_TO_JMH_JAR = "Path to jmh jar";
+    public static final String PROP_MAVEN_MODULE_LOCATION = "Maven module location";
     public static final String MODE = "Mode";
     public static final String TAB_TITLE = "Benchmarks";
     public static final String DISPLAY_NAME = "Jmh";
