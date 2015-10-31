@@ -4,7 +4,7 @@
 
 ## Overview
 
-This plugin help you to work with [jmh](http://openjdk.java.net/projects/code-tools/jmh/) framework. 
+This plugin helps you to work with [jmh](http://openjdk.java.net/projects/code-tools/jmh/) framework. 
 JMH is a Java harness for building, running, and analysing nano/micro/milli/macro benchmarks written in Java and other languages targeting the JVM.
 Plugin run benchmarks on the agent side and collect results for further displaying them on build tab named "Benchmark".
 
