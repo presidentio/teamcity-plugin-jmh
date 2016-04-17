@@ -14,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by presidentio on 10/30/15.
@@ -39,6 +40,11 @@ public abstract class JmhBuildProcess implements BuildProcess, Runnable {
         this.artifactsWatcher = artifactsWatcher;
         this.buildRunnerContext = buildRunnerContext;
         benchmarksOutput = new File(workingDir, PluginConst.OUTPUT_FILE);
+    }
+
+    protected static String getOrDefault(Map<String, String> map, String key, String defaultValue){
+        String result = map.get(key);
+        return result == null ? defaultValue : result;
     }
 
     @Override

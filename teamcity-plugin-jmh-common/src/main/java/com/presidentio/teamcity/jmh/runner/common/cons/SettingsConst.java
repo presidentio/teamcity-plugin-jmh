@@ -21,6 +21,9 @@ public class SettingsConst {
 
     public static final String PROP_RUN_FROM = "run_from";
     public static final String PROP_MAVEN_MODULE_LOCATION = "maven_module_location";
+    public static final String PROP_GRADLE_MODULE_LOCATION = "gradle_module_location";
+    public static final String PROP_GRADLE_USE_WRAPPER = "gradle_use_wrapper";
+    public static final String PROP_GRADLE_WRAPPER_PATH = "gradle_wrapper_path";
     public static final String PROP_JAR_PATH = "jar_path";
     public static final String PROP_BENCHMARKS = "benchmarks";
     public static final String PROP_MODE = "mode";
@@ -57,6 +60,18 @@ public class SettingsConst {
 
     public String getPROP_MAVEN_MODULE_LOCATION() {
         return PROP_MAVEN_MODULE_LOCATION;
+    }
+
+    public String getPROP_GRADLE_MODULE_LOCATION() {
+        return PROP_GRADLE_MODULE_LOCATION;
+    }
+
+    public String getPROP_GRADLE_USE_WRAPPER() {
+        return PROP_GRADLE_USE_WRAPPER;
+    }
+
+    public String getPROP_GRADLE_WRAPPER_PATH() {
+        return PROP_GRADLE_WRAPPER_PATH;
     }
 
     public String getPROP_JAR_PATH() {

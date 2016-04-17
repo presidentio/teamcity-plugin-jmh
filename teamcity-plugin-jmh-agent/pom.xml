@@ -5,7 +5,7 @@
     <parent>
         <artifactId>teamcity-plugin-jmh</artifactId>
         <groupId>com.presidentio</groupId>
-        <version>1.0.1</version>
+        <version>1.0.2-SNAPSHOT</version>
     </parent>
     <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
@@ -15,13 +15,18 @@
         <dependency>
             <groupId>org.jetbrains.teamcity</groupId>
             <artifactId>agent-api</artifactId>
-            <version>${teamcity-version}</version>
+            <version>${teamcity.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.presidentio</groupId>
             <artifactId>teamcity-plugin-jmh-common</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-compress</artifactId>
+            <version>${commons-compress.version}</version>
         </dependency>
     </dependencies>
     

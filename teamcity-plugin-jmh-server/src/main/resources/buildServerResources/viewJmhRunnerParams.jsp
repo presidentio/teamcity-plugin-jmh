@@ -20,10 +20,10 @@
 <jsp:useBean id="paramProvider" class="com.presidentio.teamcity.jmh.runner.common.param.RunnerParamProvider"/>
 
 <div class="parameter">
-    Jar path: <strong><props:displayValue name="${settings.PROP_RUN_FROM}" emptyValue="not specified"/></strong>
+    Run from: <strong><props:displayValue name="${settings.PROP_RUN_FROM}" emptyValue="not specified"/></strong>
 </div>
 <div class="parameter">
-    Jar path: <strong><props:displayValue name="${settings.PROP_MAVEN_MODULE_LOCATION}" emptyValue="not specified"/></strong>
+    Maven module: <strong><props:displayValue name="${settings.PROP_MAVEN_MODULE_LOCATION}" emptyValue="not specified"/></strong>
 </div>
 <div class="parameter">
     Jar path: <strong><props:displayValue name="${settings.PROP_JAR_PATH}" emptyValue="not specified"/></strong>

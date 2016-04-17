@@ -15,6 +15,7 @@
 package com.presidentio.teamcity.jmh.runner.server;
 
 import com.presidentio.teamcity.jmh.runner.common.cons.Dictionary;
+import com.presidentio.teamcity.jmh.runner.common.cons.RunFromConst;
 import com.presidentio.teamcity.jmh.runner.common.cons.SettingsConst;
 import com.presidentio.teamcity.jmh.runner.common.param.RunnerParam;
 import com.presidentio.teamcity.jmh.runner.common.param.RunnerParamProvider;
@@ -38,8 +39,9 @@ public class JmhRunTypePropertiesProcessor implements PropertiesProcessor {
     public Collection<InvalidProperty> process(Map<String, String> map) {
         List<InvalidProperty> result = new ArrayList<InvalidProperty>();
         Loggers.SERVER.info(map.toString());
+        String runFrom = map.get(SettingsConst.PROP_RUN_FROM);
         String jarPath = map.get(SettingsConst.PROP_JAR_PATH);
-        if (PropertiesUtil.isEmptyOrNull(jarPath)) {
+        if (runFrom.equals(RunFromConst.JAR) && PropertiesUtil.isEmptyOrNull(jarPath)) {
             result.add(new InvalidProperty(SettingsConst.PROP_JAR_PATH, Dictionary.ERROR_JAR_PATH_EMPTY));
         }
 

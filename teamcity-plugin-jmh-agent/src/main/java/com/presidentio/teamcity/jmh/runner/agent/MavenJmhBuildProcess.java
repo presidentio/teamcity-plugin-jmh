@@ -22,14 +22,17 @@ public class MavenJmhBuildProcess extends JmhBuildProcess {
     private static final Logger LOGGER = Logger.getInstance("jmh-agent");
 
     public MavenJmhBuildProcess(ArtifactsWatcher artifactsWatcher, BuildRunnerContext buildRunnerContext) {
-        super(new File(buildRunnerContext.getWorkingDirectory(), buildRunnerContext.getRunnerParameters().get(SettingsConst.PROP_MAVEN_MODULE_LOCATION)),
+        super(new File(buildRunnerContext.getWorkingDirectory(),
+                        getOrDefault(buildRunnerContext.getRunnerParameters(),
+                                SettingsConst.PROP_MAVEN_MODULE_LOCATION, ".")),
                 artifactsWatcher, buildRunnerContext);
     }
 
     @Override
     protected String buildClasspath() throws IOException, InterruptedException {
         Path tmpClasspathFile = Files.createTempFile("jmh-", ".classpath");
-        List<String> command = Arrays.asList("mvn", "dependency:build-classpath", "-Dmdep.outputFile=" + tmpClasspathFile);
+        List<String> command = Arrays.asList("mvn", "dependency:build-classpath",
+                "-Dmdep.outputFile=" + tmpClasspathFile);
         ProcessBuilder processBuilder = new ProcessBuilder(command);
         processBuilder.directory(getWorkingDir());
         getBuildRunnerContext().getBuild().getBuildLogger().message("Running command: " + command);

@@ -28,6 +28,8 @@ public class JmhAgentBuildRunner implements AgentBuildRunner {
                 return new JarJmhBuildProcess(artifactsWatcher, buildRunnerContext);
             case RunFromConst.MAVEN:
                 return new MavenJmhBuildProcess(artifactsWatcher, buildRunnerContext);
+            case RunFromConst.GRADLE:
+                return new GradleJmhBuildProcess(artifactsWatcher, buildRunnerContext);
             default:
                 throw new RunBuildException("Unknown run from: " + buildRunnerContext.getRunnerParameters().get(SettingsConst.PROP_RUN_FROM));
         }

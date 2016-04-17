@@ -26,7 +26,8 @@
     <tr>
         <th><label for="${settings.PROP_RUN_FROM}">Run from: <l:star/></label></th>
         <td>
-            <props:selectProperty name="${settings.PROP_RUN_FROM}" id="${settings.PROP_RUN_FROM}" multiple="false">
+            <props:selectProperty name="${settings.PROP_RUN_FROM}" id="${settings.PROP_RUN_FROM}" multiple="false"
+                                  onchange="BS.JmhRun.updateRunFrom()">
                 <c:forEach var="option" items="${runFrom.RUN_FROMS_WITH_DESCRIPTION}">
                     <props:option value="${option.key}"><c:out value="${option.value}"/></props:option>
                 </c:forEach>
@@ -36,10 +37,30 @@
         </td>
     </tr>
     <tr id="${settings.PROP_MAVEN_MODULE_LOCATION}">
-        <th><label for="${settings.PROP_MAVEN_MODULE_LOCATION}">Maven module: <l:star/></label></th>
+        <th><label for="${settings.PROP_MAVEN_MODULE_LOCATION}">Maven module: </label></th>
         <td><props:textProperty name="${settings.PROP_MAVEN_MODULE_LOCATION}" className="longField"/>
             <span class="error" id="error_${settings.PROP_MAVEN_MODULE_LOCATION}"></span>
             <span class="smallNote">Maven module path.</span>
+        </td>
+    </tr>
+    <tr id="${settings.PROP_GRADLE_MODULE_LOCATION}">
+        <th><label for="${settings.PROP_GRADLE_MODULE_LOCATION}">Gradle module: </label></th>
+        <td><props:textProperty name="${settings.PROP_GRADLE_MODULE_LOCATION}" className="longField"/>
+            <span class="error" id="error_${settings.PROP_GRADLE_MODULE_LOCATION}"></span>
+            <span class="smallNote">Gradle module path.</span>
+        </td>
+    </tr>
+    <tr id="row-${settings.PROP_GRADLE_USE_WRAPPER}">
+        <th><label for="${settings.PROP_GRADLE_USE_WRAPPER}">Gradle Wrapper: </label></th>
+        <td><props:checkboxProperty name="${settings.PROP_GRADLE_USE_WRAPPER}" onclick="BS.JmhRun.updateGradleUseWrapper()"/>
+            <span class="error" id="error_${settings.PROP_GRADLE_USE_WRAPPER}"></span>
+        </td>
+    </tr>
+    <tr id="${settings.PROP_GRADLE_WRAPPER_PATH}">
+        <th><label for="${settings.PROP_GRADLE_WRAPPER_PATH}">Path to Wrapper script: <l:star/></label></th>
+        <td><props:textProperty name="${settings.PROP_GRADLE_WRAPPER_PATH}" className="longField"/>
+            <span class="error" id="error_${settings.PROP_GRADLE_WRAPPER_PATH}"></span>
+            <span class="smallNote">Optional path to the Gradle wrapper script, relative to the working directory</span>
         </td>
     </tr>
     <tr id="${settings.PROP_JAR_PATH}">
@@ -83,15 +104,33 @@
     BS.JmhRun = {
         updateRunFrom: function () {
             var val = $('${settings.PROP_RUN_FROM}').value;
+            BS.JmhRun.hideAll();
             if (val == '${runFrom.MAVEN}') {
-                BS.Util.hide($('${settings.PROP_JAR_PATH}'));
                 BS.Util.show($('${settings.PROP_MAVEN_MODULE_LOCATION}'));
             }
             if (val == '${runFrom.JAR}') {
                 BS.Util.show($('${settings.PROP_JAR_PATH}'));
-                BS.Util.hide($('${settings.PROP_MAVEN_MODULE_LOCATION}'));
+            }
+            if (val == '${runFrom.GRADLE}') {
+                BS.Util.show($('${settings.PROP_GRADLE_MODULE_LOCATION}'));
+                BS.Util.show($('row-${settings.PROP_GRADLE_USE_WRAPPER}'));
+                BS.JmhRun.updateGradleUseWrapper();
             }
             BS.MultilineProperties.updateVisible();
+        },
+        updateGradleUseWrapper: function () {
+            if ($('${settings.PROP_GRADLE_USE_WRAPPER}').checked) {
+                BS.Util.show($('${settings.PROP_GRADLE_WRAPPER_PATH}'));
+            } else {
+                BS.Util.hide($('${settings.PROP_GRADLE_WRAPPER_PATH}'));
+            }
+        },
+        hideAll: function () {
+            BS.Util.hide($('${settings.PROP_JAR_PATH}'));
+            BS.Util.hide($('${settings.PROP_MAVEN_MODULE_LOCATION}'));
+            BS.Util.hide($('${settings.PROP_GRADLE_MODULE_LOCATION}'));
+            BS.Util.hide($('row-${settings.PROP_GRADLE_USE_WRAPPER}'));
+            BS.Util.hide($('${settings.PROP_GRADLE_WRAPPER_PATH}'));
         }
     };
     BS.JmhRun.updateRunFrom();

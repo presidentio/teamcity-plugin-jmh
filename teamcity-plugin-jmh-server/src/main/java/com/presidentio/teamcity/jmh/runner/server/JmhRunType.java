@@ -49,6 +49,9 @@ public class JmhRunType extends RunType {
             if (runFrom.equals(RunFromConst.MAVEN)) {
                 stringBuilder.append(Dictionary.PROP_MAVEN_MODULE_LOCATION + ": ").append(parameters.get(SettingsConst.PROP_MAVEN_MODULE_LOCATION));
             }
+            if (runFrom.equals(RunFromConst.GRADLE)) {
+                stringBuilder.append(Dictionary.PROP_GRADLE_MODULE_LOCATION + ": ").append(parameters.get(SettingsConst.PROP_GRADLE_MODULE_LOCATION));
+            }
         }
         if (parameters.containsKey(SettingsConst.PROP_MODE)
                 && !parameters.get(SettingsConst.PROP_MODE).equals(ModeConst.DEFAULT)) {

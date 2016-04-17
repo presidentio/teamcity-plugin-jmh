@@ -11,6 +11,7 @@ import java.util.Map;
 public class RunFromConst {
 
     public static final String MAVEN = "maven";
+    public static final String GRADLE = "gradle";
     public static final String JAR = "jar";
 
     public static final List<String> RUN_FROMS = Arrays.asList(MAVEN, JAR);
@@ -19,6 +20,7 @@ public class RunFromConst {
 
     static {
         RUN_FROMS_WITH_DESCRIPTION.put(MAVEN, "maven");
+        RUN_FROMS_WITH_DESCRIPTION.put(GRADLE, "gradle");
         RUN_FROMS_WITH_DESCRIPTION.put(JAR, "jar");
     }
 
@@ -32,6 +34,10 @@ public class RunFromConst {
 
     public String getJAR() {
         return JAR;
+    }
+
+    public String getGRADLE() {
+        return GRADLE;
     }
 
     public List<String> getRUN_FROMS() {

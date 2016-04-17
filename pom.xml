@@ -4,10 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.presidentio</groupId>
     <artifactId>teamcity-plugin-jmh</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
     <properties>
-        <teamcity-version>9.0.1</teamcity-version>
+        <teamcity.version>9.0.1</teamcity.version>
+        <commons-compress.version>1.11</commons-compress.version>
     </properties>
     <repositories>
         <repository>
