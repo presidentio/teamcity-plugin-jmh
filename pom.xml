@@ -6,34 +6,122 @@
     <artifactId>teamcity-plugin-jmh</artifactId>
     <version>1.0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
+
     <properties>
+        <maven.build.timestamp.format>yyyy-MM-dd-HH-mm-ss</maven.build.timestamp.format>
+        <teamcity.teamcity-plugin-jmh.plugin.version>${project.version}</teamcity.teamcity-plugin-jmh.plugin.version>
+        <teamcity.teamcity-plugin-jmh.plugin.vendorName>Presidentio</teamcity.teamcity-plugin-jmh.plugin.vendorName>
+        <teamcity.teamcity-plugin-jmh.plugin.vendorUrl>http://presidentio.com/</teamcity.teamcity-plugin-jmh.plugin.vendorUrl>
+
         <teamcity.version>9.0.1</teamcity.version>
+        <java.version>1.7</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+
+        <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
+        <maven-replacer-plugin.version>1.5.2</maven-replacer-plugin.version>
+        <maven-assembly-plugin.version>2.4</maven-assembly-plugin.version>
+
         <commons-compress.version>1.11</commons-compress.version>
+        <jackson-mapper-asl.version>1.9.13</jackson-mapper-asl.version>
     </properties>
+
+    <scm>
+        <developerConnection>scm:git:git@github.com:presidentio/teamcity-plugin-jmh.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
     <repositories>
         <repository>
             <id>JetBrains</id>
             <url>http://repository.jetbrains.com/all</url>
         </repository>
     </repositories>
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <configuration>
-                        <source>1.7</source>
-                        <target>1.7</target>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-    </build>
+
     <modules>
         <module>teamcity-plugin-jmh-server</module>
         <module>teamcity-plugin-jmh-common</module>
         <module>teamcity-plugin-jmh-agent</module>
         <module>build</module>
     </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.presidentio</groupId>
+                <artifactId>teamcity-plugin-jmh-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.presidentio</groupId>
+                <artifactId>teamcity-plugin-jmh-server</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.presidentio</groupId>
+                <artifactId>teamcity-plugin-jmh-agent</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jetbrains.teamcity</groupId>
+                <artifactId>agent-api</artifactId>
+                <version>${teamcity.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jetbrains.teamcity</groupId>
+                <artifactId>server-api</artifactId>
+                <version>${teamcity.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jetbrains.teamcity</groupId>
+                <artifactId>server-web-api</artifactId>
+                <version>${teamcity.version}</version>
+                <type>war</type>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-compress</artifactId>
+                <version>${commons-compress.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-mapper-asl</artifactId>
+                <version>${jackson-mapper-asl.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jetbrains.teamcity</groupId>
+                <artifactId>tests-support</artifactId>
+                <version>${teamcity.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+            </plugin>
+        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>${maven-release-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>com.google.code.maven-replacer-plugin</groupId>
+                    <artifactId>replacer</artifactId>
+                    <version>${maven-replacer-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>${maven-assembly-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>

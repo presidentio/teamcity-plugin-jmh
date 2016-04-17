@@ -13,20 +13,19 @@
     <artifactId>teamcity-plugin-jmh-agent</artifactId>
     <dependencies>
         <dependency>
-            <groupId>org.jetbrains.teamcity</groupId>
-            <artifactId>agent-api</artifactId>
-            <version>${teamcity.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>com.presidentio</groupId>
             <artifactId>teamcity-plugin-jmh-common</artifactId>
-            <version>${project.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.jetbrains.teamcity</groupId>
+            <artifactId>agent-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-compress</artifactId>
-            <version>${commons-compress.version}</version>
         </dependency>
     </dependencies>
     
