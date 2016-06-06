@@ -14,9 +14,12 @@
  */
 package com.presidentio.teamcity.jmh.entity;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
 /**
  * Created by Vitaliy on 16.04.2015.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Benchmark implements BenchmarkGroup {
 
     private String benchmark;

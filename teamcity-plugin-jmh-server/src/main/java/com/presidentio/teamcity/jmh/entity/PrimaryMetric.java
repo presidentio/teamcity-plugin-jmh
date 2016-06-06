@@ -14,6 +14,8 @@
  */
 package com.presidentio.teamcity.jmh.entity;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,6 +23,7 @@ import java.util.Map;
 /**
  * Created by Vitaliy on 16.04.2015.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PrimaryMetric {
 
     public Double score;
