@@ -17,10 +17,10 @@
 <%@ taglib prefix="bs" tagdir="/WEB-INF/tags" %>
 
 <script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.4.13/d3.min.js"></script>
-<link rel="stylesheet" href="${teamcityPluginResourcesPath}css/bar.chart.css">
-<link rel="stylesheet" href="${teamcityPluginResourcesPath}css/jmh.css">
-<script src="${teamcityPluginResourcesPath}js/bar.chart.js"></script>
-<script src="${teamcityPluginResourcesPath}js/jmh.js"></script>
+<link rel="stylesheet" href="<c:url value='${teamcityPluginResourcesPath}css/bar.chart.css'/>"/>
+<link rel="stylesheet" href="<c:url value='${teamcityPluginResourcesPath}css/jmh.css'/>">
+<script src="<c:url value='${teamcityPluginResourcesPath}js/bar.chart.js'/>"></script>
+<script src="<c:url value='${teamcityPluginResourcesPath}js/jmh.js'/>"></script>
 
 <jsp:useBean id="mode" class="com.presidentio.teamcity.jmh.runner.common.cons.ModeConst"/>
 
