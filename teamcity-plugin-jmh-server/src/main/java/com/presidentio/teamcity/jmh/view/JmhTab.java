@@ -125,11 +125,18 @@ public class JmhTab extends BuildTab {
                                 if (byClass.containsKey(className)) {
                                     BenchmarksByMethod byMethod = byClass.get(className);
                                     for (String methodName : curByMethod.keySet()) {
-                                        if (byMethod.containsKey(methodName) && !prevByMode.contains(mode, className, methodName)) {
-                                            Benchmark curBenchmark = curByMethod.get(methodName);
-                                            Benchmark benchmark = byMethod.get(methodName);
-                                            benchmark = convertScoreUnit(benchmark, curBenchmark.getPrimaryMetric().getScoreUnit());
-                                            prevByMode.add(benchmark);
+                                        BenchmarksByParameter curByParameter = curByMethod.get(methodName);
+                                        if (byMethod.containsKey(methodName)) {
+                                            BenchmarksByParameter byParameter = byMethod.get(methodName);
+                                            for (String paramsName : curByParameter.keySet()) {
+                                                if (byParameter.containsKey(paramsName) && !prevByMode.contains(mode, className, methodName, paramsName)) {
+                                                    Benchmark curBenchmark = curByParameter.get(paramsName);
+                                                    Benchmark benchmark = byParameter.get(paramsName);
+                                                    benchmark = convertScoreUnit(benchmark, curBenchmark.getPrimaryMetric().getScoreUnit());
+                                                    prevByMode.add(benchmark);
+                                                }
+                                            }
+
                                         }
                                     }
                                 }

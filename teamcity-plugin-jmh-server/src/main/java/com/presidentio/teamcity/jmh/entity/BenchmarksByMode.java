@@ -36,9 +36,9 @@ public class BenchmarksByMode extends BaseBenchmarkGroup<BenchmarksByClass> {
         byClass.add(benchmark);
     }
 
-    public boolean contains(String mode, String className, String methodName) {
+    public boolean contains(String mode, String className, String methodName, String parameters) {
         BenchmarksByClass byClass = get(mode);
-        return byClass != null && byClass.contains(className, methodName);
+        return byClass != null && byClass.contains(className, methodName, parameters);
     }
 
 }

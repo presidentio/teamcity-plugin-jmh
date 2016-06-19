@@ -17,7 +17,7 @@ package com.presidentio.teamcity.jmh.entity;
 /**
  * Created by presidentio on 06.05.15.
  */
-public class BenchmarksByMethod extends BaseBenchmarkGroup<Benchmark>{
+public class BenchmarksByMethod extends BaseBenchmarkGroup<BenchmarksByParameter>{
 
     private String scoreUnit;
 
@@ -31,11 +31,15 @@ public class BenchmarksByMethod extends BaseBenchmarkGroup<Benchmark>{
     public void add(Benchmark benchmark) {
         if (scoreUnit == null) {
             scoreUnit = benchmark.getPrimaryMetric().getScoreUnit();
-        } else {
-            benchmark = changeScoreUnit(benchmark, scoreUnit);
         }
         String methodName = extractMethod(benchmark.getBenchmark());
-        put(methodName, benchmark);
+
+        BenchmarksByParameter byParameter = get(methodName);
+        if (byParameter == null) {
+            byParameter = new BenchmarksByParameter(scoreUnit);
+            put(methodName, byParameter);
+        }
+        byParameter.add(benchmark);
     }
 
     private String extractMethod(String classWithMethod) {
@@ -45,6 +49,13 @@ public class BenchmarksByMethod extends BaseBenchmarkGroup<Benchmark>{
 
     public String getScoreUnit() {
         return scoreUnit;
+    }
+
+
+
+    public boolean contains(String methodName, String parameters) {
+        BenchmarksByParameter byParameter = get(methodName);
+        return byParameter != null && byParameter.containsKey(parameters);
     }
 
 }

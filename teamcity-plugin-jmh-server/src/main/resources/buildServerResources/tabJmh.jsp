@@ -41,7 +41,7 @@
             <c:set var="prevModeGroup" value="${prevBenchmarks.get(byModeEntry.key)}"/>
             <div id="mode-container-${byModeStatus.index}" class="mode-container">
                 <c:forEach items="${byModeEntry.value}" var="byClassEntry" varStatus="byClassStatus">
-                    <c:set var="prevGroup" value="${prevModeGroup.get(byClassEntry.key)}"/>
+                    <c:set var="prevClassGroup" value="${prevModeGroup.get(byClassEntry.key)}"/>
                     <div class="group-title<c:if test="${byClassStatus.first}"> first-group</c:if>">
                         <div class="group-collapsible"
                              data-target="mod-${byModeStatus.index}-bar-chart-container-${byClassStatus.index}">
@@ -59,21 +59,24 @@
                         <script>
                             bChart.drawChart("#mod-${byModeStatus.index}-bar-chart-${byClassStatus.index}", {
                                 <c:forEach items="${byClassEntry.value}" var="byMethodEntry" varStatus="byMethodStatus">
-                                <c:set var="prevBenchmark" value="${null}"/>
-                                <c:if test="${prevGroup != null}">
-                                <c:set var="prevBenchmark" value="${prevGroup.get(byMethodEntry.key)}"/>
-                                </c:if>
-                                "${byMethodEntry.key}": {
-                                    "percentiles": {
-                                        <c:forEach var="percentile" items="${byMethodEntry.value.primaryMetric.scorePercentiles}" varStatus="status">
-                                        "${percentile.key}":${percentile.value}<c:if test="${!status.last}">, </c:if>
-                                        </c:forEach>
-                                    }, "avg":${byMethodEntry.value.primaryMetric.score},
-                                    "mode": "${byMethodEntry.value.mode}"
-                                    <c:if test="${prevBenchmark != null}">
-                                    , "prevAvg":${prevBenchmark.primaryMetric.score}
-                                    </c:if>
-                                }<c:if test="${!byMethodStatus.last}">, </c:if>
+                                    <c:forEach items="${byMethodEntry.value}" var="byParameterEntry" varStatus="byParameterStatus">
+                                        <c:set var="prevBenchmark" value="${null}"/>
+                                        <c:if test="${prevClassGroup != null}">
+                                        <c:set var="benchmark" value="${prevClassGroup.get(byMethodEntry.key).get(byParameterEntry.key)}"/>
+                                        </c:if>
+                                        "${byMethodEntry.key}_${byParameterEntry.key}": {
+                                            "percentiles": {
+                                                <c:forEach var="percentile" items="${byParameterEntry.value.primaryMetric.scorePercentiles}" varStatus="status">
+                                                "${percentile.key}":${percentile.value}<c:if test="${!status.last}">, </c:if>
+                                                </c:forEach>
+                                            }, "avg":${byParameterEntry.value.primaryMetric.score},
+                                            "mode": "${byParameterEntry.value.mode}"
+                                            <c:if test="${prevBenchmark != null}">
+                                            , "prevAvg":${prevBenchmark.primaryMetric.score}
+                                            </c:if>
+                                        }<c:if test="${!byParameterStatus.last}">, </c:if>
+                                    </c:forEach>
+                                    <c:if test="${!byMethodStatus.last}">, </c:if>
                                 </c:forEach>
                             }, "${byClassEntry.value.scoreUnit}");
                         </script>

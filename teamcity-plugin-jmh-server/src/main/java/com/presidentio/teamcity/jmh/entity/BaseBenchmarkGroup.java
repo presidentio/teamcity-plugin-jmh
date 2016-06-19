@@ -17,11 +17,18 @@ package com.presidentio.teamcity.jmh.entity;
 import com.presidentio.teamcity.jmh.runner.common.cons.UnitConverter;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * Created by Vitaliy on 06.05.2015.
  */
-public abstract class BaseBenchmarkGroup<B extends BenchmarkGroup> extends HashMap<String, B> 
+
+/*
+ * extending LinkedHashMap to store the benchmarks in such a way that the order of iteration is consistent.
+ * HashMap implementation results in a different order for different versions of java.
+ * This could be undesirable when comparing results between two TeamCity jobs on different versions of java
+ */
+public abstract class BaseBenchmarkGroup<B extends BenchmarkGroup> extends LinkedHashMap<String, B>
         implements BenchmarkGroup {
 
     @Override

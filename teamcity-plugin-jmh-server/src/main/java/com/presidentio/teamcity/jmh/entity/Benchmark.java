@@ -16,6 +16,7 @@ package com.presidentio.teamcity.jmh.entity;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -34,7 +35,7 @@ public class Benchmark implements BenchmarkGroup {
     private String measurementTime;
     private PrimaryMetric primaryMetric;
     private SecondaryMetrics secondaryMetrics;
-    private Map<String, String> params;
+    private Map<String, String> params = new LinkedHashMap<>();
 
     public Benchmark(Benchmark benchmark) {
         this.benchmark = benchmark.getBenchmark();
