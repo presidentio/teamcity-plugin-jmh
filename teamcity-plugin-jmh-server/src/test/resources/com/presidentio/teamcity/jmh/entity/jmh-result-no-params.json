@@ -1,0 +1,48 @@
+[
+    {
+        "benchmark" : "com.argonaught.jmhtest.SomeBenchmark.bench",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "warmupIterations" : 5,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "1 s",
+        "measurementBatchSize" : 1,
+        "primaryMetric" : {
+            "score" : 7.060500106064259,
+            "scoreError" : 0.12258233499653351,
+            "scoreConfidence" : [
+                6.937917771067726,
+                7.183082441060792
+            ],
+            "scorePercentiles" : {
+                "0.0" : 7.034514562222476,
+                "50.0" : 7.046264033980231,
+                "90.0" : 7.1144855192856316,
+                "95.0" : 7.1144855192856316,
+                "99.0" : 7.1144855192856316,
+                "99.9" : 7.1144855192856316,
+                "99.99" : 7.1144855192856316,
+                "99.999" : 7.1144855192856316,
+                "99.9999" : 7.1144855192856316,
+                "100.0" : 7.1144855192856316
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    7.0627455291681045,
+                    7.1144855192856316,
+                    7.046264033980231,
+                    7.034514562222476,
+                    7.0444908856648505
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+]
+
+

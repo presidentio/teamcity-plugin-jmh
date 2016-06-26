@@ -50,8 +50,8 @@ public class BenchmarksByClass extends BaseBenchmarkGroup<BenchmarksByMethod> {
         return classWithMethod.substring(0, index);
     }
 
-    public boolean contains(String className, String methodName) {
+    public boolean contains(String className, String methodName, String parameters) {
         BenchmarksByMethod byMethod = get(className);
-        return byMethod != null && byMethod.containsKey(methodName);
+        return byMethod != null && byMethod.contains(methodName, parameters);
     }
 }

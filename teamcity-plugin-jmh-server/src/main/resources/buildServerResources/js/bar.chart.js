@@ -35,7 +35,7 @@ function BenchmarkChart() {
 
     this.drawChart = function (elId, data, unit) {
 
-        var nameSize = 150;
+        var nameSize = 300;
         var outerPadding = .3;
         var barHeight = 40;
         var margin = {top: 50, right: 30, bottom: 10, left: nameSize};

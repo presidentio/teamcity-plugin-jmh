@@ -1,0 +1,1718 @@
+[
+    {
+        "benchmark" : "com.argonaught.jmhtest.SomeBenchmark.bench",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "warmupIterations" : 5,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "1 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "arg" : "1",
+            "certainty" : "0"
+        },
+        "primaryMetric" : {
+            "score" : 3.2441778478396173,
+            "scoreError" : 0.006149600040012329,
+            "scoreConfidence" : [
+                3.2380282477996047,
+                3.25032744787963
+            ],
+            "scorePercentiles" : {
+                "0.0" : 3.242292448968171,
+                "50.0" : 3.244253417618651,
+                "90.0" : 3.246117546942701,
+                "95.0" : 3.246117546942701,
+                "99.0" : 3.246117546942701,
+                "99.9" : 3.246117546942701,
+                "99.99" : 3.246117546942701,
+                "99.999" : 3.246117546942701,
+                "99.9999" : 3.246117546942701,
+                "100.0" : 3.246117546942701
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    3.246117546942701,
+                    3.242292448968171,
+                    3.2453109809309395,
+                    3.244253417618651,
+                    3.242914844737624
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+    ,
+    {
+        "benchmark" : "com.argonaught.jmhtest.SomeBenchmark.bench",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "warmupIterations" : 5,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "1 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "arg" : "1",
+            "certainty" : "1"
+        },
+        "primaryMetric" : {
+            "score" : 7.046967726747896,
+            "scoreError" : 0.038590044462121526,
+            "scoreConfidence" : [
+                7.008377682285775,
+                7.085557771210017
+            ],
+            "scorePercentiles" : {
+                "0.0" : 7.03898531581411,
+                "50.0" : 7.041917571812441,
+                "90.0" : 7.0638572334374565,
+                "95.0" : 7.0638572334374565,
+                "99.0" : 7.0638572334374565,
+                "99.9" : 7.0638572334374565,
+                "99.99" : 7.0638572334374565,
+                "99.999" : 7.0638572334374565,
+                "99.9999" : 7.0638572334374565,
+                "100.0" : 7.0638572334374565
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    7.041891045424913,
+                    7.0638572334374565,
+                    7.03898531581411,
+                    7.048187467250558,
+                    7.041917571812441
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+    ,
+    {
+        "benchmark" : "com.argonaught.jmhtest.SomeBenchmark.bench",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "warmupIterations" : 5,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "1 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "arg" : "1",
+            "certainty" : "2"
+        },
+        "primaryMetric" : {
+            "score" : 7.039038038171374,
+            "scoreError" : 0.014664139854772787,
+            "scoreConfidence" : [
+                7.024373898316601,
+                7.053702178026147
+            ],
+            "scorePercentiles" : {
+                "0.0" : 7.035474029555895,
+                "50.0" : 7.038047364978396,
+                "90.0" : 7.04437407085324,
+                "95.0" : 7.04437407085324,
+                "99.0" : 7.04437407085324,
+                "99.9" : 7.04437407085324,
+                "99.99" : 7.04437407085324,
+                "99.999" : 7.04437407085324,
+                "99.9999" : 7.04437407085324,
+                "100.0" : 7.04437407085324
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    7.035474029555895,
+                    7.04437407085324,
+                    7.035859138425529,
+                    7.041435587043807,
+                    7.038047364978396
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+    ,
+    {
+        "benchmark" : "com.argonaught.jmhtest.SomeBenchmark.bench",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "warmupIterations" : 5,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "1 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "arg" : "1",
+            "certainty" : "4"
+        },
+        "primaryMetric" : {
+            "score" : 7.046055964656183,
+            "scoreError" : 0.03177176609620753,
+            "scoreConfidence" : [
+                7.0142841985599755,
+                7.077827730752391
+            ],
+            "scorePercentiles" : {
+                "0.0" : 7.036742748182743,
+                "50.0" : 7.046497367784699,
+                "90.0" : 7.058921074974782,
+                "95.0" : 7.058921074974782,
+                "99.0" : 7.058921074974782,
+                "99.9" : 7.058921074974782,
+                "99.99" : 7.058921074974782,
+                "99.999" : 7.058921074974782,
+                "99.9999" : 7.058921074974782,
+                "100.0" : 7.058921074974782
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    7.046498850825693,
+                    7.046497367784699,
+                    7.036742748182743,
+                    7.058921074974782,
+                    7.041619781513001
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+    ,
+    {
+        "benchmark" : "com.argonaught.jmhtest.SomeBenchmark.bench",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "warmupIterations" : 5,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "1 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "arg" : "1",
+            "certainty" : "8"
+        },
+        "primaryMetric" : {
+            "score" : 7.0819950717013445,
+            "scoreError" : 0.23429657900553214,
+            "scoreConfidence" : [
+                6.847698492695812,
+                7.3162916507068765
+            ],
+            "scorePercentiles" : {
+                "0.0" : 7.0375431974732034,
+                "50.0" : 7.064531829395514,
+                "90.0" : 7.187712152805155,
+                "95.0" : 7.187712152805155,
+                "99.0" : 7.187712152805155,
+                "99.9" : 7.187712152805155,
+                "99.99" : 7.187712152805155,
+                "99.999" : 7.187712152805155,
+                "99.9999" : 7.187712152805155,
+                "100.0" : 7.187712152805155
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    7.046082676919936,
+                    7.064531829395514,
+                    7.0741055019129115,
+                    7.187712152805155,
+                    7.0375431974732034
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+    ,
+    {
+        "benchmark" : "com.argonaught.jmhtest.SomeBenchmark.bench",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "warmupIterations" : 5,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "1 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "arg" : "1",
+            "certainty" : "16"
+        },
+        "primaryMetric" : {
+            "score" : 7.0434465938241235,
+            "scoreError" : 0.016714262595773726,
+            "scoreConfidence" : [
+                7.02673233122835,
+                7.060160856419897
+            ],
+            "scorePercentiles" : {
+                "0.0" : 7.036455464559367,
+                "50.0" : 7.04437751009534,
+                "90.0" : 7.048220763263474,
+                "95.0" : 7.048220763263474,
+                "99.0" : 7.048220763263474,
+                "99.9" : 7.048220763263474,
+                "99.99" : 7.048220763263474,
+                "99.999" : 7.048220763263474,
+                "99.9999" : 7.048220763263474,
+                "100.0" : 7.048220763263474
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    7.04437751009534,
+                    7.048220763263474,
+                    7.036455464559367,
+                    7.043088987558922,
+                    7.045090243643518
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+    ,
+    {
+        "benchmark" : "com.argonaught.jmhtest.SomeBenchmark.bench",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "warmupIterations" : 5,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "1 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "arg" : "1",
+            "certainty" : "32"
+        },
+        "primaryMetric" : {
+            "score" : 6.805242590792252,
+            "scoreError" : 0.035552583804464716,
+            "scoreConfidence" : [
+                6.769690006987788,
+                6.840795174596717
+            ],
+            "scorePercentiles" : {
+                "0.0" : 6.792440277037395,
+                "50.0" : 6.80427688738849,
+                "90.0" : 6.8152326982394325,
+                "95.0" : 6.8152326982394325,
+                "99.0" : 6.8152326982394325,
+                "99.9" : 6.8152326982394325,
+                "99.99" : 6.8152326982394325,
+                "99.999" : 6.8152326982394325,
+                "99.9999" : 6.8152326982394325,
+                "100.0" : 6.8152326982394325
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    6.801248736258539,
+                    6.80427688738849,
+                    6.8152326982394325,
+                    6.792440277037395,
+                    6.813014355037413
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+    ,
+    {
+        "benchmark" : "com.argonaught.jmhtest.SomeBenchmark.bench",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "warmupIterations" : 5,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "1 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "arg" : "31",
+            "certainty" : "0"
+        },
+        "primaryMetric" : {
+            "score" : 8.085238106423905,
+            "scoreError" : 0.5730716508121869,
+            "scoreConfidence" : [
+                7.512166455611718,
+                8.658309757236092
+            ],
+            "scorePercentiles" : {
+                "0.0" : 7.9482212625732,
+                "50.0" : 8.022496010600095,
+                "90.0" : 8.326636386985957,
+                "95.0" : 8.326636386985957,
+                "99.0" : 8.326636386985957,
+                "99.9" : 8.326636386985957,
+                "99.99" : 8.326636386985957,
+                "99.999" : 8.326636386985957,
+                "99.9999" : 8.326636386985957,
+                "100.0" : 8.326636386985957
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    7.9482212625732,
+                    8.022496010600095,
+                    8.006344536194174,
+                    8.1224923357661,
+                    8.326636386985957
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+    ,
+    {
+        "benchmark" : "com.argonaught.jmhtest.SomeBenchmark.bench",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "warmupIterations" : 5,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "1 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "arg" : "31",
+            "certainty" : "1"
+        },
+        "primaryMetric" : {
+            "score" : 425.02846914029726,
+            "scoreError" : 14.535890346966507,
+            "scoreConfidence" : [
+                410.4925787933308,
+                439.56435948726374
+            ],
+            "scorePercentiles" : {
+                "0.0" : 421.2147773541211,
+                "50.0" : 423.2938260920374,
+                "90.0" : 430.27265760144587,
+                "95.0" : 430.27265760144587,
+                "99.0" : 430.27265760144587,
+                "99.9" : 430.27265760144587,
+                "99.99" : 430.27265760144587,
+                "99.999" : 430.27265760144587,
+                "99.9999" : 430.27265760144587,
+                "100.0" : 430.27265760144587
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    422.7413595602684,
+                    430.27265760144587,
+                    421.2147773541211,
+                    427.6197250936131,
+                    423.2938260920374
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+    ,
+    {
+        "benchmark" : "com.argonaught.jmhtest.SomeBenchmark.bench",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "warmupIterations" : 5,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "1 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "arg" : "31",
+            "certainty" : "2"
+        },
+        "primaryMetric" : {
+            "score" : 422.57819832911144,
+            "scoreError" : 16.39643926540949,
+            "scoreConfidence" : [
+                406.181759063702,
+                438.9746375945209
+            ],
+            "scorePercentiles" : {
+                "0.0" : 417.12075563807815,
+                "50.0" : 423.03871633297956,
+                "90.0" : 426.63412131037154,
+                "95.0" : 426.63412131037154,
+                "99.0" : 426.63412131037154,
+                "99.9" : 426.63412131037154,
+                "99.99" : 426.63412131037154,
+                "99.999" : 426.63412131037154,
+                "99.9999" : 426.63412131037154,
+                "100.0" : 426.63412131037154
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    419.46842259844334,
+                    426.63412131037154,
+                    426.62897576568446,
+                    423.03871633297956,
+                    417.12075563807815
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+    ,
+    {
+        "benchmark" : "com.argonaught.jmhtest.SomeBenchmark.bench",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "warmupIterations" : 5,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "1 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "arg" : "31",
+            "certainty" : "4"
+        },
+        "primaryMetric" : {
+            "score" : 774.2089658500596,
+            "scoreError" : 8.662407173098007,
+            "scoreConfidence" : [
+                765.5465586769616,
+                782.8713730231576
+            ],
+            "scorePercentiles" : {
+                "0.0" : 772.0118271832187,
+                "50.0" : 773.7316705079646,
+                "90.0" : 777.9967688590228,
+                "95.0" : 777.9967688590228,
+                "99.0" : 777.9967688590228,
+                "99.9" : 777.9967688590228,
+                "99.99" : 777.9967688590228,
+                "99.999" : 777.9967688590228,
+                "99.9999" : 777.9967688590228,
+                "100.0" : 777.9967688590228
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    773.9841834380545,
+                    772.0118271832187,
+                    773.3203792620372,
+                    773.7316705079646,
+                    777.9967688590228
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+    ,
+    {
+        "benchmark" : "com.argonaught.jmhtest.SomeBenchmark.bench",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "warmupIterations" : 5,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "1 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "arg" : "31",
+            "certainty" : "8"
+        },
+        "primaryMetric" : {
+            "score" : 1458.639873117338,
+            "scoreError" : 14.286071811471244,
+            "scoreConfidence" : [
+                1444.353801305867,
+                1472.9259449288093
+            ],
+            "scorePercentiles" : {
+                "0.0" : 1454.8016292603281,
+                "50.0" : 1456.8845684228932,
+                "90.0" : 1462.8182750623678,
+                "95.0" : 1462.8182750623678,
+                "99.0" : 1462.8182750623678,
+                "99.9" : 1462.8182750623678,
+                "99.99" : 1462.8182750623678,
+                "99.999" : 1462.8182750623678,
+                "99.9999" : 1462.8182750623678,
+                "100.0" : 1462.8182750623678
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    1462.412102684122,
+                    1456.8845684228932,
+                    1454.8016292603281,
+                    1462.8182750623678,
+                    1456.2827901569801
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+    ,
+    {
+        "benchmark" : "com.argonaught.jmhtest.SomeBenchmark.bench",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "warmupIterations" : 5,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "1 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "arg" : "31",
+            "certainty" : "16"
+        },
+        "primaryMetric" : {
+            "score" : 2893.150397987744,
+            "scoreError" : 23.506713639890357,
+            "scoreConfidence" : [
+                2869.6436843478537,
+                2916.657111627634
+            ],
+            "scorePercentiles" : {
+                "0.0" : 2886.8650987775895,
+                "50.0" : 2891.805656132152,
+                "90.0" : 2901.761803858278,
+                "95.0" : 2901.761803858278,
+                "99.0" : 2901.761803858278,
+                "99.9" : 2901.761803858278,
+                "99.99" : 2901.761803858278,
+                "99.999" : 2901.761803858278,
+                "99.9999" : 2901.761803858278,
+                "100.0" : 2901.761803858278
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    2888.5906665241296,
+                    2891.805656132152,
+                    2886.8650987775895,
+                    2896.72876464657,
+                    2901.761803858278
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+    ,
+    {
+        "benchmark" : "com.argonaught.jmhtest.SomeBenchmark.bench",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "warmupIterations" : 5,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "1 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "arg" : "31",
+            "certainty" : "32"
+        },
+        "primaryMetric" : {
+            "score" : 5743.980739683646,
+            "scoreError" : 72.49993079122133,
+            "scoreConfidence" : [
+                5671.480808892425,
+                5816.480670474867
+            ],
+            "scorePercentiles" : {
+                "0.0" : 5715.804549664406,
+                "50.0" : 5742.938400822624,
+                "90.0" : 5767.531188701451,
+                "95.0" : 5767.531188701451,
+                "99.0" : 5767.531188701451,
+                "99.9" : 5767.531188701451,
+                "99.99" : 5767.531188701451,
+                "99.999" : 5767.531188701451,
+                "99.9999" : 5767.531188701451,
+                "100.0" : 5767.531188701451
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    5715.804549664406,
+                    5741.70091423846,
+                    5742.938400822624,
+                    5751.928644991283,
+                    5767.531188701451
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+    ,
+    {
+        "benchmark" : "com.argonaught.jmhtest.SomeBenchmark.bench",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "warmupIterations" : 5,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "1 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "arg" : "65",
+            "certainty" : "0"
+        },
+        "primaryMetric" : {
+            "score" : 7.994518605054571,
+            "scoreError" : 0.17366050685117254,
+            "scoreConfidence" : [
+                7.820858098203399,
+                8.168179111905744
+            ],
+            "scorePercentiles" : {
+                "0.0" : 7.9282822028953985,
+                "50.0" : 8.00148432709118,
+                "90.0" : 8.053739787664986,
+                "95.0" : 8.053739787664986,
+                "99.0" : 8.053739787664986,
+                "99.9" : 8.053739787664986,
+                "99.99" : 8.053739787664986,
+                "99.999" : 8.053739787664986,
+                "99.9999" : 8.053739787664986,
+                "100.0" : 8.053739787664986
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    8.053739787664986,
+                    8.00148432709118,
+                    7.98472559203339,
+                    8.004361115587905,
+                    7.9282822028953985
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+    ,
+    {
+        "benchmark" : "com.argonaught.jmhtest.SomeBenchmark.bench",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "warmupIterations" : 5,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "1 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "arg" : "65",
+            "certainty" : "1"
+        },
+        "primaryMetric" : {
+            "score" : 1102.6643690270953,
+            "scoreError" : 35.2779294609852,
+            "scoreConfidence" : [
+                1067.38643956611,
+                1137.9422984880805
+            ],
+            "scorePercentiles" : {
+                "0.0" : 1097.187195929669,
+                "50.0" : 1099.5370922720583,
+                "90.0" : 1118.8807587438887,
+                "95.0" : 1118.8807587438887,
+                "99.0" : 1118.8807587438887,
+                "99.9" : 1118.8807587438887,
+                "99.99" : 1118.8807587438887,
+                "99.999" : 1118.8807587438887,
+                "99.9999" : 1118.8807587438887,
+                "100.0" : 1118.8807587438887
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    1100.2754012048804,
+                    1097.4413969849797,
+                    1097.187195929669,
+                    1099.5370922720583,
+                    1118.8807587438887
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+    ,
+    {
+        "benchmark" : "com.argonaught.jmhtest.SomeBenchmark.bench",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "warmupIterations" : 5,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "1 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "arg" : "65",
+            "certainty" : "2"
+        },
+        "primaryMetric" : {
+            "score" : 1102.7055205131444,
+            "scoreError" : 27.450615821690906,
+            "scoreConfidence" : [
+                1075.2549046914535,
+                1130.1561363348353
+            ],
+            "scorePercentiles" : {
+                "0.0" : 1095.8838815125978,
+                "50.0" : 1101.961286304767,
+                "90.0" : 1114.4563266643777,
+                "95.0" : 1114.4563266643777,
+                "99.0" : 1114.4563266643777,
+                "99.9" : 1114.4563266643777,
+                "99.99" : 1114.4563266643777,
+                "99.999" : 1114.4563266643777,
+                "99.9999" : 1114.4563266643777,
+                "100.0" : 1114.4563266643777
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    1114.4563266643777,
+                    1102.775736486263,
+                    1095.8838815125978,
+                    1101.961286304767,
+                    1098.4503715977164
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+    ,
+    {
+        "benchmark" : "com.argonaught.jmhtest.SomeBenchmark.bench",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "warmupIterations" : 5,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "1 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "arg" : "65",
+            "certainty" : "4"
+        },
+        "primaryMetric" : {
+            "score" : 1171.9096174767005,
+            "scoreError" : 32.33649368203662,
+            "scoreConfidence" : [
+                1139.5731237946638,
+                1204.2461111587372
+            ],
+            "scorePercentiles" : {
+                "0.0" : 1160.7531337952944,
+                "50.0" : 1171.6699125156013,
+                "90.0" : 1184.125659020782,
+                "95.0" : 1184.125659020782,
+                "99.0" : 1184.125659020782,
+                "99.9" : 1184.125659020782,
+                "99.99" : 1184.125659020782,
+                "99.999" : 1184.125659020782,
+                "99.9999" : 1184.125659020782,
+                "100.0" : 1184.125659020782
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    1171.6699125156013,
+                    1173.4987029877059,
+                    1184.125659020782,
+                    1169.5006790641198,
+                    1160.7531337952944
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+    ,
+    {
+        "benchmark" : "com.argonaught.jmhtest.SomeBenchmark.bench",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "warmupIterations" : 5,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "1 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "arg" : "65",
+            "certainty" : "8"
+        },
+        "primaryMetric" : {
+            "score" : 1201.8357738880957,
+            "scoreError" : 45.20939172580487,
+            "scoreConfidence" : [
+                1156.6263821622908,
+                1247.0451656139005
+            ],
+            "scorePercentiles" : {
+                "0.0" : 1189.1068543758838,
+                "50.0" : 1200.5279437246852,
+                "90.0" : 1218.4658256852779,
+                "95.0" : 1218.4658256852779,
+                "99.0" : 1218.4658256852779,
+                "99.9" : 1218.4658256852779,
+                "99.99" : 1218.4658256852779,
+                "99.999" : 1218.4658256852779,
+                "99.9999" : 1218.4658256852779,
+                "100.0" : 1218.4658256852779
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    1200.5279437246852,
+                    1207.8781430072845,
+                    1189.1068543758838,
+                    1218.4658256852779,
+                    1193.2001026473467
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+    ,
+    {
+        "benchmark" : "com.argonaught.jmhtest.SomeBenchmark.bench",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "warmupIterations" : 5,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "1 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "arg" : "65",
+            "certainty" : "16"
+        },
+        "primaryMetric" : {
+            "score" : 1178.9283806283988,
+            "scoreError" : 42.03845484206998,
+            "scoreConfidence" : [
+                1136.8899257863288,
+                1220.9668354704688
+            ],
+            "scorePercentiles" : {
+                "0.0" : 1169.7890192546147,
+                "50.0" : 1176.1801977635425,
+                "90.0" : 1197.6468147296293,
+                "95.0" : 1197.6468147296293,
+                "99.0" : 1197.6468147296293,
+                "99.9" : 1197.6468147296293,
+                "99.99" : 1197.6468147296293,
+                "99.999" : 1197.6468147296293,
+                "99.9999" : 1197.6468147296293,
+                "100.0" : 1197.6468147296293
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    1197.6468147296293,
+                    1169.7890192546147,
+                    1173.0680499064722,
+                    1177.9578214877358,
+                    1176.1801977635425
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+    ,
+    {
+        "benchmark" : "com.argonaught.jmhtest.SomeBenchmark.bench",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "warmupIterations" : 5,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "1 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "arg" : "65",
+            "certainty" : "32"
+        },
+        "primaryMetric" : {
+            "score" : 1185.0362379428475,
+            "scoreError" : 12.822136553842846,
+            "scoreConfidence" : [
+                1172.2141013890046,
+                1197.8583744966904
+            ],
+            "scorePercentiles" : {
+                "0.0" : 1179.8451821910128,
+                "50.0" : 1184.9425268146167,
+                "90.0" : 1188.137364217632,
+                "95.0" : 1188.137364217632,
+                "99.0" : 1188.137364217632,
+                "99.9" : 1188.137364217632,
+                "99.99" : 1188.137364217632,
+                "99.999" : 1188.137364217632,
+                "99.9999" : 1188.137364217632,
+                "100.0" : 1188.137364217632
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    1188.137364217632,
+                    1184.4856334331103,
+                    1184.9425268146167,
+                    1179.8451821910128,
+                    1187.7704830578655
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+    ,
+    {
+        "benchmark" : "com.argonaught.jmhtest.SomeBenchmark.bench",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "warmupIterations" : 5,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "1 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "arg" : "101",
+            "certainty" : "0"
+        },
+        "primaryMetric" : {
+            "score" : 8.0740521697314,
+            "scoreError" : 0.6043984496121462,
+            "scoreConfidence" : [
+                7.469653720119254,
+                8.678450619343547
+            ],
+            "scorePercentiles" : {
+                "0.0" : 7.906320793691107,
+                "50.0" : 8.056660655367311,
+                "90.0" : 8.257265552853406,
+                "95.0" : 8.257265552853406,
+                "99.0" : 8.257265552853406,
+                "99.9" : 8.257265552853406,
+                "99.99" : 8.257265552853406,
+                "99.999" : 8.257265552853406,
+                "99.9999" : 8.257265552853406,
+                "100.0" : 8.257265552853406
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    8.210175281001478,
+                    7.939838565743705,
+                    8.257265552853406,
+                    7.906320793691107,
+                    8.056660655367311
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+    ,
+    {
+        "benchmark" : "com.argonaught.jmhtest.SomeBenchmark.bench",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "warmupIterations" : 5,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "1 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "arg" : "101",
+            "certainty" : "1"
+        },
+        "primaryMetric" : {
+            "score" : 561.3077073943018,
+            "scoreError" : 5.265300575456546,
+            "scoreConfidence" : [
+                556.0424068188453,
+                566.5730079697584
+            ],
+            "scorePercentiles" : {
+                "0.0" : 560.0409907656349,
+                "50.0" : 561.0639650185693,
+                "90.0" : 563.3283342734157,
+                "95.0" : 563.3283342734157,
+                "99.0" : 563.3283342734157,
+                "99.9" : 563.3283342734157,
+                "99.99" : 563.3283342734157,
+                "99.999" : 563.3283342734157,
+                "99.9999" : 563.3283342734157,
+                "100.0" : 563.3283342734157
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    561.0639650185693,
+                    561.9475766384303,
+                    560.1576702754587,
+                    563.3283342734157,
+                    560.0409907656349
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+    ,
+    {
+        "benchmark" : "com.argonaught.jmhtest.SomeBenchmark.bench",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "warmupIterations" : 5,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "1 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "arg" : "101",
+            "certainty" : "2"
+        },
+        "primaryMetric" : {
+            "score" : 561.6709569991768,
+            "scoreError" : 9.274674812440995,
+            "scoreConfidence" : [
+                552.3962821867358,
+                570.9456318116179
+            ],
+            "scorePercentiles" : {
+                "0.0" : 557.5184654179799,
+                "50.0" : 562.7296142678452,
+                "90.0" : 563.4090753076268,
+                "95.0" : 563.4090753076268,
+                "99.0" : 563.4090753076268,
+                "99.9" : 563.4090753076268,
+                "99.99" : 563.4090753076268,
+                "99.999" : 563.4090753076268,
+                "99.9999" : 563.4090753076268,
+                "100.0" : 563.4090753076268
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    557.5184654179799,
+                    563.0201961844268,
+                    562.7296142678452,
+                    563.4090753076268,
+                    561.6774338180059
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+    ,
+    {
+        "benchmark" : "com.argonaught.jmhtest.SomeBenchmark.bench",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "warmupIterations" : 5,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "1 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "arg" : "101",
+            "certainty" : "4"
+        },
+        "primaryMetric" : {
+            "score" : 1062.882577323051,
+            "scoreError" : 15.626743304805764,
+            "scoreConfidence" : [
+                1047.2558340182452,
+                1078.5093206278568
+            ],
+            "scorePercentiles" : {
+                "0.0" : 1056.8537882472351,
+                "50.0" : 1063.0747907916423,
+                "90.0" : 1068.1672509271418,
+                "95.0" : 1068.1672509271418,
+                "99.0" : 1068.1672509271418,
+                "99.9" : 1068.1672509271418,
+                "99.99" : 1068.1672509271418,
+                "99.999" : 1068.1672509271418,
+                "99.9999" : 1068.1672509271418,
+                "100.0" : 1068.1672509271418
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    1068.1672509271418,
+                    1063.999105223008,
+                    1056.8537882472351,
+                    1063.0747907916423,
+                    1062.3179514262276
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+    ,
+    {
+        "benchmark" : "com.argonaught.jmhtest.SomeBenchmark.bench",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "warmupIterations" : 5,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "1 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "arg" : "101",
+            "certainty" : "8"
+        },
+        "primaryMetric" : {
+            "score" : 2043.716977125175,
+            "scoreError" : 44.47255510642321,
+            "scoreConfidence" : [
+                1999.2444220187517,
+                2088.189532231598
+            ],
+            "scorePercentiles" : {
+                "0.0" : 2027.7342456639954,
+                "50.0" : 2044.2437622081547,
+                "90.0" : 2060.2825391657016,
+                "95.0" : 2060.2825391657016,
+                "99.0" : 2060.2825391657016,
+                "99.9" : 2060.2825391657016,
+                "99.99" : 2060.2825391657016,
+                "99.999" : 2060.2825391657016,
+                "99.9999" : 2060.2825391657016,
+                "100.0" : 2060.2825391657016
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    2041.9801879084966,
+                    2044.344150679526,
+                    2044.2437622081547,
+                    2060.2825391657016,
+                    2027.7342456639954
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+    ,
+    {
+        "benchmark" : "com.argonaught.jmhtest.SomeBenchmark.bench",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "warmupIterations" : 5,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "1 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "arg" : "101",
+            "certainty" : "16"
+        },
+        "primaryMetric" : {
+            "score" : 3968.0838631748434,
+            "scoreError" : 69.8977490364669,
+            "scoreConfidence" : [
+                3898.1861141383765,
+                4037.98161221131
+            ],
+            "scorePercentiles" : {
+                "0.0" : 3938.233088038323,
+                "50.0" : 3973.6858444366712,
+                "90.0" : 3987.0888949137407,
+                "95.0" : 3987.0888949137407,
+                "99.0" : 3987.0888949137407,
+                "99.9" : 3987.0888949137407,
+                "99.99" : 3987.0888949137407,
+                "99.999" : 3987.0888949137407,
+                "99.9999" : 3987.0888949137407,
+                "100.0" : 3987.0888949137407
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    3973.916829967287,
+                    3987.0888949137407,
+                    3938.233088038323,
+                    3967.494658518195,
+                    3973.6858444366712
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+    ,
+    {
+        "benchmark" : "com.argonaught.jmhtest.SomeBenchmark.bench",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "warmupIterations" : 5,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "1 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "arg" : "101",
+            "certainty" : "32"
+        },
+        "primaryMetric" : {
+            "score" : 7895.957366957919,
+            "scoreError" : 156.946391685177,
+            "scoreConfidence" : [
+                7739.010975272741,
+                8052.903758643096
+            ],
+            "scorePercentiles" : {
+                "0.0" : 7831.648907168038,
+                "50.0" : 7898.210604468947,
+                "90.0" : 7943.669471459446,
+                "95.0" : 7943.669471459446,
+                "99.0" : 7943.669471459446,
+                "99.9" : 7943.669471459446,
+                "99.99" : 7943.669471459446,
+                "99.999" : 7943.669471459446,
+                "99.9999" : 7943.669471459446,
+                "100.0" : 7943.669471459446
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    7895.22158431323,
+                    7898.210604468947,
+                    7911.036267379933,
+                    7943.669471459446,
+                    7831.648907168038
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+    ,
+    {
+        "benchmark" : "com.argonaught.jmhtest.SomeBenchmark.bench",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "warmupIterations" : 5,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "1 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "arg" : "103",
+            "certainty" : "0"
+        },
+        "primaryMetric" : {
+            "score" : 8.07675672046129,
+            "scoreError" : 0.4556583847794371,
+            "scoreConfidence" : [
+                7.621098335681853,
+                8.532415105240727
+            ],
+            "scorePercentiles" : {
+                "0.0" : 7.980673537242378,
+                "50.0" : 8.010932639974193,
+                "90.0" : 8.259597251272854,
+                "95.0" : 8.259597251272854,
+                "99.0" : 8.259597251272854,
+                "99.9" : 8.259597251272854,
+                "99.99" : 8.259597251272854,
+                "99.999" : 8.259597251272854,
+                "99.9999" : 8.259597251272854,
+                "100.0" : 8.259597251272854
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    7.980673537242378,
+                    8.259597251272854,
+                    8.13260856461515,
+                    8.010932639974193,
+                    7.99997160920188
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+    ,
+    {
+        "benchmark" : "com.argonaught.jmhtest.SomeBenchmark.bench",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "warmupIterations" : 5,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "1 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "arg" : "103",
+            "certainty" : "1"
+        },
+        "primaryMetric" : {
+            "score" : 476.41638956353074,
+            "scoreError" : 9.619530476230398,
+            "scoreConfidence" : [
+                466.79685908730033,
+                486.03592003976115
+            ],
+            "scorePercentiles" : {
+                "0.0" : 473.43867113895004,
+                "50.0" : 475.5478734968101,
+                "90.0" : 479.06445529926447,
+                "95.0" : 479.06445529926447,
+                "99.0" : 479.06445529926447,
+                "99.9" : 479.06445529926447,
+                "99.99" : 479.06445529926447,
+                "99.999" : 479.06445529926447,
+                "99.9999" : 479.06445529926447,
+                "100.0" : 479.06445529926447
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    478.96637890474153,
+                    475.0645689778875,
+                    479.06445529926447,
+                    473.43867113895004,
+                    475.5478734968101
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+    ,
+    {
+        "benchmark" : "com.argonaught.jmhtest.SomeBenchmark.bench",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "warmupIterations" : 5,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "1 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "arg" : "103",
+            "certainty" : "2"
+        },
+        "primaryMetric" : {
+            "score" : 471.8059680972216,
+            "scoreError" : 6.331420257520203,
+            "scoreConfidence" : [
+                465.47454783970136,
+                478.1373883547418
+            ],
+            "scorePercentiles" : {
+                "0.0" : 468.8806159915619,
+                "50.0" : 472.55937002484507,
+                "90.0" : 472.74560398430225,
+                "95.0" : 472.74560398430225,
+                "99.0" : 472.74560398430225,
+                "99.9" : 472.74560398430225,
+                "99.99" : 472.74560398430225,
+                "99.999" : 472.74560398430225,
+                "99.9999" : 472.74560398430225,
+                "100.0" : 472.74560398430225
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    468.8806159915619,
+                    472.26929446038804,
+                    472.55937002484507,
+                    472.5749560250108,
+                    472.74560398430225
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+    ,
+    {
+        "benchmark" : "com.argonaught.jmhtest.SomeBenchmark.bench",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "warmupIterations" : 5,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "1 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "arg" : "103",
+            "certainty" : "4"
+        },
+        "primaryMetric" : {
+            "score" : 886.6549209993033,
+            "scoreError" : 23.126288676063723,
+            "scoreConfidence" : [
+                863.5286323232395,
+                909.781209675367
+            ],
+            "scorePercentiles" : {
+                "0.0" : 877.0968782656075,
+                "50.0" : 887.4314881045905,
+                "90.0" : 893.7296191206681,
+                "95.0" : 893.7296191206681,
+                "99.0" : 893.7296191206681,
+                "99.9" : 893.7296191206681,
+                "99.99" : 893.7296191206681,
+                "99.999" : 893.7296191206681,
+                "99.9999" : 893.7296191206681,
+                "100.0" : 893.7296191206681
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    886.8709170068606,
+                    888.1457024987899,
+                    887.4314881045905,
+                    893.7296191206681,
+                    877.0968782656075
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+    ,
+    {
+        "benchmark" : "com.argonaught.jmhtest.SomeBenchmark.bench",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "warmupIterations" : 5,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "1 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "arg" : "103",
+            "certainty" : "8"
+        },
+        "primaryMetric" : {
+            "score" : 1641.1733651028703,
+            "scoreError" : 56.69189400693742,
+            "scoreConfidence" : [
+                1584.4814710959329,
+                1697.8652591098078
+            ],
+            "scorePercentiles" : {
+                "0.0" : 1632.638341618599,
+                "50.0" : 1635.8251591403232,
+                "90.0" : 1667.3710763154559,
+                "95.0" : 1667.3710763154559,
+                "99.0" : 1667.3710763154559,
+                "99.9" : 1667.3710763154559,
+                "99.99" : 1667.3710763154559,
+                "99.999" : 1667.3710763154559,
+                "99.9999" : 1667.3710763154559,
+                "100.0" : 1667.3710763154559
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    1633.7048433458126,
+                    1635.8251591403232,
+                    1667.3710763154559,
+                    1636.3274050941611,
+                    1632.638341618599
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+    ,
+    {
+        "benchmark" : "com.argonaught.jmhtest.SomeBenchmark.bench",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "warmupIterations" : 5,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "1 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "arg" : "103",
+            "certainty" : "16"
+        },
+        "primaryMetric" : {
+            "score" : 3319.3468855312267,
+            "scoreError" : 72.42446877474137,
+            "scoreConfidence" : [
+                3246.9224167564853,
+                3391.771354305968
+            ],
+            "scorePercentiles" : {
+                "0.0" : 3302.9689973440454,
+                "50.0" : 3312.253045578486,
+                "90.0" : 3344.9197016793087,
+                "95.0" : 3344.9197016793087,
+                "99.0" : 3344.9197016793087,
+                "99.9" : 3344.9197016793087,
+                "99.99" : 3344.9197016793087,
+                "99.999" : 3344.9197016793087,
+                "99.9999" : 3344.9197016793087,
+                "100.0" : 3344.9197016793087
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    3344.9197016793087,
+                    3302.9689973440454,
+                    3333.133631180609,
+                    3303.4590518736845,
+                    3312.253045578486
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+    ,
+    {
+        "benchmark" : "com.argonaught.jmhtest.SomeBenchmark.bench",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "warmupIterations" : 5,
+        "warmupTime" : "1 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "1 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "arg" : "103",
+            "certainty" : "32"
+        },
+        "primaryMetric" : {
+            "score" : 6484.897397286411,
+            "scoreError" : 236.95686941050235,
+            "scoreConfidence" : [
+                6247.9405278759095,
+                6721.854266696913
+            ],
+            "scorePercentiles" : {
+                "0.0" : 6415.32821532835,
+                "50.0" : 6509.6996926603115,
+                "90.0" : 6555.625770532225,
+                "95.0" : 6555.625770532225,
+                "99.0" : 6555.625770532225,
+                "99.9" : 6555.625770532225,
+                "99.99" : 6555.625770532225,
+                "99.999" : 6555.625770532225,
+                "99.9999" : 6555.625770532225,
+                "100.0" : 6555.625770532225
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    6518.567784841076,
+                    6415.32821532835,
+                    6555.625770532225,
+                    6509.6996926603115,
+                    6425.2655230701
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+]
+
+
